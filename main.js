@@ -329,7 +329,7 @@
 
 	// Vaste CTA-balk op mobiel: verschijnt na de hero, verdwijnt bij de CTA-sectie en de footer
 	var mbar = document.querySelector('.mbar');
-	var ctaSection = document.querySelector('.cta');
+	var ctaSection = document.querySelector('.tot__visit'); // daar staan dezelfde knoppen al
 	var footerEl = document.querySelector('.footer');
 	if (mbar && 'IntersectionObserver' in window) {
 		var heroVisible = true, endVisible = false;

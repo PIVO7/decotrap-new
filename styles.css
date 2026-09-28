@@ -270,7 +270,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	background: var(--deep); color: var(--paper); transition: background-color 300ms var(--ease);
 	padding: clamp(80px, 9vh, 120px) var(--gutter);
 	display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 40px;
-	grid-template-areas: "head head head head head . media media media media media media" "steps steps steps steps steps . media media media media media media" "visit visit visit visit visit . media media media media media media";
+	grid-template-areas: "head head head head head . media media media media media media" "lead lead lead lead lead . media media media media media media" "visit visit visit visit visit . media media media media media media";
 	grid-template-rows: auto 1fr auto;
 	min-height: min(100svh, 980px); box-sizing: border-box;
 }
@@ -286,12 +286,10 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .tot__film { position: absolute; left: 20px; bottom: 20px; z-index: 2; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 6px 16px 6px 6px; border: 0; border-radius: 999px; background: rgb(var(--shade) / 0.55); color: #F6F5F1; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; }
 .tot__film .play { width: 36px; height: 36px; border-radius: 999px; background: #F6F5F1; display: grid; place-items: center; }
 .tot__film .play path { fill: #1F211C; }
-.tot__steps { grid-area: steps; align-self: center; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.tot__steps li { display: grid; grid-template-columns: 32px 1fr; column-gap: 18px; row-gap: 4px; padding: 18px 0; border-top: 1px solid rgb(var(--on-dark) / 0.16); }
-.tot__steps li:last-child { border-bottom: 1px solid rgb(var(--on-dark) / 0.16); }
-.tot__steps .stair { grid-row: 1 / span 2; margin-top: 2px; }
-.tot__steps h3 { font-size: 18px; line-height: 1.25; font-weight: 500; text-transform: uppercase; }
-.tot__steps p { font-size: 15px; line-height: 1.5; color: rgb(var(--on-dark) / 0.75); }
+.tot__lead { grid-area: lead; align-self: center; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6; color: rgb(var(--on-dark) / 0.82); max-width: 520px; }
+.tot__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.tot__btn2 { color: var(--paper); border-color: rgb(var(--on-dark) / 0.5); min-height: 52px; }
+@media (hover: hover) { .tot__btn2:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); } }
 .tot__visit { grid-area: visit; display: flex; flex-direction: column; gap: 24px; }
 .tot__places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .place { display: flex; flex-direction: column; gap: 2px; padding: 16px 18px; border: 1px solid rgb(var(--on-dark) / 0.18); border-radius: var(--radius); font-size: 14px; line-height: 1.5; }
@@ -355,15 +353,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 /* ---------- 9. Trap-o-theek ---------- */
 
 /* ---------- 10. CTA ---------- */
-.cta {
-	background: var(--cta-bg); color: var(--cta-fg); border-top: var(--cta-border);
-	display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center;
-	padding: 120px var(--gutter);
-}
-.cta h2 { grid-column: 1 / span 6; font-size: clamp(40px, 4.5vw, 64px); line-height: 1; font-weight: 500; text-transform: uppercase; }
-.cta h2 .mark { display: var(--cta-mark); width: 28px; height: 28px; margin-bottom: 20px; }
-.cta__body { grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 24px; font-size: 18px; }
-.cta__btns { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* ---------- 11. Footer ---------- */
 .footer { background: var(--footer); color: #F6F5F1; padding: 96px var(--gutter) 40px; display: flex; flex-direction: column; gap: 96px; }
@@ -665,19 +654,18 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.acc__body { padding: 22px; }
 	.acc__shade { position: absolute; inset: 0; z-index: 0; background: rgb(var(--shade) / 1); opacity: 0; pointer-events: none; }
 	.tot {
-		display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "media" "steps" "visit"; grid-template-rows: auto;
+		display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "media" "lead" "visit"; grid-template-rows: auto;
 		min-height: 0; padding: 0 0 72px; row-gap: 36px;
 	}
 	.tot__media { grid-area: media; min-height: 0; border-radius: 0; aspect-ratio: 4 / 5; max-height: 86svh; width: 100%; }
 	.tot__media::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgb(var(--shade) / 0.25) 0%, rgb(var(--shade) / 0) 18%, rgb(var(--shade) / 0.1) 38%, rgb(var(--shade) / 0.7) 62%, rgb(var(--shade) / 0.94) 100%); }
 	.tot__head { grid-area: media; align-self: end; z-index: 3; padding: 0 var(--gutter) 88px; gap: 14px; pointer-events: none; }
 	.tot__title { font-size: clamp(34px, 9.5vw, 56px); }
+	.tot__lead, .tot__visit { padding-inline: var(--gutter); }
+	.tot__btns { flex-direction: column; }
+	.tot__btns .btn { justify-content: space-between; }
 	.tot__film { top: 16px; bottom: auto; left: var(--gutter); font-size: 13px; }
 	.tot__pause { top: 16px; bottom: auto; right: var(--gutter); }
-	.tot__steps, .tot__visit { padding-inline: var(--gutter); }
-	.tot__steps li { padding: 16px 0; }
-	.tot__steps h3 { font-size: 17px; }
-	.tot__steps p { font-size: 14px; }
 	.tot__places { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.tot__cta { flex-direction: column; align-items: stretch; gap: 12px; }
 	.tot__btn { justify-content: space-between; }
@@ -703,8 +691,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.steps::after { display: none; }
 	.js .step, .js .steps.is-in .step { transform: none; }
 
-	.cta { grid-template-columns: 1fr; row-gap: 28px; padding-block: 88px; }
-	.cta h2, .cta__body { grid-column: 1; }
 	.footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
 }
 @media (max-width: 520px) {
@@ -775,9 +761,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	/* Trap-o-theek: video over de volle breedte */
 
 	/* CTA en footer */
-	.cta { padding-block: 72px; }
-	.cta h2 { font-size: 36px; }
-	.cta__btns .btn { flex: 1 1 auto; justify-content: center; }
 	.footer { padding-top: 64px; padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
 	.footer__cols { font-size: 14px; }
 }
