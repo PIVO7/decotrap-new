@@ -738,9 +738,10 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	box-shadow: 0 24px 48px -12px rgb(0 0 0 / 0.18);
 	padding: 40px var(--gutter) 48px;
 	display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr); gap: 40px;
-	animation: mega-in 260ms var(--ease);
+	animation: mega-in 560ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-@keyframes mega-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+/* opent als een cirkel vanuit het menu-onderdeel, zoals het mobiele menu vanuit de knop */
+@keyframes mega-in { from { clip-path: circle(0 at var(--mega-x, 50%) 0); } to { clip-path: circle(150% at var(--mega-x, 50%) 0); } }
 /* wisselen tussen twee open panelen: zonder infade, anders schemert de pagina er even door */
 .hero.is-mega-switch .mega__inner { animation: none; }
 /* inhoud komt gelaagd binnen: kolommen en foto's een voor een, zoals treden */
@@ -774,6 +775,19 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .mega__thumbs a { display: flex; align-items: center; gap: 16px; padding: 6px 0; text-decoration: none; font-size: 15px; font-weight: 500; line-height: 1.25; letter-spacing: 0.04em; text-transform: uppercase; }
 .mega__thumbs img { width: 72px; height: 54px; object-fit: cover; border-radius: var(--radius); flex: none; }
 .mega__thumbs span { border-bottom: 1px solid transparent; transition: border-color 150ms var(--ease); }
+/* desktop: grote rijen met lijnen en pijltje, zoals het mobiele menu */
+.mega .mega__thumbs { gap: 0; border-top: 1px solid var(--line); }
+.mega .mega__thumbs li { border-bottom: 1px solid var(--line); }
+.mega .mega__thumbs a { min-height: 64px; padding: 7px 4px 7px 0; gap: 18px; font-size: 19px; letter-spacing: 0.01em; transition: color 200ms var(--ease); }
+.mega .mega__thumbs img { width: 64px; height: 48px; transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1); }
+.mega .mega__thumbs span { border: 0; transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1); }
+.mega .mega__thumbs a::after { content: ""; flex: none; margin-left: auto; width: 8px; height: 8px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg); opacity: 0.45; transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms var(--ease), border-color 200ms var(--ease); }
+@media (hover: hover) {
+	.mega .mega__thumbs a:hover span { transform: translateX(4px); }
+	.mega .mega__thumbs a:hover img { transform: scale(1.06); }
+	.mega .mega__thumbs a:hover::after { opacity: 1; border-color: var(--brand); transform: translateX(4px) rotate(45deg); }
+}
+.mega .mega__thumbs a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 .mega__alle { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; min-height: 44px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--brand); }
 .mega__info { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
 .mega__info a { text-decoration: none; border-bottom: 1px solid transparent; }

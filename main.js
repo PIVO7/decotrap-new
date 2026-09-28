@@ -160,6 +160,9 @@
 			hero.style.setProperty('--mega-dir', to > from ? '1' : '-1');
 		}
 		hero.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
+		// cirkel opent vanuit het midden van het gekozen menu-onderdeel
+		var tr = document.querySelector('.nav__trigger[data-mega="' + name + '"]');
+		if (tr && !openName) { var r = tr.getBoundingClientRect(); hero.style.setProperty('--mega-x', Math.round(r.left + r.width / 2) + 'px'); }
 		triggers.forEach(function (t) {
 			var on = t.dataset.mega === name;
 			t.setAttribute('aria-expanded', String(on));
