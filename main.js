@@ -366,15 +366,25 @@
 		var target = focusEl || mnav.querySelector('[data-view="' + name + '"] ' + (name === 'root' ? 'button, a' : '[data-back]'));
 		if (target) target.focus();
 	}
+	var mnavCloseTimer;
 	function openMnav() {
+		clearTimeout(mnavCloseTimer);
+		// de cirkel groeit vanuit het midden van de menuknop
+		var r = mToggle.getBoundingClientRect();
+		mnav.style.setProperty('--mx', (r.left + r.width / 2) + 'px');
+		mnav.style.setProperty('--my', (r.top + r.height / 2) + 'px');
 		mnav.hidden = false;
+		void mnav.offsetWidth;
+		mnav.classList.add('is-open');
 		document.body.style.overflow = 'hidden';
 		mToggle.setAttribute('aria-expanded', 'true');
 		window.dispatchEvent(new Event('decotrap:mnav'));
 		showView('root');
 	}
 	function closeMnav() {
-		mnav.hidden = true;
+		mnav.classList.remove('is-open');
+		var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		mnavCloseTimer = setTimeout(function () { mnav.hidden = true; }, reduce ? 0 : 640);
 		document.body.style.overflow = '';
 		mToggle.setAttribute('aria-expanded', 'false');
 		window.dispatchEvent(new Event('decotrap:mnav'));
