@@ -400,7 +400,10 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 /* ---------- 12c. Megamenu (desktop) ---------- */
 .nav { position: relative; z-index: 30; transition: background-color 200ms var(--ease), color 200ms var(--ease); }
 /* open megamenu: de balk wordt effen, logo en tekst in inkt */
-.hero.is-mega { z-index: 25; } /* boven de scrim (20), zodat menu en balk bedienbaar blijven */
+.hero.is-mega { z-index: 25; }
+/* de hero zelf ook dimmen onder het paneel, zoals de rest van de pagina (scrim) */
+.hero::after { content: ""; position: absolute; inset: 0; z-index: 28; background: rgb(var(--shade) / 0.28); opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease); }
+.hero.is-mega::after { opacity: 1; pointer-events: auto; } /* boven de scrim (20), zodat menu en balk bedienbaar blijven */
 .hero.is-mega .nav { background: var(--paper); color: var(--ink); }
 .hero.is-mega .logo--licht { display: none; }
 .hero.is-mega .logo--normaal { display: block; }
@@ -414,9 +417,11 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	box-shadow: 0 24px 48px -12px rgb(0 0 0 / 0.18);
 	padding: 40px var(--gutter) 48px;
 	display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr); gap: 40px;
-	animation: mega-in 220ms var(--ease);
+	animation: mega-in 260ms var(--ease);
 }
-@keyframes mega-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@keyframes mega-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+/* wisselen tussen twee open panelen: zonder infade, anders schemert de pagina er even door */
+.hero.is-mega-switch .mega__inner { animation: none; }
 .mega .label, .mnav .label { margin-bottom: 20px; }
 .mega__thumbs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
 .mega__thumbs a { display: flex; align-items: center; gap: 16px; padding: 6px 0; text-decoration: none; font-size: 15px; font-weight: 500; line-height: 1.25; letter-spacing: 0.04em; text-transform: uppercase; }

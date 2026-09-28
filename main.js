@@ -34,6 +34,9 @@
 
 	function openMega(name) {
 		clearTimeout(closeTimer);
+		if (openName === name) return;
+		// al een paneel open? dan meteen wisselen, zonder infade
+		hero.classList.toggle('is-mega-switch', !!openName);
 		hero.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
 		triggers.forEach(function (t) {
 			var on = t.dataset.mega === name;
@@ -78,6 +81,8 @@
 		});
 	}
 	scrim.addEventListener('click', function () { closeMega(false); });
+	// klik op de gedimde hero (het ::after-vlak) sluit ook
+	hero.addEventListener('click', function (e) { if (openName && e.target === hero) closeMega(false); });
 	document.addEventListener('keydown', function (e) {
 		if (e.key === 'Escape' && openName) { suppressHover = true; closeMega(true); }
 	});
