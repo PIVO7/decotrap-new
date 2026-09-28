@@ -285,8 +285,27 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .acc__more { display: flex; flex-direction: column; gap: 16px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 500ms var(--ease), opacity 250ms var(--ease); }
 .acc__item.is-open .acc__more { max-height: 220px; opacity: 1; transition: max-height 600ms var(--ease) 200ms, opacity 400ms var(--ease) 300ms; }
 .acc__more p { font-size: 16px; line-height: 1.5; max-width: 420px; color: rgb(246 245 241 / 0.88); }
-.acc__more a { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; min-height: 44px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--brand); }
-@media (prefers-reduced-motion: reduce) { .acc__item, .acc__more, .acc__img img { transition: none !important; } }
+.acc__more .acc__cta { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; min-height: 44px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--brand); }
+/* snelkoppelingen naar de modellen, als glazen labels op de foto */
+.acc__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; max-width: 520px; }
+.acc__tags a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 500; text-decoration: none; color: #F6F5F1; background: rgb(246 245 241 / 0.12); border: 1px solid rgb(246 245 241 / 0.28); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background-color 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease); }
+@media (hover: hover) { .acc__tags a:hover { background: var(--brand); border-color: var(--brand); color: #1F211C; } }
+.acc__tags a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.acc__item.is-open .acc__more { max-height: 320px; }
+/* open kaart: tekst, labels en link komen na elkaar binnen */
+.acc__more > * { transform: translateY(10px); opacity: 0; transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 400ms var(--ease); }
+.acc__item.is-open .acc__more > * { transform: none; opacity: 1; }
+.acc__item.is-open .acc__more > :nth-child(1) { transition-delay: 260ms; }
+.acc__item.is-open .acc__more > :nth-child(2) { transition-delay: 340ms; }
+.acc__item.is-open .acc__more > :nth-child(3) { transition-delay: 420ms; }
+/* dichte kaarten: trapje bovenaan, bij hover wat lichter */
+.acc__item::after { content: ""; position: absolute; top: 24px; left: 24px; width: 16px; height: 16px; background: var(--brand); clip-path: polygon(0 100%, 0 66.6%, 33.3% 66.6%, 33.3% 33.3%, 66.6% 33.3%, 66.6% 0, 100% 0, 100% 100%); opacity: 0; transform: translateY(6px); transition: opacity 300ms var(--ease), transform 400ms cubic-bezier(0.22, 1, 0.36, 1); }
+.acc__item:not(.is-open)::after { opacity: 1; transform: none; }
+@media (hover: hover) {
+	.acc__item:not(.is-open):hover::before { background-color: rgb(var(--shade) / 0.08); }
+	.acc__item:not(.is-open):hover .acc__img img { transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) { .acc__item, .acc__more, .acc__more > *, .acc__img img, .acc__item::after { transition: none !important; } }
 
 /* ---------- 9. Trap-o-theek (signature) ---------- */
 /* desktop: tekst links, video rechts over de volle hoogte, alles samen binnen één scherm */
@@ -710,6 +729,8 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.collections__head { flex-direction: column; align-items: flex-start; gap: 12px; }
 	/* mobiel: stapelkaarten. Elke kaart kleeft even en de volgende schuift eroverheen. */
 	.acc { display: block; height: auto; }
+	.acc__more > *, .acc__item .acc__more > * { opacity: 1; transform: none; transition: none; }
+	.acc__tags, .acc__item::after { display: none; }
 	.acc__item, .acc__item.is-open {
 		position: sticky; top: calc(84px + var(--i, 0) * 14px);
 		height: min(520px, 68svh); margin-bottom: 20px;
