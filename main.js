@@ -106,6 +106,46 @@
 	scrim.className = 'mega-scrim';
 	document.body.appendChild(scrim);
 	var openName = null, openTimer, closeTimer, suppressHover = false;
+
+	// glijdende lijn onder het menu: volgt muis en focus, rust onder het open paneel
+	var menuEl = document.querySelector('.nav__menu');
+	var ink = document.createElement('span');
+	ink.className = 'nav__ink';
+	ink.setAttribute('aria-hidden', 'true');
+	menuEl.appendChild(ink);
+	menuEl.classList.add('has-ink');
+	function moveInk(el) {
+		if (!el) { ink.classList.remove('is-on'); return; }
+		var m = menuEl.getBoundingClientRect(), r = el.getBoundingClientRect();
+		var w = r.width;
+		// uit het niets? dan eerst zonder beweging op zijn plaats zetten
+		if (!ink.classList.contains('is-on')) {
+			ink.classList.add('is-jump');
+			ink.style.transform = 'translate(' + (r.left - m.left) + 'px,' + (r.bottom - m.top - 2) + 'px)';
+			ink.style.width = w + 'px';
+			ink.offsetWidth;
+			ink.classList.remove('is-jump');
+		}
+		ink.style.transform = 'translate(' + (r.left - m.left) + 'px,' + (r.bottom - m.top - 2) + 'px)';
+		ink.style.width = w + 'px';
+		ink.classList.add('is-on');
+	}
+	function inkRest() {
+		var open = openName && document.querySelector('.nav__trigger[data-mega="' + openName + '"]');
+		moveInk(open || null);
+	}
+	menuEl.querySelectorAll('a, .nav__trigger').forEach(function (el) {
+		el.addEventListener('mouseenter', function () { moveInk(el); });
+		el.addEventListener('focus', function () { moveInk(el); });
+		el.addEventListener('blur', function () { setTimeout(function () { if (!menuEl.contains(document.activeElement)) inkRest(); }, 0); });
+	});
+	menuEl.addEventListener('mouseleave', function () { setTimeout(inkRest, 60); });
+	// foto's in het megamenu alvast laden als de pagina rustig is, zodat ze bij de eerste keer openen meteen klaar staan
+	window.addEventListener('load', function () {
+		var warm = function () { document.querySelectorAll('.mega img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; }); };
+		if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 3000 }); else setTimeout(warm, 1500);
+	});
+	window.addEventListener('resize', inkRest);
 	var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 	function openMega(name) {
@@ -113,6 +153,12 @@
 		if (openName === name) return;
 		// al een paneel open? dan meteen wisselen, zonder infade
 		hero.classList.toggle('is-mega-switch', !!openName);
+		// richting van de wissel: naar rechts in het menu = inhoud schuift van rechts binnen
+		if (openName) {
+			var from = triggers.findIndex(function (t) { return t.dataset.mega === openName; });
+			var to = triggers.findIndex(function (t) { return t.dataset.mega === name; });
+			hero.style.setProperty('--mega-dir', to > from ? '1' : '-1');
+		}
 		hero.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
 		triggers.forEach(function (t) {
 			var on = t.dataset.mega === name;
@@ -122,6 +168,7 @@
 		hero.classList.add('is-mega');
 		scrim.classList.add('is-on');
 		openName = name;
+		moveInk(document.querySelector('.nav__trigger[data-mega="' + name + '"]'));
 	}
 	function closeMega(returnFocus) {
 		clearTimeout(openTimer);
@@ -134,6 +181,7 @@
 		hero.classList.remove('is-mega');
 		scrim.classList.remove('is-on');
 		openName = null;
+		if (!menuEl.matches(':hover')) moveInk(null);
 		if (returnFocus && trigger) trigger.focus();
 	}
 	triggers.forEach(function (t) {
