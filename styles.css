@@ -1,0 +1,395 @@
+/* Decotrap – homepagina "A · Geist"
+   Eén stijlgids, twee thema's: [data-theme="lime"] en [data-theme="zw"] (zwart-wit met subtiele lime).
+   Componenten gebruiken enkel de semantische tokens hieronder; een thema zet alleen tokens. */
+
+/* ---------- 1. Tokens ---------- */
+:root,
+[data-theme="lime"] {
+	--bg: #ECEAE5;              /* pagina */
+	--paper: #F6F5F1;           /* lichte tekst op donker, knoppen */
+	--ink: #1F211C;             /* tekst, donkere knoppen */
+	--deep: #2A3320;            /* donkere band (treden, toonzaalkaart) */
+	--text: #33362F;            /* broodtekst */
+	--muted: #4A4D44;           /* labels */
+	--line: #C9C6BE;            /* lijnen */
+	--footer: #1F211C;
+	--shade: 20 22 17;          /* rgb voor fotolagen */
+	--on-dark: 246 245 241;     /* rgb voor transparant wit op donker */
+	--brand: #C4C800;           /* logogroen */
+
+	/* component-tokens (verschillen per thema) */
+	--hero-btn-bg: var(--brand);
+	--hero-btn-fg: var(--ink);
+	--usp-dot: 8px;
+	--label-on-dark: var(--brand);
+	--step-border: 6px solid var(--brand);
+	--step-last-bg: var(--brand);
+	--step-last-fg: var(--ink);
+	--step-last-border: 6px solid var(--brand);
+	--step-last-icon-on: var(--ink);
+	--step-last-icon-off: rgb(31 33 28 / 0.25);
+	--card-btn-bg: var(--brand);
+	--card-btn-fg: var(--ink);
+	--cta-bg: var(--brand);
+	--cta-fg: var(--ink);
+	--cta-border: 0;
+	--cta-mark: none;
+	--footer-label: var(--brand);
+	--footer-mark: 120px;
+}
+
+[data-theme="zw"] {
+	--bg: #F1F1EF;
+	--paper: #FAFAF9;
+	--ink: #141414;
+	--deep: #1B1B1B;
+	--text: #3A3A3A;
+	--muted: #626262;
+	--line: #D8D8D5;
+	--footer: #141414;
+	--shade: 12 12 12;
+	--on-dark: 250 250 249;
+
+	--hero-btn-bg: var(--paper);
+	--hero-btn-fg: var(--ink);
+	--usp-dot: 6px;
+	--label-on-dark: rgb(var(--on-dark) / 0.6);
+	--step-border: 2px solid rgb(var(--on-dark) / 0.3);
+	--step-last-bg: rgb(var(--on-dark) / 0.28);
+	--step-last-fg: var(--paper);
+	--step-last-border: 2px solid var(--brand);
+	--step-last-icon-on: var(--brand);
+	--step-last-icon-off: rgb(var(--on-dark) / 0.22);
+	--card-btn-bg: var(--paper);
+	--card-btn-fg: var(--ink);
+	--cta-bg: var(--paper);
+	--cta-fg: var(--ink);
+	--cta-border: 1px solid var(--line);
+	--cta-mark: block;
+	--footer-label: rgb(var(--on-dark) / 0.55);
+	--footer-mark: 56px;
+}
+
+:root {
+	--font: 'Geist', system-ui, sans-serif;
+	--mono: 'Geist Mono', ui-monospace, monospace;
+	--serif: 'Instrument Serif', Georgia, serif;
+	--gutter: clamp(20px, 4.5vw, 64px);
+	--radius: 4px;
+	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- 2. Basis ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--ink);
+	font-family: var(--font);
+	font-size: 17px;
+	line-height: 1.6;
+	transition: background-color 300ms var(--ease), color 300ms var(--ease);
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, blockquote, figure { margin: 0; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.label {
+	font-family: var(--mono);
+	font-size: 13px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+.h2 {
+	font-size: clamp(32px, 3.4vw, 48px);
+	line-height: 1.04;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: -0.01em;
+}
+.mark { width: 16px; height: 16px; flex: none; }
+.mark path { fill: var(--brand); }
+.arrow { width: 14px; height: 14px; flex: none; }
+
+/* knoppen */
+.btn {
+	display: inline-flex; align-items: center; gap: 10px;
+	min-height: 48px; padding: 0 22px;
+	border-radius: var(--radius);
+	font-size: 15px; font-weight: 500; text-decoration: none;
+	transition: background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease);
+}
+.btn--dark { background: var(--ink); color: var(--paper); }
+.btn--outline { border: 1px solid currentColor; }
+@media (hover: hover) {
+	.btn--dark:hover { background: var(--brand); color: var(--ink); }
+	.btn--outline:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+}
+.link {
+	display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
+	font-size: 15px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+	text-decoration: none; border-bottom: 2px solid var(--brand); padding-bottom: 6px;
+}
+
+/* ---------- 3. Hero ---------- */
+.hero {
+	position: relative;
+	min-height: min(100svh, 900px);
+	color: #F6F5F1;
+	display: flex; flex-direction: column;
+	isolation: isolate;
+}
+.hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero::before {
+	content: ""; position: absolute; inset: 0; z-index: -1;
+	background:
+		linear-gradient(90deg, rgb(var(--shade) / 0.34) 0%, rgb(var(--shade) / 0.12) 40%, rgb(var(--shade) / 0) 60%),
+		linear-gradient(180deg, rgb(var(--shade) / 0.38) 0%, rgb(var(--shade) / 0) 16%, rgb(var(--shade) / 0) 55%, rgb(var(--shade) / 0.5) 100%);
+}
+.nav {
+	display: flex; align-items: center; justify-content: space-between; gap: 24px;
+	padding: 28px var(--gutter);
+}
+.nav__logo img { width: 52px; height: auto; }
+.nav__menu { display: flex; gap: 36px; list-style: none; margin: 0; padding: 0; }
+.nav__menu a {
+	font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+	padding: 8px 0; border-bottom: 2px solid transparent;
+}
+@media (hover: hover) { .nav__menu a:hover { border-bottom-color: var(--brand); } }
+.nav__cta { color: #F6F5F1; border-color: rgb(246 245 241 / 0.6); min-height: 44px; font-size: 14px; }
+.nav__toggle { display: none; }
+
+.hero__content {
+	margin-top: auto;
+	padding: 0 var(--gutter) 72px;
+	max-width: 960px;
+	display: flex; flex-direction: column; gap: 24px;
+}
+.hero__eyebrow {
+	display: flex; align-items: center; gap: 12px;
+	font-family: var(--mono); font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.hero h1 {
+	font-size: clamp(40px, 5.3vw, 76px);
+	line-height: 1; font-weight: 500; text-transform: uppercase; letter-spacing: -0.01em;
+}
+.hero__offerte {
+	position: absolute; right: 40px; bottom: 40px;
+	min-height: 52px; padding: 0 24px; font-weight: 600;
+	background: var(--hero-btn-bg); color: var(--hero-btn-fg);
+}
+@media (hover: hover) { .hero__offerte:hover { background: var(--ink); color: var(--paper); } }
+
+/* ---------- 4. USP-balk ---------- */
+.usp {
+	display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 16px; padding: 36px var(--gutter);
+	border-bottom: 1px solid var(--line);
+	list-style: none; margin: 0;
+	font-size: 15px; font-weight: 500;
+}
+.usp li { display: flex; align-items: center; gap: 12px; }
+.usp li::before { content: ""; width: var(--usp-dot); height: var(--usp-dot); background: var(--brand); flex: none; }
+
+/* ---------- 5. Over Decotrap ---------- */
+.split {
+	display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px;
+	padding: 140px var(--gutter);
+	align-items: center;
+}
+.split__img { grid-column: 1 / span 5; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
+.split__body { grid-column: 7 / span 5; display: flex; flex-direction: column; gap: 28px; }
+.split__body p { color: var(--text); }
+
+/* ---------- 6. Tegels ---------- */
+.tiles { padding: 0 var(--gutter) 140px; display: flex; flex-direction: column; gap: 48px; }
+.tiles__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; }
+.tiles__head p { max-width: 420px; font-size: 16px; color: var(--text); }
+.tiles__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.tile { display: flex; flex-direction: column; gap: 14px; text-decoration: none; }
+.tile__img { overflow: hidden; border-radius: var(--radius); }
+.tile img { width: 100%; aspect-ratio: 8 / 11; object-fit: cover; transition: transform 600ms var(--ease); }
+.tile span { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 500; text-transform: uppercase; }
+@media (hover: hover) { .tile:hover img { transform: scale(1.03); } }
+
+/* ---------- 7. Treden ---------- */
+.steps {
+	position: relative;
+	background: var(--deep); color: var(--paper);
+	padding: 120px var(--gutter);
+	display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
+	align-items: end;
+	transition: background-color 300ms var(--ease);
+}
+.steps__intro { grid-column: 1 / span 2; grid-row: 1; align-self: start; display: flex; flex-direction: column; gap: 20px; max-width: 520px; }
+.steps__intro .label { color: var(--label-on-dark); }
+.steps__intro p { font-size: 16px; color: rgb(var(--on-dark) / 0.78); max-width: 420px; }
+.step {
+	grid-row: 1;
+	background: rgb(var(--on-dark) / var(--tint));
+	border-top: var(--step-border);
+	border-radius: var(--radius) var(--radius) 0 0;
+	padding: 28px;
+	display: flex; flex-direction: column; gap: 12px;
+	min-height: var(--h);
+	position: relative; z-index: 1;
+}
+.step:nth-of-type(1) { grid-column: 1; --h: 220px; --tint: 0.06; }
+.step:nth-of-type(2) { grid-column: 2; --h: 320px; --tint: 0.12; }
+.step:nth-of-type(3) { grid-column: 3; --h: 420px; --tint: 0.2; }
+.step:nth-of-type(4) { grid-column: 4; --h: 520px; background: var(--step-last-bg); color: var(--step-last-fg); border-top: var(--step-last-border); }
+.step h3 { font-size: 22px; line-height: 1.2; font-weight: 500; text-transform: uppercase; }
+.step p { font-size: 15px; color: rgb(var(--on-dark) / 0.8); }
+.step:nth-of-type(4) p { color: inherit; }
+.stair rect { fill: rgb(var(--on-dark) / 0.22); }
+.stair rect.on { fill: var(--brand); }
+.step:nth-of-type(4) .stair rect { fill: var(--step-last-icon-off); }
+.step:nth-of-type(4) .stair rect.on { fill: var(--step-last-icon-on); }
+.steps::after { content: ""; position: absolute; left: var(--gutter); right: var(--gutter); bottom: 119px; height: 1px; background: rgb(var(--on-dark) / 0.35); }
+
+/* ---------- 8. Klantervaring ---------- */
+.quote { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 140px var(--gutter); align-items: center; }
+.quote__body { grid-column: 1 / span 6; display: flex; flex-direction: column; gap: 32px; }
+.quote blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(34px, 3.8vw, 54px); line-height: 1.1; }
+.quote__who { display: flex; align-items: center; gap: 16px; font-size: 15px; }
+.quote__who::before { content: ""; width: 32px; height: 2px; background: var(--brand); }
+.quote img { grid-column: 8 / span 5; width: 100%; aspect-ratio: 5 / 6; object-fit: cover; border-radius: var(--radius); }
+
+/* ---------- 9. Trap-o-theek ---------- */
+.showroom { position: relative; padding-bottom: 120px; min-height: 1040px; }
+.showroom__img { width: 100%; height: 720px; object-fit: cover; }
+.showroom__video {
+	position: absolute; left: var(--gutter); top: 600px;
+	display: inline-flex; align-items: center; gap: 16px;
+	color: #F6F5F1; font-size: 15px; font-weight: 500; text-decoration: none;
+	background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit;
+}
+.showroom__video .play { width: 72px; height: 72px; border-radius: 999px; background: var(--bg); display: grid; place-items: center; }
+.showroom__video .play path { fill: var(--ink); }
+.showroom__video .txt { background: rgb(var(--shade) / 0.55); padding: 8px 12px; border-radius: var(--radius); }
+.showroom__note { padding: 56px var(--gutter) 0; font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); max-width: 720px; }
+.card {
+	position: absolute; right: var(--gutter); top: 500px; width: min(560px, calc(100% - 2 * var(--gutter)));
+	background: var(--deep); color: var(--paper); border-radius: var(--radius);
+	padding: 48px; display: flex; flex-direction: column; gap: 20px;
+}
+.card .label { color: var(--label-on-dark); }
+.card p { font-size: 16px; color: rgb(var(--on-dark) / 0.8); }
+.card__adr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; font-size: 15px; line-height: 1.5; border-top: 1px solid rgb(var(--on-dark) / 0.2); padding-top: 20px; }
+.card .btn { background: var(--card-btn-bg); color: var(--card-btn-fg); font-weight: 600; align-self: flex-start; }
+
+/* ---------- 10. CTA ---------- */
+.cta {
+	background: var(--cta-bg); color: var(--cta-fg); border-top: var(--cta-border);
+	display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center;
+	padding: 120px var(--gutter);
+}
+.cta h2 { grid-column: 1 / span 6; font-size: clamp(40px, 4.5vw, 64px); line-height: 1; font-weight: 500; text-transform: uppercase; }
+.cta h2 .mark { display: var(--cta-mark); width: 28px; height: 28px; margin-bottom: 20px; }
+.cta__body { grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 24px; font-size: 18px; }
+.cta__btns { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ---------- 11. Footer ---------- */
+.footer { background: var(--footer); color: #F6F5F1; padding: 96px var(--gutter) 40px; display: flex; flex-direction: column; gap: 96px; }
+.footer__cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; font-size: 15px; line-height: 1.7; }
+.footer__cols .label { color: var(--footer-label); font-size: 12px; margin-bottom: 6px; }
+.footer__base { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.footer__word { min-width: 0; overflow: hidden; font-size: clamp(56px, 13.5vw, 200px); line-height: 0.8; font-weight: 500; letter-spacing: -0.02em; color: rgb(246 245 241 / 0.08); }
+.footer__base .mark { width: var(--footer-mark); height: var(--footer-mark); }
+
+/* ---------- 12. Themaschakelaar (enkel voor de preview) ---------- */
+.theme-switch {
+	position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 50;
+	display: flex; gap: 2px; padding: 4px;
+	background: rgb(20 20 20 / 0.82); backdrop-filter: blur(8px);
+	border-radius: 999px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+	box-shadow: 0 6px 24px rgb(0 0 0 / 0.2);
+}
+.theme-switch button {
+	min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; cursor: pointer;
+	background: transparent; color: #F6F5F1; font: inherit; letter-spacing: inherit; text-transform: inherit;
+	display: inline-flex; align-items: center; gap: 8px;
+}
+.theme-switch button[aria-pressed="true"] { background: #F6F5F1; color: #141414; }
+.theme-switch .dot { width: 10px; height: 10px; border-radius: 999px; }
+
+/* ---------- 13. Beweging ---------- */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+.reveal.is-in { opacity: 1; transform: none; }
+/* treden rijzen één voor één uit de vloerlijn */
+.js .step { transform: scaleY(0); transform-origin: bottom; transition: transform 700ms var(--ease); }
+.js .step > * { opacity: 0; transition: opacity 400ms var(--ease); }
+.js .steps.is-in .step { transform: none; }
+.js .steps.is-in .step > * { opacity: 1; }
+.js .steps.is-in .step:nth-of-type(2) { transition-delay: 90ms; }
+.js .steps.is-in .step:nth-of-type(3) { transition-delay: 180ms; }
+.js .steps.is-in .step:nth-of-type(4) { transition-delay: 270ms; }
+.js .steps.is-in .step:nth-of-type(1) > * { transition-delay: 450ms; }
+.js .steps.is-in .step:nth-of-type(2) > * { transition-delay: 540ms; }
+.js .steps.is-in .step:nth-of-type(3) > * { transition-delay: 630ms; }
+.js .steps.is-in .step:nth-of-type(4) > * { transition-delay: 720ms; }
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+	.reveal, .js .step, .js .step > * { opacity: 1; transform: none; }
+}
+
+/* ---------- 14. Tablet en mobiel ---------- */
+@media (max-width: 1100px) {
+	.nav__menu { gap: 22px; }
+	.nav__menu a { font-size: 13px; }
+}
+@media (max-width: 960px) {
+	.nav__menu, .nav__cta { display: none; }
+	.nav__toggle {
+		display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px;
+		background: rgb(var(--shade) / 0.35); border: 1px solid rgb(246 245 241 / 0.5); border-radius: var(--radius); color: #F6F5F1; cursor: pointer;
+	}
+	.nav.is-open { position: fixed; inset: 0; z-index: 40; background: var(--deep); flex-direction: column; align-items: flex-start; }
+	.nav.is-open .nav__menu { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+	.nav.is-open .nav__menu a { font-size: 28px; }
+	.nav.is-open .nav__cta { display: inline-flex; }
+	.nav.is-open .nav__toggle { position: absolute; top: 28px; right: var(--gutter); }
+
+	.usp { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 14px; padding-block: 24px; }
+	.split, .quote { grid-template-columns: 1fr; row-gap: 40px; padding-block: 88px; }
+	.split__img, .split__body, .quote__body, .quote img { grid-column: 1; }
+	.tiles { padding-bottom: 88px; }
+	.tiles__head { flex-direction: column; align-items: flex-start; gap: 16px; }
+	.tiles__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+	.steps { grid-template-columns: 1fr; padding-block: 88px; gap: 10px; }
+	.steps__intro { grid-column: 1; grid-row: auto; margin-bottom: 28px; }
+	.step { grid-column: 1 !important; grid-row: auto; min-height: 0; }
+	.step:nth-of-type(2) { margin-left: 8%; }
+	.step:nth-of-type(3) { margin-left: 16%; }
+	.step:nth-of-type(4) { margin-left: 24%; }
+	.steps::after { display: none; }
+	.js .step { transform: scaleX(0); transform-origin: left; }
+
+	.showroom { min-height: 0; padding-bottom: 88px; }
+	.showroom__img { height: 420px; }
+	.showroom__video { top: 250px; }
+	.card { position: relative; top: auto; right: auto; margin: -64px var(--gutter) 0 auto; }
+	.showroom__note { padding-top: 32px; }
+	.cta { grid-template-columns: 1fr; row-gap: 28px; padding-block: 88px; }
+	.cta h2, .cta__body { grid-column: 1; }
+	.footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+}
+@media (max-width: 520px) {
+	.hero__content { padding-bottom: 112px; }
+	.hero__offerte { left: var(--gutter); right: var(--gutter); bottom: 32px; justify-content: space-between; }
+	.tiles__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+	.tile img { aspect-ratio: 4 / 5; }
+	.card { margin: -48px var(--gutter) 0; padding: 32px; width: auto; }
+	.card__adr { grid-template-columns: 1fr; }
+	.footer { gap: 56px; }
+	.footer__word { font-size: 12.5vw; }
+	.footer__base .mark { width: min(var(--footer-mark), 48px); height: min(var(--footer-mark), 48px); }
+	.theme-switch button { padding: 0 12px; white-space: nowrap; }
+	.theme-switch { bottom: auto; top: 36px; }
+}
