@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" data-theme="lime" data-hero="latten" data-kop="a">
+<html lang="nl" data-theme="lime" data-hero="latten">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
-	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero'); if (f === 'raam' || f === 'latten' || f === 'reeks') document.documentElement.dataset.hero = f; var k = localStorage.getItem('decotrap-kop'); if (k === 'a' || k === 'b') document.documentElement.dataset.kop = k; } catch (e) {}
+	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero'); if (f === 'raam' || f === 'latten' || f === 'reeks') document.documentElement.dataset.hero = f; } catch (e) {}
 	document.documentElement.classList.add('js');
 </script>
 </head>
@@ -176,11 +176,10 @@
 	</div>
 	<div class="hero__content">
 		<p class="hero__eyebrow"><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Familiebedrijf · toonzalen in Heusden-Zolder en Wetteren</p>
-		<h1><span class="kop-a">Op maat gemaakt.<br>Ter plaatse afgewerkt.</span><span class="kop-b">Op maat gemaakt.<br>Tot in elk detail.</span></h1>
-		<p class="hero__sub kop-b">Ter plaatse afgewerkt, door een Limburgs familiebedrijf.</p>
-		<a class="link" href="#">Ontdek onze trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
+		<h1>Op maat gemaakt.<br>Tot in elk detail.</h1>
+		<p class="hero__sub">Ter plaatse afgewerkt, door een Limburgs familiebedrijf.</p>
+		<div class="hero__actions"><a class="btn hero__cta" href="https://www.decotrap.be/gratis-offerte/">Gratis offerte <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a><a class="link" href="https://www.decotrap.be/trappen/">Ontdek onze trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 	</div>
-	<a class="btn hero__offerte hero__offerte--mobiel" href="https://www.decotrap.be/gratis-offerte/">Gratis offerte <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 </header>
 
 <main>
@@ -233,6 +232,26 @@
 				</div>
 			</li>
 		</ul>
+	</section>
+
+	<section class="projects" aria-labelledby="projecten-titel">
+		<div class="projects__head reveal"><p class="label">Realisaties</p><h2 class="h2" id="projecten-titel">Gemaakt voor echte interieurs.</h2></div>
+		<article class="project reveal">
+			<picture class="project__main"><source type="image/webp" srcset="img/proj-geel-800.webp 800w, img/proj-geel-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img src="img/proj-geel-1600.jpg" srcset="img/proj-geel-800.jpg 800w, img/proj-geel-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Zwevende trap met donkere eiken treden naast een eettafel" loading="lazy" decoding="async"></picture>
+			<picture class="project__detail"><source type="image/webp" srcset="img/proj-geel-detail-450.webp 450w, img/proj-geel-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img src="img/proj-geel-detail-900.jpg" srcset="img/proj-geel-detail-450.jpg 450w, img/proj-geel-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Donkere eiken trap van bovenaf gezien" loading="lazy" decoding="async"></picture>
+			<div class="project__txt"><h3>Geel</h3><p>Zwevende treden in donkere eik, in een open leefruimte</p></div>
+		</article>
+		<article class="project project--flip reveal">
+			<picture class="project__main"><source type="image/webp" srcset="img/proj-lier-800.webp 800w, img/proj-lier-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img src="img/proj-lier-1600.jpg" srcset="img/proj-lier-800.jpg 800w, img/proj-lier-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Gebogen lichte eiken trap in een inkomhal met boogdeur" loading="lazy" decoding="async"></picture>
+			<picture class="project__detail"><source type="image/webp" srcset="img/proj-lier-detail-450.webp 450w, img/proj-lier-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img src="img/proj-lier-detail-900.jpg" srcset="img/proj-lier-detail-450.jpg 450w, img/proj-lier-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Detail van de gebogen trap naast een boogdeur" loading="lazy" decoding="async"></picture>
+			<div class="project__txt"><h3>Lier</h3><p>Gebogen trap op maat in lichte eik</p></div>
+		</article>
+		<article class="project reveal">
+			<picture class="project__main"><source type="image/webp" srcset="img/proj-genk-800.webp 800w, img/proj-genk-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img src="img/proj-genk-1600.jpg" srcset="img/proj-genk-800.jpg 800w, img/proj-genk-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Kind speelt tussen de zwevende eiken treden" loading="lazy" decoding="async"></picture>
+			<picture class="project__detail"><source type="image/webp" srcset="img/proj-genk-detail-450.webp 450w, img/proj-genk-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img src="img/proj-genk-detail-900.jpg" srcset="img/proj-genk-detail-450.jpg 450w, img/proj-genk-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Close-up van zwevende eiken treden" loading="lazy" decoding="async"></picture>
+			<div class="project__txt"><h3>Genk</h3><p>Zwevende trap met geïntegreerde ledleuning</p></div>
+		</article>
+		<a class="link projects__more reveal" href="https://www.decotrap.be/trappen/">Bekijk al onze trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 	</section>
 
 	<section class="steps" aria-labelledby="treden-titel">
@@ -351,10 +370,6 @@
 	<button type="button" data-set-hero="latten" aria-pressed="true">Foto latten</button>
 	<button type="button" data-set-hero="raam" aria-pressed="false">Foto raam</button>
 	<button type="button" data-set-hero="reeks" aria-pressed="false">Fotoreeks</button>
-</div>
-<div class="theme-switch" role="group" aria-label="Herokop (enkel in de preview)">
-	<button type="button" data-set-kop="a" aria-pressed="true">Kop ter plaatse</button>
-	<button type="button" data-set-kop="b" aria-pressed="false">Kop in elk detail</button>
 </div>
 <div class="theme-switch" role="group" aria-label="Treden-animatie (enkel in de preview)">
 	<button type="button" data-set-steps="eenmalig" aria-pressed="false">Treden eenmalig</button>

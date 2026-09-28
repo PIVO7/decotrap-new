@@ -31,15 +31,6 @@
 	heroButtons.forEach(function (b) { b.addEventListener('click', function () { setHero(b.dataset.setHero); }); });
 	setHero(root.dataset.hero || 'latten');
 
-	// Herokop A/B (enkel preview)
-	var kopButtons = document.querySelectorAll('[data-set-kop]');
-	function setKop(k) {
-		root.dataset.kop = k;
-		kopButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setKop === k)); });
-		try { localStorage.setItem('decotrap-kop', k); } catch (e) {}
-	}
-	kopButtons.forEach(function (b) { b.addEventListener('click', function () { setKop(b.dataset.setKop); }); });
-	setKop(root.dataset.kop || 'a');
 
 	// Trap-o-theek-video: speelt enkel als hij in beeld is, pauzeerbaar, niet vanzelf bij beperkte beweging
 	var totVideo = document.querySelector('.tot__video');

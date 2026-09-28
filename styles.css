@@ -199,8 +199,28 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 @media (hover: hover) { .hero__offerte:hover { background: var(--ink); color: var(--paper); } }
 @media (min-width: 961px) { .hero__offerte--mobiel { display: none; } }
 
-[data-kop="a"] .kop-b, [data-kop="b"] .kop-a { display: none; }
 .hero__sub { font-size: clamp(16px, 1.4vw, 19px); line-height: 1.5; max-width: 520px; }
+
+.hero__actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
+.hero__cta { min-height: 52px; padding: 0 24px; font-weight: 600; background: var(--hero-btn-bg); color: var(--hero-btn-fg); }
+@media (hover: hover) { .hero__cta:hover { background: var(--paper); color: var(--ink); } [data-theme="zw"] .hero__cta:hover { background: var(--brand); } }
+[data-theme="zw"][data-hero="raam"] .hero__cta { background: var(--ink); color: var(--paper); }
+
+/* ---------- 6b. Projecten (realisaties) ---------- */
+.projects { padding: 0 var(--gutter) 160px; display: flex; flex-direction: column; gap: 96px; }
+.projects__head { display: flex; flex-direction: column; gap: 16px; }
+.project { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 20px; align-items: end; }
+.project__main { grid-column: 1 / span 8; grid-row: 1 / span 2; }
+.project__detail { grid-column: 10 / span 3; grid-row: 1; }
+.project__txt { grid-column: 10 / span 3; grid-row: 2; display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px; }
+.project--flip .project__main { grid-column: 5 / span 8; }
+.project--flip .project__detail, .project--flip .project__txt { grid-column: 1 / span 3; }
+.project picture, .project img { display: block; width: 100%; }
+.project__main img { aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
+.project__detail img { aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
+.project__txt h3 { font-size: clamp(32px, 3vw, 48px); line-height: 1; font-weight: 500; text-transform: uppercase; letter-spacing: -0.01em; }
+.project__txt p { font-size: 15px; line-height: 1.5; color: var(--text); max-width: 280px; }
+.projects__more { align-self: flex-start; }
 
 /* ---------- 4. USP-balk ---------- */
 .usp {
@@ -701,6 +721,16 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.tot__cta { flex-direction: column; align-items: stretch; gap: 12px; }
 	.tot__btn { justify-content: space-between; }
 	.tot__cta p { text-align: center; }
+	.projects { padding-bottom: 88px; gap: 56px; }
+	.project, .project--flip { grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 12px; row-gap: 14px; align-items: start; }
+	.project__main, .project--flip .project__main { grid-column: 1 / -1; grid-row: 1; margin-inline: calc(-1 * var(--gutter)); }
+	.project__main img { border-radius: 0; aspect-ratio: 4 / 3; }
+	.project__txt, .project--flip .project__txt { grid-column: 1 / span 4; grid-row: 2; padding: 0; }
+	.project__detail, .project--flip .project__detail { grid-column: 5 / span 2; grid-row: 2; margin-top: -48px; position: relative; box-shadow: 0 12px 30px -16px rgb(0 0 0 / 0.4); border-radius: var(--radius); }
+	.project__txt h3 { font-size: 30px; }
+	.hero__actions { flex-direction: column; align-items: stretch; gap: 14px; }
+	.hero__cta { justify-content: space-between; }
+	.hero__actions .link { align-self: flex-start; }
 	.steps { grid-template-columns: 1fr; padding-block: 88px; gap: 10px; }
 	.steps__intro { grid-column: 1; grid-row: auto; margin-bottom: 28px; }
 	/* mobiel: verticale traplijn met het logotrapje als markering per stap */
