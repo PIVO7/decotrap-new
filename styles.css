@@ -536,7 +536,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 		transform: translateY(110%); transition: transform 280ms var(--ease);
 	}
 	.mbar.is-on { transform: none; }
-	.acc-pinned .mbar.is-on { transform: translateY(110%); }
 	.mbar .btn { justify-content: center; min-height: 48px; font-weight: 600; font-size: 14px; }
 	.mbar__offerte { background: var(--hero-btn-bg); color: var(--hero-btn-fg); }
 	[data-theme="zw"] .mbar__offerte { background: var(--ink); color: var(--paper); }
@@ -601,12 +600,23 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.tot__pause { right: 12px; bottom: 12px; }
 	.collections { padding-bottom: 88px; }
 	.collections__head { flex-direction: column; align-items: flex-start; gap: 12px; }
-	.acc { flex-direction: column; height: auto; gap: 8px; }
-	.acc__item { flex: none; height: 76px; transition: height 600ms cubic-bezier(0.65, 0, 0.35, 1); }
-	.acc__item.is-open { height: min(400px, 100vw, calc(100svh - 360px)); min-height: 280px; }
-	.acc__item:not(.is-open) .acc__title { position: static; writing-mode: horizontal-tb; transform: none; font-size: 22px; }
-	.acc__item:not(.is-open) .acc__body { padding: 0 20px; height: 100%; justify-content: center; }
+	/* mobiel: stapelkaarten. Elke kaart kleeft even en de volgende schuift eroverheen. */
+	.acc { display: block; height: auto; }
+	.acc__item, .acc__item.is-open {
+		position: sticky; top: calc(84px + var(--i, 0) * 14px);
+		height: min(520px, 68svh); margin-bottom: 20px;
+		transform-origin: 50% 0; will-change: transform;
+		box-shadow: 0 -12px 30px -18px rgb(0 0 0 / 0.35);
+	}
+	.acc__item:nth-child(1) { --i: 0; } .acc__item:nth-child(2) { --i: 1; } .acc__item:nth-child(3) { --i: 2; } .acc__item:nth-child(4) { --i: 3; }
+	.acc__item:not(.is-open)::before { background-color: transparent; }
+	.acc__item .acc__img img { transform: none; }
+	.acc__item:not(.is-open) .acc__title { position: static; writing-mode: horizontal-tb; transform: none; font-size: 30px; }
+	.acc__item .acc__title { font-size: 30px; }
+	.acc__item:not(.is-open) .acc__body { padding: 22px; height: auto; justify-content: flex-end; }
+	.acc__item .acc__more, .acc__item.is-open .acc__more { max-height: none; opacity: 1; transition: none; }
 	.acc__body { padding: 22px; }
+	.acc__shade { position: absolute; inset: 0; z-index: 0; background: rgb(var(--shade) / 1); opacity: 0; pointer-events: none; }
 	.steps { grid-template-columns: 1fr; padding-block: 88px; gap: 10px; }
 	.steps__intro { grid-column: 1; grid-row: auto; margin-bottom: 28px; }
 	.step { grid-column: 1 !important; grid-row: auto; min-height: 0; }

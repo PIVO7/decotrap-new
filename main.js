@@ -70,22 +70,29 @@
 		function openAcc(item) {
 			accItems.forEach(function (it) { it.classList.toggle('is-open', it === item); });
 		}
-		// Mobiel: sectie blijft even staan en de collecties schuiven één voor één open terwijl je scrolt
+		// Mobiel: stapelkaarten. De vorige kaart krimpt en verdonkert mee met de scroll (geen vastzetten).
 		if (window.gsap && window.ScrollTrigger && gsap.matchMedia) {
 			gsap.registerPlugin(ScrollTrigger);
 			gsap.matchMedia().add('(max-width: 960px) and (prefers-reduced-motion: no-preference)', function () {
-				var st = ScrollTrigger.create({
-					trigger: '.collections', start: 'top top', end: '+=' + (accItems.length * 45) + '%', pin: true, anticipatePin: 1,
-					// CTA-balk even weg zolang de sectie vaststaat, anders bedekt hij de onderste strook
-					onToggle: function (self) { root.classList.toggle('acc-pinned', self.isActive); },
-					onUpdate: function (self) {
-						var i = Math.min(accItems.length - 1, Math.floor(self.progress * accItems.length));
-						if (!accItems[i].classList.contains('is-open')) openAcc(accItems[i]);
-					}
+				var tweens = [];
+				accItems.forEach(function (item, i) {
+					var next = accItems[i + 1];
+					if (!next) return;
+					var shade = item.querySelector('.acc__shade');
+					if (!shade) { shade = document.createElement('span'); shade.className = 'acc__shade'; shade.setAttribute('aria-hidden', 'true'); item.appendChild(shade); }
+					var tl = gsap.timeline({ scrollTrigger: { trigger: next, start: 'top bottom', end: 'top top+=' + (84 + (i + 1) * 14), scrub: true } });
+					tl.to(item, { scale: 0.92, ease: 'none' }, 0).to(shade, { opacity: 0.45, ease: 'none' }, 0);
+					tweens.push(tl);
 				});
-				return function () { st.kill(); };
+				return function () {
+					tweens.forEach(function (t) { t.scrollTrigger && t.scrollTrigger.kill(); t.kill(); });
+					gsap.set(accItems, { clearProps: 'transform' });
+					document.querySelectorAll('.acc__shade').forEach(function (s) { s.remove(); });
+				};
 			});
 		}
+		// op mobiel is elke kaart 'open'; tikken hoeft niets te openen
+		var mobileAcc = window.matchMedia('(max-width: 960px)');
 		accItems.forEach(function (item) {
 			if (hoverDevice) {
 				item.addEventListener('mouseenter', function () { clearTimeout(accTimer); accTimer = setTimeout(function () { openAcc(item); }, 90); });
@@ -93,7 +100,7 @@
 			}
 			item.addEventListener('focusin', function () { openAcc(item); });
 			item.addEventListener('click', function (e) {
-				if (item.classList.contains('is-open')) return; // open: de link werkt gewoon
+				if (mobileAcc.matches || item.classList.contains('is-open')) return; // open (of mobiel): de link werkt gewoon
 				e.preventDefault();
 				openAcc(item);
 			});
