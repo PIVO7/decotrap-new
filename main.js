@@ -53,6 +53,28 @@
 		syncTot();
 	}
 
+	// Collecties: image accordion. Muis opent bij hover, toetsenbord bij focus, aanraken opent met een tik.
+	var accItems = Array.prototype.slice.call(document.querySelectorAll('[data-acc]'));
+	if (accItems.length) {
+		var hoverDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+		var accTimer;
+		function openAcc(item) {
+			accItems.forEach(function (it) { it.classList.toggle('is-open', it === item); });
+		}
+		accItems.forEach(function (item) {
+			if (hoverDevice) {
+				item.addEventListener('mouseenter', function () { clearTimeout(accTimer); accTimer = setTimeout(function () { openAcc(item); }, 90); });
+				item.addEventListener('mouseleave', function () { clearTimeout(accTimer); });
+			}
+			item.addEventListener('focusin', function () { openAcc(item); });
+			item.addEventListener('click', function (e) {
+				if (item.classList.contains('is-open')) return; // open: de link werkt gewoon
+				e.preventDefault();
+				openAcc(item);
+			});
+		});
+	}
+
 	// Megamenu (desktop): knop opent paneel; muis opent met kleine vertraging; Escape en klik buiten sluiten
 	var hero = document.querySelector('.hero');
 	var navEl = document.querySelector('.nav');
@@ -254,6 +276,27 @@
 		window.addEventListener('load', function () { window.ScrollTrigger && ScrollTrigger.refresh(); });
 	}
 
+	// Vaste CTA-balk op mobiel: verschijnt na de hero, verdwijnt bij de CTA-sectie en de footer
+	var mbar = document.querySelector('.mbar');
+	var ctaSection = document.querySelector('.cta');
+	var footerEl = document.querySelector('.footer');
+	if (mbar && 'IntersectionObserver' in window) {
+		var heroVisible = true, endVisible = false;
+		function syncBar() {
+			var on = !heroVisible && !endVisible && (!mnav || mnav.hidden);
+			mbar.classList.toggle('is-on', on);
+			mbar.setAttribute('aria-hidden', String(!on));
+			mbar.querySelectorAll('a').forEach(function (a) { if (on) { a.removeAttribute('tabindex'); } else { a.setAttribute('tabindex', '-1'); } });
+		}
+		new IntersectionObserver(function (e) { heroVisible = e[0].isIntersecting; syncBar(); }, { threshold: 0.15 }).observe(document.querySelector('.hero'));
+		var endIO = new IntersectionObserver(function (entries) {
+			endVisible = entries.some(function (x) { return x.isIntersecting; }) || [ctaSection, footerEl].some(function (el) { return el && el.getBoundingClientRect().top < window.innerHeight; });
+			syncBar();
+		});
+		[ctaSection, footerEl].forEach(function (el) { if (el) endIO.observe(el); });
+		window.addEventListener('decotrap:mnav', syncBar);
+	}
+
 	// Mobiel menu met doorklikpanelen
 	var mnav = document.getElementById('mnav');
 	var mToggle = document.querySelector('.nav__toggle');
@@ -269,12 +312,14 @@
 		mnav.hidden = false;
 		document.body.style.overflow = 'hidden';
 		mToggle.setAttribute('aria-expanded', 'true');
+		window.dispatchEvent(new Event('decotrap:mnav'));
 		showView('root');
 	}
 	function closeMnav() {
 		mnav.hidden = true;
 		document.body.style.overflow = '';
 		mToggle.setAttribute('aria-expanded', 'false');
+		window.dispatchEvent(new Event('decotrap:mnav'));
 		mToggle.focus();
 	}
 	if (mnav && mToggle) {
