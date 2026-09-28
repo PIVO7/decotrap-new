@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
-	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero3'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal') ? f : 'hal'; } catch (e) {}
+	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal') ? f : 'zon'; } catch (e) {}
 	document.documentElement.classList.add('js');
 </script>
 </head>
@@ -91,11 +91,11 @@
 	<img class="hero__img hero__img--latten" src="img/hero.jpg" alt="Houten trap achter latten met geïntegreerde ledleuning" loading="lazy">
 	<picture class="hero__pic--hal">
 		<source type="image/webp" srcset="img/hero-hal-1200.webp 1200w, img/hero-hal-2400.webp 2400w" sizes="100vw">
-		<img class="hero__img hero__img--hal" src="img/hero-hal-2400.jpg" srcset="img/hero-hal-1200.jpg 1200w, img/hero-hal-2400.jpg 2400w" sizes="100vw" width="2400" height="1340" alt="Notelaren trap met glazen balustrade en ledverlichting in een hoge, warm verlichte hal met zicht op de tuin" fetchpriority="high">
+		<img class="hero__img hero__img--hal" src="img/hero-hal-2400.jpg" srcset="img/hero-hal-1200.jpg 1200w, img/hero-hal-2400.jpg 2400w" sizes="100vw" width="2400" height="1340" alt="Notelaren trap met glazen balustrade en ledverlichting in een hoge, warm verlichte hal met zicht op de tuin" loading="lazy">
 	</picture>
 	<picture class="hero__pic--zon">
-		<source type="image/webp" srcset="img/hero-zon-1200.webp 1200w, img/hero-zon-2400.webp 2400w" sizes="100vw">
-		<img class="hero__img hero__img--zon" src="img/hero-zon-2400.jpg" srcset="img/hero-zon-1200.jpg 1200w, img/hero-zon-2400.jpg 2400w" sizes="100vw" width="2400" height="1351" alt="Zwevende eiken trap met ledverlichting in een lichte inkomhal met laag zonlicht" loading="lazy">
+		<source type="image/webp" srcset="img/hero-zon-1200.webp 1200w, img/hero-zon-2400.webp 2400w, img/hero-zon-3200.webp 3200w" sizes="100vw">
+		<img class="hero__img hero__img--zon" src="img/hero-zon-2400.jpg" srcset="img/hero-zon-1200.jpg 1200w, img/hero-zon-2400.jpg 2400w, img/hero-zon-3200.jpg 3200w" sizes="100vw" width="2400" height="1351" alt="Zwevende eiken trap met ledverlichting in een lichte inkomhal met laag zonlicht" fetchpriority="high">
 	</picture>
 	<picture class="hero__pic--raam">
 		<source type="image/webp" srcset="img/hero-raam-960.webp 960w, img/hero-raam-1920.webp 1920w" sizes="100vw">
@@ -391,8 +391,8 @@
 <div class="preview-bar">
 <button class="preview-bar__toggle" type="button" aria-expanded="false">Preview-opties</button>
 <div class="theme-switch" role="group" aria-label="Herofoto (enkel in de preview)">
-	<button type="button" data-set-hero="hal" aria-pressed="true">Foto hal</button>
-	<button type="button" data-set-hero="zon" aria-pressed="false">Foto zon</button>
+	<button type="button" data-set-hero="zon" aria-pressed="true">Foto zon</button>
+	<button type="button" data-set-hero="hal" aria-pressed="false">Foto hal</button>
 	<button type="button" data-set-hero="latten" aria-pressed="false">Foto latten</button>
 	<button type="button" data-set-hero="raam" aria-pressed="false">Foto raam</button>
 	<button type="button" data-set-hero="reeks" aria-pressed="false">Fotoreeks</button>
