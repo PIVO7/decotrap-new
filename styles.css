@@ -204,7 +204,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .hero__actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
 .hero__cta { min-height: 52px; padding: 0 24px; font-weight: 600; background: var(--hero-btn-bg); color: var(--hero-btn-fg); }
 @media (hover: hover) { .hero__cta:hover { background: var(--paper); color: var(--ink); } [data-theme="zw"] .hero__cta:hover { background: var(--brand); } }
-[data-theme="zw"][data-hero="raam"] .hero__cta { background: var(--ink); color: var(--paper); }
 
 /* ---------- 6b. Projecten (realisaties) ---------- */
 .projects { padding: 0 var(--gutter) 160px; display: flex; flex-direction: column; gap: 96px; }
@@ -443,30 +442,23 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.preview-bar.is-open .theme-switch { display: flex; }
 }
 
-/* ---------- 12b. Herofoto 'raam' (lichte foto, donkere tekst) ---------- */
+/* ---------- 12b. Herofoto 'raam' (zelfde donkere stijl als de andere hero's) ---------- */
 .hero__pic--raam, .logo--normaal { display: none; }
-[data-hero="raam"] .hero__img--latten, [data-hero="raam"] .logo--licht { display: none; }
-[data-hero="raam"] .hero__pic--raam, [data-hero="raam"] .logo--normaal { display: block; }
-[data-hero="raam"] .hero__pic--raam { position: absolute; top: 0; bottom: 0; left: 20%; right: 0; z-index: -2; }
-[data-hero="raam"] .hero__img--raam { object-position: 0% 50%; }
-[data-hero="raam"] .hero { color: var(--ink); background: var(--bg); }
+[data-hero="raam"] .hero__img--latten { display: none; }
+[data-hero="raam"] .hero__pic--raam { display: block; }
+/* de persoon en de trap staan rechts van het midden: tekst links blijft vrij */
+[data-hero="raam"] .hero__img--raam { object-position: 62% 50%; }
+/* lichte foto: iets sterkere laag zodat witte tekst en nav leesbaar blijven */
 [data-hero="raam"] .hero::before {
 	background:
-		linear-gradient(90deg, rgb(var(--bg-rgb)) 0%, rgb(var(--bg-rgb)) 20%, rgb(var(--bg-rgb) / 0.7) 27%, rgb(var(--bg-rgb) / 0) 38%),
-		linear-gradient(180deg, rgb(var(--bg-rgb) / 0.96) 0%, rgb(var(--bg-rgb) / 0.88) 10%, rgb(var(--bg-rgb) / 0.4) 18%, rgb(var(--bg-rgb) / 0) 26%);
+		radial-gradient(120% 90% at 0% 100%, rgb(var(--shade) / 0.55) 0%, rgb(var(--shade) / 0.3) 45%, rgb(var(--shade) / 0) 75%),
+		linear-gradient(90deg, rgb(var(--shade) / 0.42) 0%, rgb(var(--shade) / 0.18) 45%, rgb(var(--shade) / 0) 70%),
+		linear-gradient(180deg, rgb(var(--shade) / 0.5) 0%, rgb(var(--shade) / 0) 22%, rgb(var(--shade) / 0) 45%, rgb(var(--shade) / 0.5) 100%);
 }
-[data-hero="raam"] .hero h1 { font-size: clamp(40px, 4.4vw, 64px); }
-@media (min-width: 961px) { [data-hero="raam"] .hero__content { max-width: 600px; } }
-[data-theme="zw"][data-hero="raam"] .nav__offerte { background: var(--ink); color: var(--paper); }
-[data-hero="raam"] .nav__toggle { color: var(--ink); background: rgb(var(--bg-rgb) / 0.7); }
-[data-hero="raam"][data-theme="zw"] .hero__offerte { background: var(--ink); color: var(--paper); }
 @media (max-width: 960px) {
-	[data-hero="raam"] .hero__pic--raam { left: 0; }
-	[data-hero="raam"] .hero__img--raam { object-position: 25% 50%; }
+	[data-hero="raam"] .hero__img--raam { object-position: 32% 50%; }
 	[data-hero="raam"] .hero::before {
-		background:
-			linear-gradient(0deg, rgb(var(--bg-rgb) / 0.96) 0%, rgb(var(--bg-rgb) / 0.85) 34%, rgb(var(--bg-rgb) / 0) 62%),
-			linear-gradient(180deg, rgb(var(--bg-rgb) / 0.96) 0%, rgb(var(--bg-rgb) / 0.85) 9%, rgb(var(--bg-rgb) / 0) 20%);
+		background: linear-gradient(180deg, rgb(var(--shade) / 0.5) 0%, rgb(var(--shade) / 0.14) 20%, rgb(var(--shade) / 0.5) 42%, rgb(var(--shade) / 0.82) 100%);
 	}
 }
 
