@@ -259,17 +259,26 @@
 		var desktop = window.matchMedia('(min-width: 961px)').matches;
 		stepsSection.classList.add('steps--scrub');
 		if (!desktop) {
-			// mobiel: de lime lijn groeit van trapje naar trapje en elke stap licht op als je hem bereikt
-			scrubTl = gsap.timeline({ paused: true }); // houder; de losse tweens staan in mobileTweens
-			steps.forEach(function (step, i) {
-				var fill = step.querySelector('.step__line > span');
-				var body = step.querySelectorAll('h3, p');
-				var rects = step.querySelectorAll('.stair rect.on');
-				var t = { trigger: step, start: 'top 72%', end: 'bottom 62%', scrub: 0.4 };
-				mobileTweens.push(gsap.fromTo(body, { opacity: 0.3 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: step, start: 'top 80%', end: 'top 60%', scrub: 0.4 } }));
-				mobileTweens.push(gsap.fromTo(rects, { opacity: 0.25 }, { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: step, start: 'top 80%', end: 'top 62%', scrub: 0.4 } }));
-				if (fill) mobileTweens.push(gsap.fromTo(fill, { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: t }));
+			// mobiel: één doorlopende tijdlijn, strikt na elkaar:
+			// stap licht op → lijn loopt naar de volgende stap → volgende stap licht op → …
+			scrubTl = gsap.timeline({ paused: true }); // houder; de echte tijdlijn staat in mobileTweens
+			var first = steps[0], last = steps[steps.length - 1];
+			var tl = gsap.timeline({
+				defaults: { ease: 'none' },
+				scrollTrigger: { trigger: first, endTrigger: last, start: 'top 80%', end: 'top 45%', scrub: 0.5 }
 			});
+			steps.forEach(function (step, i) {
+				var rects = step.querySelectorAll('.stair rect.on');
+				var body = step.querySelectorAll('h3, p');
+				var fill = step.querySelector('.step__line > span');
+				gsap.set(rects, { opacity: 0.25 });
+				gsap.set(body, { opacity: 0.3 });
+				if (fill) gsap.set(fill, { scaleY: 0 });
+				tl.to(rects, { opacity: 1, duration: 0.35, stagger: 0.08 })
+				  .to(body, { opacity: 1, duration: 0.35 }, '<');
+				if (fill) tl.to(fill, { scaleY: 1, duration: 1 });
+			});
+			mobileTweens.push(tl);
 			return;
 		}
 		scrubTl = gsap.timeline({
