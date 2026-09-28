@@ -282,6 +282,25 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .split__img { grid-column: 1 / span 5; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
 .split__body { grid-column: 7 / span 5; display: flex; flex-direction: column; gap: 28px; }
 .split__body p { color: var(--text); }
+.split__facts { display: none; }
+/* desktop: foto tot tegen de rand met de trapuitsnede van het logo, feiten als rustige lijst */
+@media (min-width: 961px) {
+	.split { align-items: center; }
+	.split .split__img {
+		grid-column: 1 / span 6; margin-left: calc(-1 * var(--gutter)); width: calc(100% + var(--gutter));
+		aspect-ratio: 5 / 6; border-radius: 0 var(--radius) var(--radius) 0;
+		--cut: clamp(56px, 6vw, 96px);
+		clip-path: polygon(0 0, calc(100% - var(--cut)) 0, calc(100% - var(--cut)) calc(var(--cut) / 3), calc(100% - var(--cut) * 2 / 3) calc(var(--cut) / 3), calc(100% - var(--cut) * 2 / 3) calc(var(--cut) * 2 / 3), calc(100% - var(--cut) / 3) calc(var(--cut) * 2 / 3), calc(100% - var(--cut) / 3) var(--cut), 100% var(--cut), 100% 100%, 0 100%);
+	}
+	.split__body { grid-column: 8 / span 5; gap: 24px; }
+	.split__body .h2 { font-size: clamp(40px, 3.6vw, 58px); }
+	.split__body .extra { display: none; }
+	.split__facts { display: flex; flex-direction: column; margin: 8px 0 12px; border-top: 1px solid var(--line); }
+	.split__facts div { display: grid; grid-template-columns: 22px clamp(96px, 9vw, 130px) minmax(0, 1fr); align-items: start; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+	.split__facts div::before { content: ""; width: 12px; height: 12px; background: var(--brand); margin-top: 5px; clip-path: polygon(0 100%, 0 66.6%, 33.3% 66.6%, 33.3% 33.3%, 66.6% 33.3%, 66.6% 0, 100% 0, 100% 100%); }
+	.split__facts dt { padding-top: 4px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+	.split__facts dd { margin: 0; font-size: 16px; line-height: 1.4; font-weight: 500; color: var(--ink); }
+}
 
 /* ---------- 6. Tegels ---------- */
 
