@@ -237,29 +237,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .award img { width: 56px; height: 56px; flex: none; border-radius: var(--radius); }
 
 /* ---------- 9. Trap-o-theek (signature) ---------- */
-.tot { background: var(--deep); color: var(--paper); padding: 140px var(--gutter) 120px; display: flex; flex-direction: column; gap: 56px; transition: background-color 300ms var(--ease); }
-.tot .label { color: var(--label-on-dark); }
-.tot__head { display: flex; flex-direction: column; gap: 20px; max-width: 1100px; }
-.tot__title { font-size: clamp(40px, 6vw, 92px); line-height: 0.98; font-weight: 500; text-transform: uppercase; letter-spacing: -0.02em; }
-.tot__media { position: relative; border-radius: var(--radius); overflow: hidden; background: #000; }
-.tot__video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.tot__pause { position: absolute; right: 20px; bottom: 20px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 999px; background: rgb(var(--shade) / 0.45); border: 1px solid rgb(246 245 241 / 0.5); color: #F6F5F1; cursor: pointer; }
-.tot__pause .i-play { display: none; }
-.tot__pause[aria-pressed="true"] .i-play { display: block; }
-.tot__pause[aria-pressed="true"] .i-pause { display: none; }
-.tot__film { position: absolute; left: 20px; bottom: 20px; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 6px 16px 6px 6px; border: 0; border-radius: 999px; background: rgb(var(--shade) / 0.55); color: #F6F5F1; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; }
-.tot__film .play { width: 36px; height: 36px; border-radius: 999px; background: #F6F5F1; display: grid; place-items: center; }
-.tot__film .play path { fill: #1F211C; }
-.tot__steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
-.tot__steps li { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgb(var(--on-dark) / 0.2); padding-top: 24px; }
-.tot__steps h3 { font-size: 22px; line-height: 1.2; font-weight: 500; text-transform: uppercase; }
-.tot__steps p { font-size: 15px; color: rgb(var(--on-dark) / 0.78); }
-.tot__visit { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; border-top: 1px solid rgb(var(--on-dark) / 0.2); padding-top: 40px; }
-.tot__places { display: flex; gap: 64px; font-size: 15px; line-height: 1.6; }
-.tot__places strong { font-weight: 600; }
-.tot__cta { display: flex; align-items: center; gap: 20px; }
-.tot__cta p { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--on-dark) / 0.7); }
-.tot__btn { background: var(--card-btn-bg); color: var(--card-btn-fg); font-weight: 600; min-height: 52px; }
 
 /* ---------- 6. Collecties: image accordion (naar Bencho, in gewone CSS/JS) ---------- */
 .collections { padding: 0 var(--gutter) 160px; display: flex; flex-direction: column; gap: 40px; }
@@ -286,6 +263,45 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .acc__more p { font-size: 16px; line-height: 1.5; max-width: 420px; color: rgb(246 245 241 / 0.88); }
 .acc__more a { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; min-height: 44px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--brand); }
 @media (prefers-reduced-motion: reduce) { .acc__item, .acc__more, .acc__img img { transition: none !important; } }
+
+/* ---------- 9. Trap-o-theek (signature) ---------- */
+/* desktop: tekst links, video rechts over de volle hoogte, alles samen binnen één scherm */
+.tot {
+	background: var(--deep); color: var(--paper); transition: background-color 300ms var(--ease);
+	padding: clamp(80px, 9vh, 120px) var(--gutter);
+	display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 40px;
+	grid-template-areas: "head head head head head . media media media media media media" "steps steps steps steps steps . media media media media media media" "visit visit visit visit visit . media media media media media media";
+	grid-template-rows: auto 1fr auto;
+	min-height: min(100svh, 980px); box-sizing: border-box;
+}
+.tot .label { color: var(--label-on-dark); }
+.tot__head { grid-area: head; display: flex; flex-direction: column; gap: 20px; }
+.tot__title { font-size: clamp(40px, 4.4vw, 68px); line-height: 0.98; font-weight: 500; text-transform: uppercase; letter-spacing: -0.02em; }
+.tot__media { grid-area: media; position: relative; border-radius: var(--radius); overflow: hidden; background: #000; min-height: 420px; }
+.tot__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tot__pause { position: absolute; right: 20px; bottom: 20px; z-index: 2; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 999px; background: rgb(var(--shade) / 0.45); border: 1px solid rgb(246 245 241 / 0.5); color: #F6F5F1; cursor: pointer; }
+.tot__pause .i-play { display: none; }
+.tot__pause[aria-pressed="true"] .i-play { display: block; }
+.tot__pause[aria-pressed="true"] .i-pause { display: none; }
+.tot__film { position: absolute; left: 20px; bottom: 20px; z-index: 2; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 6px 16px 6px 6px; border: 0; border-radius: 999px; background: rgb(var(--shade) / 0.55); color: #F6F5F1; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; }
+.tot__film .play { width: 36px; height: 36px; border-radius: 999px; background: #F6F5F1; display: grid; place-items: center; }
+.tot__film .play path { fill: #1F211C; }
+.tot__steps { grid-area: steps; align-self: center; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.tot__steps li { display: grid; grid-template-columns: 32px 1fr; column-gap: 18px; row-gap: 4px; padding: 18px 0; border-top: 1px solid rgb(var(--on-dark) / 0.16); }
+.tot__steps li:last-child { border-bottom: 1px solid rgb(var(--on-dark) / 0.16); }
+.tot__steps .stair { grid-row: 1 / span 2; margin-top: 2px; }
+.tot__steps h3 { font-size: 18px; line-height: 1.25; font-weight: 500; text-transform: uppercase; }
+.tot__steps p { font-size: 15px; line-height: 1.5; color: rgb(var(--on-dark) / 0.75); }
+.tot__visit { grid-area: visit; display: flex; flex-direction: column; gap: 24px; }
+.tot__places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.place { display: flex; flex-direction: column; gap: 2px; padding: 16px 18px; border: 1px solid rgb(var(--on-dark) / 0.18); border-radius: var(--radius); font-size: 14px; line-height: 1.5; }
+.place strong { font-weight: 600; font-size: 15px; }
+.place span { color: rgb(var(--on-dark) / 0.75); }
+.place__links { display: flex; gap: 16px; margin-top: 8px; }
+.place__links a { color: var(--paper); font-weight: 500; text-underline-offset: 3px; }
+.tot__cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.tot__cta p { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--on-dark) / 0.7); }
+.tot__btn { background: var(--card-btn-bg); color: var(--card-btn-fg); font-weight: 600; min-height: 52px; }
 
 /* ---------- 7. Treden ---------- */
 .step__line { display: none; }
@@ -593,12 +609,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.split__img, .split__body, .quote__body, .quote > img { grid-column: 1; }
 
 	.proof { grid-template-columns: 1fr; }
-	.tot { padding-block: 88px; gap: 40px; }
-	.tot__steps { grid-template-columns: 1fr; gap: 24px; }
-	.tot__places { flex-direction: column; gap: 20px; }
-	.tot__cta { flex-direction: column; align-items: flex-start; }
-	.tot__film { left: 12px; bottom: 12px; font-size: 13px; }
-	.tot__pause { right: 12px; bottom: 12px; }
 	.collections { padding-bottom: 88px; }
 	.collections__head { flex-direction: column; align-items: flex-start; gap: 12px; }
 	/* mobiel: stapelkaarten. Elke kaart kleeft even en de volgende schuift eroverheen. */
@@ -618,6 +628,24 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.acc__item .acc__more, .acc__item.is-open .acc__more { max-height: none; opacity: 1; transition: none; }
 	.acc__body { padding: 22px; }
 	.acc__shade { position: absolute; inset: 0; z-index: 0; background: rgb(var(--shade) / 1); opacity: 0; pointer-events: none; }
+	.tot {
+		display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "media" "steps" "visit"; grid-template-rows: auto;
+		min-height: 0; padding: 0 0 72px; row-gap: 36px;
+	}
+	.tot__media { grid-area: media; min-height: 0; border-radius: 0; aspect-ratio: 4 / 5; max-height: 86svh; width: 100%; }
+	.tot__media::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgb(var(--shade) / 0.25) 0%, rgb(var(--shade) / 0) 18%, rgb(var(--shade) / 0.1) 38%, rgb(var(--shade) / 0.7) 62%, rgb(var(--shade) / 0.94) 100%); }
+	.tot__head { grid-area: media; align-self: end; z-index: 3; padding: 0 var(--gutter) 88px; gap: 14px; pointer-events: none; }
+	.tot__title { font-size: clamp(34px, 9.5vw, 56px); }
+	.tot__film { top: 16px; bottom: auto; left: var(--gutter); font-size: 13px; }
+	.tot__pause { top: 16px; bottom: auto; right: var(--gutter); }
+	.tot__steps, .tot__visit { padding-inline: var(--gutter); }
+	.tot__steps li { padding: 16px 0; }
+	.tot__steps h3 { font-size: 17px; }
+	.tot__steps p { font-size: 14px; }
+	.tot__places { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.tot__cta { flex-direction: column; align-items: stretch; gap: 12px; }
+	.tot__btn { justify-content: space-between; }
+	.tot__cta p { text-align: center; }
 	.steps { grid-template-columns: 1fr; padding-block: 88px; gap: 10px; }
 	.steps__intro { grid-column: 1; grid-row: auto; margin-bottom: 28px; }
 	/* mobiel: verticale traplijn met het logotrapje als markering per stap */
@@ -699,19 +727,6 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.proof blockquote { font-size: 19px; }
 
 	/* Trap-o-theek: video over de volle breedte */
-	.tot { padding-block: 72px; gap: 32px; }
-	.tot__title { font-size: 38px; }
-	.tot__media { margin-inline: calc(-1 * var(--gutter)); border-radius: 0; }
-	.tot__video { aspect-ratio: 4 / 3; }
-	.tot__steps { gap: 0; }
-	.tot__steps li { flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: 14px; row-gap: 6px; padding: 18px 0; }
-	.tot__steps li .stair { flex: none; }
-	.tot__steps h3 { font-size: 17px; }
-	.tot__steps p { flex-basis: 100%; font-size: 14px; }
-	.tot__visit { padding-top: 28px; gap: 28px; }
-	.tot__places { flex-direction: row; gap: 24px; font-size: 14px; }
-	.tot__cta { width: 100%; }
-	.tot__btn { width: 100%; justify-content: space-between; }
 
 	/* CTA en footer */
 	.cta { padding-block: 72px; }
