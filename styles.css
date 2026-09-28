@@ -209,6 +209,8 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 /* ---------- 6b. Projecten (realisaties) ---------- */
 .projects { padding: 0 var(--gutter) 160px; display: flex; flex-direction: column; gap: 96px; }
 .projects__head { display: flex; flex-direction: column; gap: 16px; }
+.projects__list { display: contents; }
+.projects__dots { display: none; }
 .project { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 20px; align-items: end; }
 .project__main { grid-column: 1 / span 8; grid-row: 1 / span 2; }
 .project__detail { grid-column: 10 / span 3; grid-row: 1; }
@@ -252,8 +254,8 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 16px; padding-top: 28px; border-top: 1px solid var(--line); }
 .proof__item { margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .proof__stars { color: var(--ink); font-size: 12px; letter-spacing: 0.2em; }
-.proof blockquote { font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.25; color: var(--ink); }
-.proof figcaption { font-size: 13px; color: var(--muted); }
+.proof blockquote { font-family: var(--font); font-style: normal; font-size: 16px; line-height: 1.55; font-weight: 400; color: var(--ink); }
+.proof figcaption { font-size: 13px; font-weight: 500; color: var(--text); }
 .award { display: flex; align-items: center; gap: 16px; font-size: 14px; color: var(--muted); max-width: 440px; }
 .award img { width: 56px; height: 56px; flex: none; border-radius: var(--radius); }
 
@@ -721,13 +723,28 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.tot__cta { flex-direction: column; align-items: stretch; gap: 12px; }
 	.tot__btn { justify-content: space-between; }
 	.tot__cta p { text-align: center; }
-	.projects { padding-bottom: 88px; gap: 56px; }
-	.project, .project--flip { grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: 12px; row-gap: 14px; align-items: start; }
-	.project__main, .project--flip .project__main { grid-column: 1 / -1; grid-row: 1; margin-inline: calc(-1 * var(--gutter)); }
-	.project__main img { border-radius: 0; aspect-ratio: 4 / 3; }
-	.project__txt, .project--flip .project__txt { grid-column: 1 / span 4; grid-row: 2; padding: 0; }
-	.project__detail, .project--flip .project__detail { grid-column: 5 / span 2; grid-row: 2; margin-top: -48px; position: relative; box-shadow: 0 12px 30px -16px rgb(0 0 0 / 0.4); border-radius: var(--radius); }
-	.project__txt h3 { font-size: 30px; }
+	/* mobiel/tablet: veegbare portfolio-kaarten met de tekst op de foto */
+	.projects { padding-bottom: 88px; gap: 28px; }
+	.projects__list {
+		display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+		margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 4px; scroll-padding-inline: var(--gutter);
+		scrollbar-width: none;
+	}
+	.projects__list::-webkit-scrollbar { display: none; }
+	.project, .project--flip {
+		flex: 0 0 84%; scroll-snap-align: start; position: relative; display: block;
+		border-radius: var(--radius); overflow: hidden; isolation: isolate; color: #F6F5F1;
+	}
+	.project__main, .project--flip .project__main { margin: 0; }
+	.project .project__main img { aspect-ratio: 4 / 5; border-radius: 0; }
+	.project::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgb(var(--shade) / 0) 45%, rgb(var(--shade) / 0.82) 100%); pointer-events: none; }
+	.project .project__detail { display: none; }
+	.project__txt, .project--flip .project__txt { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 22px; gap: 6px; }
+	.project__txt h3 { font-size: 34px; }
+	.project__txt p { color: rgb(246 245 241 / 0.88); font-size: 15px; max-width: none; }
+	.projects__dots { display: flex; justify-content: center; gap: 8px; margin-top: -8px; }
+	.projects__dots span { width: 6px; height: 6px; border-radius: 999px; background: var(--line); transition: width 250ms var(--ease), background-color 250ms var(--ease); }
+	.projects__dots span.is-on { width: 20px; background: var(--ink); }
 	.hero__actions { flex-direction: column; align-items: stretch; gap: 14px; }
 	.hero__cta { justify-content: space-between; }
 	.hero__actions .link { align-self: flex-start; }
@@ -808,7 +825,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	}
 	.proof::-webkit-scrollbar { display: none; }
 	.proof__item { flex: 0 0 84%; scroll-snap-align: start; background: var(--paper); border-radius: var(--radius); padding: 22px 20px; gap: 12px; }
-	.proof blockquote { font-size: 20px; line-height: 1.25; }
+	.proof blockquote { font-size: 16px; line-height: 1.55; }
 	.proof__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
 	.proof__dots span { width: 6px; height: 6px; border-radius: 999px; background: var(--line); transition: width 250ms var(--ease), background-color 250ms var(--ease); }
 	.proof__dots span.is-on { width: 20px; background: var(--ink); }

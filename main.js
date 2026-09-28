@@ -339,6 +339,21 @@
 		window.addEventListener('decotrap:mnav', syncBar);
 	}
 
+	// Veegbare rijen (projecten, reviews): bolletjes volgen de kaart die vooraan staat
+	function bindDots(list, dots, itemSel) {
+		if (!list || !dots.length) return;
+		var raf;
+		list.addEventListener('scroll', function () {
+			cancelAnimationFrame(raf);
+			raf = requestAnimationFrame(function () {
+				var items = list.querySelectorAll(itemSel), left = list.getBoundingClientRect().left, best = 0, bestD = Infinity;
+				items.forEach(function (it, k) { var d = Math.abs(it.getBoundingClientRect().left - left - 20); if (d < bestD) { bestD = d; best = k; } });
+				dots.forEach(function (d, k) { d.classList.toggle('is-on', k === best); });
+			});
+		}, { passive: true });
+	}
+	bindDots(document.querySelector('.projects__list'), document.querySelectorAll('.projects__dots span'), '.project');
+
 	// Reviews op mobiel: bolletjes volgen de veegbeweging
 	var proof = document.querySelector('.proof');
 	var dots = document.querySelectorAll('.proof__dots span');
