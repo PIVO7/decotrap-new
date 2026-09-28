@@ -900,7 +900,15 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	/* mobiel: stapelkaarten. Elke kaart kleeft even en de volgende schuift eroverheen. */
 	.acc { display: block; height: auto; }
 	.acc__more > *, .acc__item .acc__more > * { opacity: 1; transform: none; transition: none; }
-	.acc__tags, .acc__item::after { display: none; }
+	.acc__item::after { display: none; }
+	/* mobiel: modellabels als veegbare rij, trapje voor de titel */
+	.acc__tags { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: none; margin-inline: -22px; padding: 2px 22px; gap: 6px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22px, #000 calc(100% - 28px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 22px, #000 calc(100% - 28px), transparent 100%); }
+	.acc__tags::-webkit-scrollbar { display: none; }
+	.acc__tags li { flex: none; }
+	.acc__tags a { min-height: 40px; padding: 0 14px; font-size: 13px; }
+	.acc__item .acc__title { display: flex; align-items: center; gap: 12px; }
+	.acc__item .acc__title::before { content: ""; flex: none; width: 16px; height: 16px; background: var(--brand); clip-path: polygon(0 100%, 0 66.6%, 33.3% 66.6%, 33.3% 33.3%, 66.6% 33.3%, 66.6% 0, 100% 0, 100% 100%); }
+	.acc__more { gap: 14px; }
 	.acc__item, .acc__item.is-open {
 		position: sticky; top: calc(84px + var(--i, 0) * 14px);
 		height: min(520px, 68svh); margin-bottom: 20px;
