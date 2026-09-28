@@ -86,6 +86,61 @@
 		if (openName && !e.target.closest('.nav, .mega')) closeMega(false);
 	});
 
+	// Fotoreeks in de hero: laadt pas als de optie gekozen is, pauzeerbaar, stopt bij beperkte beweging
+	var reeks = document.querySelector('.hero__reeks');
+	var ctrl = document.querySelector('.hero__reeks-ctrl');
+	if (reeks && ctrl) {
+		var slides = Array.prototype.slice.call(reeks.querySelectorAll('.hero__slide'));
+		var bars = Array.prototype.slice.call(ctrl.querySelectorAll('.hero__bars span'));
+		var countEl = ctrl.querySelector('[data-count]');
+		var pauseBtn = ctrl.querySelector('.hero__pause');
+		var DUUR = 6500, index = 0, timer = null, loaded = false, userPaused = false;
+		var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		ctrl.style.setProperty('--reeks-duur', DUUR + 'ms');
+		function load(slide) {
+			slide.querySelectorAll('[data-srcset]').forEach(function (el) { el.srcset = el.dataset.srcset; el.removeAttribute('data-srcset'); });
+			var img = slide.querySelector('img[data-src]');
+			if (img) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+		}
+		function show(i) {
+			index = (i + slides.length) % slides.length;
+			load(slides[index]);
+			load(slides[(index + 1) % slides.length]); // volgende alvast laden
+			slides.forEach(function (s, k) { s.classList.toggle('is-active', k === index); s.setAttribute('aria-hidden', String(k !== index)); });
+			bars.forEach(function (b, k) { b.classList.remove('is-active'); b.classList.toggle('is-done', k < index); });
+			void ctrl.offsetWidth; // balkanimatie opnieuw starten
+			bars[index].classList.add('is-active');
+			countEl.textContent = ('0' + (index + 1)).slice(-2);
+		}
+		function play() {
+			clearInterval(timer);
+			if (userPaused || document.hidden || root.dataset.hero !== 'reeks') return;
+			timer = setInterval(function () { show(index + 1); }, DUUR);
+			reeks.classList.remove('is-paused'); ctrl.classList.remove('is-paused');
+		}
+		function stop() {
+			clearInterval(timer);
+			reeks.classList.add('is-paused'); ctrl.classList.add('is-paused');
+		}
+		function setPaused(p) {
+			userPaused = p;
+			pauseBtn.setAttribute('aria-pressed', String(p));
+			pauseBtn.setAttribute('aria-label', p ? 'Diavoorstelling afspelen' : 'Diavoorstelling pauzeren');
+		}
+		function activate() {
+			if (root.dataset.hero !== 'reeks') { stop(); return; }
+			if (!loaded) { loaded = true; show(0); if (reduce) setPaused(true); }
+			if (userPaused) { stop(); } else { play(); }
+		}
+		pauseBtn.addEventListener('click', function () {
+			setPaused(!userPaused);
+			if (userPaused) { stop(); } else { play(); }
+		});
+		document.addEventListener('visibilitychange', function () { if (document.hidden) { stop(); } else if (!userPaused) { play(); } });
+		new MutationObserver(activate).observe(root, { attributes: true, attributeFilter: ['data-hero'] });
+		activate();
+	}
+
 	// Mobiel menu met doorklikpanelen
 	var mnav = document.getElementById('mnav');
 	var mToggle = document.querySelector('.nav__toggle');

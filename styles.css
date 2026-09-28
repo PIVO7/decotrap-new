@@ -355,6 +355,46 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	}
 }
 
+/* ---------- 12b2. Herofoto 'reeks' (diavoorstelling) ---------- */
+.hero__reeks, .hero__reeks-ctrl { display: none; }
+[data-hero="reeks"] .hero__img--latten, [data-hero="reeks"] .hero__pic--raam { display: none; }
+[data-hero="reeks"] .hero__reeks { display: block; position: absolute; inset: 0; z-index: -2; overflow: hidden; background: #1F211C; }
+.hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1400ms var(--ease); }
+.hero__slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); }
+.hero__slide.is-active { opacity: 1; }
+.hero__slide.is-active img { animation: reeks-zoom 8000ms linear forwards; }
+.hero__reeks.is-paused .hero__slide.is-active img { animation-play-state: paused; }
+@keyframes reeks-zoom { from { transform: scale(1.06); } to { transform: scale(1); } }
+/* iets sterkere laag: witte tekst moet op elke foto leesbaar blijven, ook de lichte */
+[data-hero="reeks"] .hero::before {
+	background:
+		linear-gradient(90deg, rgb(var(--shade) / 0.55) 0%, rgb(var(--shade) / 0.25) 45%, rgb(var(--shade) / 0) 70%),
+		linear-gradient(180deg, rgb(var(--shade) / 0.5) 0%, rgb(var(--shade) / 0) 20%, rgb(var(--shade) / 0) 50%, rgb(var(--shade) / 0.6) 100%);
+}
+[data-hero="reeks"] .hero__reeks-ctrl {
+	display: flex; align-items: center; gap: 14px;
+	position: absolute; right: 40px; bottom: 112px;
+	font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: #F6F5F1;
+}
+.hero__bars { display: flex; gap: 6px; }
+.hero__bars span { width: 28px; height: 2px; background: rgb(246 245 241 / 0.35); position: relative; overflow: hidden; }
+.hero__bars span::after { content: ""; position: absolute; inset: 0; background: var(--brand); transform: scaleX(0); transform-origin: left; }
+.hero__bars span.is-done::after { transform: scaleX(1); }
+.hero__bars span.is-active::after { animation: reeks-bar var(--reeks-duur, 6500ms) linear forwards; }
+.hero__reeks-ctrl.is-paused .hero__bars span.is-active::after { animation-play-state: paused; }
+@keyframes reeks-bar { to { transform: scaleX(1); } }
+.hero__pause { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 999px; background: rgb(var(--shade) / 0.35); border: 1px solid rgb(246 245 241 / 0.5); color: #F6F5F1; cursor: pointer; }
+.hero__pause .i-play { display: none; }
+.hero__pause[aria-pressed="true"] .i-play { display: block; }
+.hero__pause[aria-pressed="true"] .i-pause { display: none; }
+@media (max-width: 520px) {
+	[data-hero="reeks"] .hero__reeks-ctrl { left: var(--gutter); right: auto; bottom: 96px; }
+	[data-hero="reeks"] .hero__content { padding-bottom: 160px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.hero__slide.is-active img { animation: none; transform: none; }
+}
+
 /* ---------- 12c. Megamenu (desktop) ---------- */
 .nav { position: relative; z-index: 30; transition: background-color 200ms var(--ease), color 200ms var(--ease); }
 /* open megamenu: de balk wordt effen, logo en tekst in inkt */
