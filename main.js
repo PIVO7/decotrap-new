@@ -12,6 +12,15 @@
 	buttons.forEach(function (b) { b.addEventListener('click', function () { setTheme(b.dataset.setTheme); }); });
 	setTheme(root.dataset.theme || 'lime');
 
+	// Previewbalk inklappen op mobiel
+	var pbar = document.querySelector('.preview-bar');
+	var pToggle = pbar && pbar.querySelector('.preview-bar__toggle');
+	if (pToggle) pToggle.addEventListener('click', function () {
+		var open = pbar.classList.toggle('is-open');
+		pToggle.setAttribute('aria-expanded', String(open));
+		pToggle.textContent = open ? 'Sluiten' : 'Preview-opties';
+	});
+
 	// Herofoto wisselen (enkel preview)
 	var heroButtons = document.querySelectorAll('[data-set-hero]');
 	function setHero(hero) {
@@ -60,6 +69,22 @@
 		var accTimer;
 		function openAcc(item) {
 			accItems.forEach(function (it) { it.classList.toggle('is-open', it === item); });
+		}
+		// Mobiel: sectie blijft even staan en de collecties schuiven één voor één open terwijl je scrolt
+		if (window.gsap && window.ScrollTrigger && gsap.matchMedia) {
+			gsap.registerPlugin(ScrollTrigger);
+			gsap.matchMedia().add('(max-width: 960px) and (prefers-reduced-motion: no-preference)', function () {
+				var st = ScrollTrigger.create({
+					trigger: '.collections', start: 'top top', end: '+=' + (accItems.length * 45) + '%', pin: true, anticipatePin: 1,
+					// CTA-balk even weg zolang de sectie vaststaat, anders bedekt hij de onderste strook
+					onToggle: function (self) { root.classList.toggle('acc-pinned', self.isActive); },
+					onUpdate: function (self) {
+						var i = Math.min(accItems.length - 1, Math.floor(self.progress * accItems.length));
+						if (!accItems[i].classList.contains('is-open')) openAcc(accItems[i]);
+					}
+				});
+				return function () { st.kill(); };
+			});
 		}
 		accItems.forEach(function (item) {
 			if (hoverDevice) {
