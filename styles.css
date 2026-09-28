@@ -742,6 +742,12 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 }
 /* opent als een cirkel vanuit het menu-onderdeel, zoals het mobiele menu vanuit de knop */
 @keyframes mega-in { from { clip-path: circle(0 at var(--mega-x, 50%) 0); } to { clip-path: circle(150% at var(--mega-x, 50%) 0); } }
+/* sluiten: cirkel krimpt terug naar het menu-onderdeel, inhoud vervaagt iets sneller */
+.hero.is-mega-closing .mega__inner { animation: mega-out 420ms cubic-bezier(0.64, 0, 0.78, 0) forwards; pointer-events: none; }
+.hero.is-mega-closing .mega__inner > * { animation: mega-fade 200ms var(--ease) forwards; }
+.hero.is-mega-closing::after { opacity: 0; }
+@keyframes mega-out { from { clip-path: circle(100% at var(--mega-x, 50%) 0); } to { clip-path: circle(0 at var(--mega-x, 50%) 0); } }
+@keyframes mega-fade { to { opacity: 0; transform: translateY(-8px); } }
 /* wisselen tussen twee open panelen: zonder infade, anders schemert de pagina er even door */
 .hero.is-mega-switch .mega__inner { animation: none; }
 /* inhoud komt gelaagd binnen: kolommen en foto's een voor een, zoals treden */

@@ -151,6 +151,8 @@
 	function openMega(name) {
 		clearTimeout(closeTimer);
 		if (openName === name) return;
+		// was het paneel nog aan het sluiten? meteen afronden, dan opent het nieuwe proper
+		if (closingTimer) finishClose();
 		// al een paneel open? dan meteen wisselen, zonder infade
 		hero.classList.toggle('is-mega-switch', !!openName);
 		// richting van de wissel: naar rechts in het menu = inhoud schuift van rechts binnen
@@ -173,18 +175,23 @@
 		openName = name;
 		moveInk(document.querySelector('.nav__trigger[data-mega="' + name + '"]'));
 	}
+	var closingTimer = null;
+	function finishClose() {
+		clearTimeout(closingTimer); closingTimer = null;
+		triggers.forEach(function (t) { document.getElementById('mega-' + t.dataset.mega).hidden = true; });
+		hero.classList.remove('is-mega', 'is-mega-closing');
+	}
 	function closeMega(returnFocus) {
 		clearTimeout(openTimer);
 		if (!openName) return;
 		var trigger = document.querySelector('.nav__trigger[data-mega="' + openName + '"]');
-		triggers.forEach(function (t) {
-			t.setAttribute('aria-expanded', 'false');
-			document.getElementById('mega-' + t.dataset.mega).hidden = true;
-		});
-		hero.classList.remove('is-mega');
+		triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
 		scrim.classList.remove('is-on');
 		openName = null;
 		if (!menuEl.matches(':hover')) moveInk(null);
+		// sluiten: het paneel krimpt als een cirkel terug naar het menu-onderdeel, daarna pas verbergen
+		var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (still) { finishClose(); } else { hero.classList.add('is-mega-closing'); closingTimer = setTimeout(finishClose, 420); }
 		if (returnFocus && trigger) trigger.focus();
 	}
 	triggers.forEach(function (t) {
