@@ -367,10 +367,11 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	min-height: var(--h);
 	position: relative; z-index: 1;
 }
-.step:nth-of-type(1) { grid-column: 1; --h: 220px; --tint: 0.06; }
-.step:nth-of-type(2) { grid-column: 2; --h: 320px; --tint: 0.12; }
-.step:nth-of-type(3) { grid-column: 3; --h: 420px; --tint: 0.2; }
-.step:nth-of-type(4) { grid-column: 4; --h: 520px; background: var(--step-last-bg); color: var(--step-last-fg); border-top: var(--step-last-border); }
+/* de treden stijgen steiler, zodat titel en intro vrij boven trede 1 en 2 liggen */
+.step:nth-of-type(1) { grid-column: 1; --h: 210px; --tint: 0.06; }
+.step:nth-of-type(2) { grid-column: 2; --h: 310px; --tint: 0.12; }
+.step:nth-of-type(3) { grid-column: 3; --h: 460px; --tint: 0.2; }
+.step:nth-of-type(4) { grid-column: 4; --h: 610px; background: var(--step-last-bg); color: var(--step-last-fg); border-top: var(--step-last-border); }
 .step h3 { font-size: 22px; line-height: 1.2; font-weight: 500; text-transform: uppercase; }
 .step p { font-size: 15px; color: rgb(var(--on-dark) / 0.8); }
 .step:nth-of-type(4) p { color: inherit; }
@@ -379,6 +380,15 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .step:nth-of-type(4) .stair rect { fill: var(--step-last-icon-off); }
 .step:nth-of-type(4) .stair rect.on { fill: var(--step-last-icon-on); }
 .steps::after { content: ""; position: absolute; left: var(--gutter); right: var(--gutter); bottom: 119px; height: 1px; background: rgb(var(--on-dark) / 0.35); }
+/* actie onderaan de trede, zoals de voet van een stap */
+.step__link { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: inherit; border-bottom: 2px solid var(--brand); }
+.step__link .arrow { transition: transform 200ms var(--ease); }
+.step h3 { margin-top: 6px; }
+@media (hover: hover) {
+	.step:not(:nth-of-type(4)) { transition: background-color 250ms var(--ease); }
+	.step:not(:nth-of-type(4)):hover { background: rgb(var(--on-dark) / calc(var(--tint) + 0.06)); }
+	.step__link:hover .arrow { transform: translate(2px, -2px); }
+}
 
 /* ---------- 8. Klantervaring ---------- */
 .quote { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 140px var(--gutter); align-items: center; }
@@ -719,10 +729,10 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.nav__menu a, .nav__trigger { font-size: 13px; }
 	.steps__intro { grid-column: 1 / -1; grid-row: 1; margin-bottom: 40px; }
 	.step { grid-row: 2; }
-	.step:nth-of-type(1) { --h: 180px; }
-	.step:nth-of-type(2) { --h: 250px; }
-	.step:nth-of-type(3) { --h: 320px; }
-	.step:nth-of-type(4) { --h: 390px; }
+	.step:nth-of-type(1) { --h: 250px; }
+	.step:nth-of-type(2) { --h: 310px; }
+	.step:nth-of-type(3) { --h: 370px; }
+	.step:nth-of-type(4) { --h: 430px; }
 	.step { padding: 24px; }
 	.step h3 { font-size: 19px; }
 }
