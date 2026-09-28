@@ -359,12 +359,13 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .hero__reeks, .hero__reeks-ctrl { display: none; }
 [data-hero="reeks"] .hero__img--latten, [data-hero="reeks"] .hero__pic--raam { display: none; }
 [data-hero="reeks"] .hero__reeks { display: block; position: absolute; inset: 0; z-index: -2; overflow: hidden; background: #1F211C; }
-.hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1400ms var(--ease); }
-.hero__slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); }
-.hero__slide.is-active { opacity: 1; }
-.hero__slide.is-active img { animation: reeks-zoom 8000ms linear forwards; }
-.hero__reeks.is-paused .hero__slide.is-active img { animation-play-state: paused; }
-@keyframes reeks-zoom { from { transform: scale(1.06); } to { transform: scale(1); } }
+.hero__slide { position: absolute; inset: 0; opacity: 0; z-index: 0; transition: opacity 2200ms cubic-bezier(0.45, 0, 0.55, 1); }
+/* de vorige foto blijft volledig zichtbaar onder de nieuwe tot die helemaal ingefaded is: geen donkere dip */
+.hero__slide.is-leaving { opacity: 1; z-index: 1; transition: none; }
+.hero__slide.is-active { opacity: 1; z-index: 2; }
+.hero__slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.07); }
+/* de zoom loopt door tijdens het wegfaden, zodat de beweging nooit stokt */
+.hero__slide.is-active img, .hero__slide.is-leaving img { transform: scale(1); transition: transform 11000ms cubic-bezier(0.25, 0.1, 0.25, 1); }
 /* iets sterkere laag: witte tekst moet op elke foto leesbaar blijven, ook de lichte */
 [data-hero="reeks"] .hero::before {
 	background:
@@ -392,8 +393,9 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	[data-hero="reeks"] .hero__content { padding-bottom: 160px; }
 }
 @media (prefers-reduced-motion: reduce) {
-	.hero__slide.is-active img { animation: none; transform: none; }
+	.hero__slide img, .hero__slide.is-active img, .hero__slide.is-leaving img { transform: none; transition: none; }
 }
+@media (min-width: 961px) { .steps--scrub { min-height: 100vh; } }
 
 /* ---------- 12c. Megamenu (desktop) ---------- */
 .nav { position: relative; z-index: 30; transition: background-color 200ms var(--ease), color 200ms var(--ease); }
@@ -485,6 +487,11 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	*, *::before, *::after { transition-duration: 1ms !important; transition-delay: 0ms !important; }
 	.reveal, .js .step, .js .step > * { opacity: 1; transform: none; }
 }
+
+/* treden die meegroeien met scrollen (GSAP ScrollTrigger): GSAP stuurt transform en opacity zelf */
+.steps--scrub .step, .steps--scrub .step > * { transition: none !important; }
+.steps--scrub .step { will-change: transform; }
+.steps__floor { display: none; }
 
 /* ---------- 14. Tablet en mobiel ---------- */
 @media (max-width: 1240px) {

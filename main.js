@@ -94,7 +94,7 @@
 		var bars = Array.prototype.slice.call(ctrl.querySelectorAll('.hero__bars span'));
 		var countEl = ctrl.querySelector('[data-count]');
 		var pauseBtn = ctrl.querySelector('.hero__pause');
-		var DUUR = 6500, index = 0, timer = null, loaded = false, userPaused = false;
+		var DUUR = 7000, index = 0, timer = null, loaded = false, userPaused = false;
 		var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		ctrl.style.setProperty('--reeks-duur', DUUR + 'ms');
 		function load(slide) {
@@ -106,7 +106,12 @@
 			index = (i + slides.length) % slides.length;
 			load(slides[index]);
 			load(slides[(index + 1) % slides.length]); // volgende alvast laden
-			slides.forEach(function (s, k) { s.classList.toggle('is-active', k === index); s.setAttribute('aria-hidden', String(k !== index)); });
+			var prev = reeks.querySelector('.hero__slide.is-active');
+			slides.forEach(function (s, k) { s.classList.remove('is-leaving'); s.classList.toggle('is-active', k === index); s.setAttribute('aria-hidden', String(k !== index)); });
+			if (prev && prev !== slides[index]) {
+				prev.classList.add('is-leaving');
+				setTimeout(function () { if (!prev.classList.contains('is-active')) prev.classList.remove('is-leaving'); }, 2400);
+			}
 			bars.forEach(function (b, k) { b.classList.remove('is-active'); b.classList.toggle('is-done', k < index); });
 			void ctrl.offsetWidth; // balkanimatie opnieuw starten
 			bars[index].classList.add('is-active');
@@ -115,10 +120,20 @@
 		function play() {
 			clearInterval(timer);
 			if (userPaused || document.hidden || root.dataset.hero !== 'reeks') return;
+			freeze(false);
 			timer = setInterval(function () { show(index + 1); }, DUUR);
 			reeks.classList.remove('is-paused'); ctrl.classList.remove('is-paused');
 		}
+		function freeze(on) {
+			slides.forEach(function (s) {
+				var img = s.querySelector('img');
+				if (on && (s.classList.contains('is-active') || s.classList.contains('is-leaving'))) {
+					img.style.transform = getComputedStyle(img).transform; img.style.transition = 'none';
+				} else { img.style.transform = ''; img.style.transition = ''; }
+			});
+		}
 		function stop() {
+			freeze(true);
 			clearInterval(timer);
 			reeks.classList.add('is-paused'); ctrl.classList.add('is-paused');
 		}
@@ -139,6 +154,68 @@
 		document.addEventListener('visibilitychange', function () { if (document.hidden) { stop(); } else if (!userPaused) { play(); } });
 		new MutationObserver(activate).observe(root, { attributes: true, attributeFilter: ['data-hero'] });
 		activate();
+	}
+
+	// Treden die meegroeien met scrollen (GSAP ScrollTrigger). Zonder GSAP of bij beperkte beweging
+	// blijft de gewone animatie (eenmalig opkomen) actief.
+	var stepsSection = document.querySelector('.steps');
+	var stepsButtons = document.querySelectorAll('[data-set-steps]');
+	var scrubTl = null;
+	function canScrub() {
+		return window.gsap && window.ScrollTrigger && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	}
+	function buildScrub() {
+		var steps = stepsSection.querySelectorAll('.step');
+		var desktop = window.matchMedia('(min-width: 961px)').matches;
+		stepsSection.classList.add('steps--scrub');
+		scrubTl = gsap.timeline({
+			defaults: { ease: 'none' },
+			scrollTrigger: desktop
+				// desktop: de sectie blijft even staan terwijl de trap trede per trede opgebouwd wordt
+				? { trigger: stepsSection, start: 'top top', end: '+=140%', pin: true, scrub: 0.6, anticipatePin: 1 }
+				// mobiel: niet vastzetten, de treden schuiven mee in terwijl ze in beeld scrollen
+				: { trigger: stepsSection, start: 'top 75%', end: 'bottom 70%', scrub: 0.6 }
+		});
+		steps.forEach(function (step, i) {
+			var at = i * 0.9;
+			scrubTl.fromTo(step, desktop ? { scaleY: 0, transformOrigin: 'bottom' } : { scaleX: 0, transformOrigin: 'left' },
+				desktop ? { scaleY: 1, duration: 1, ease: 'power2.out' } : { scaleX: 1, duration: 1, ease: 'power2.out' }, at);
+			scrubTl.fromTo(step.children, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 }, at + 0.55);
+			// het trapje in de trede vult zich
+			scrubTl.fromTo(step.querySelectorAll('.stair rect.on'), { opacity: 0.2 }, { opacity: 1, duration: 0.3, stagger: 0.1 }, at + 0.6);
+		});
+		scrubTl.to({}, { duration: 0.6 }); // korte rust op het einde, trede 4 blijft even staan
+	}
+	function killScrub() {
+		if (!scrubTl) return;
+		scrubTl.scrollTrigger && scrubTl.scrollTrigger.kill(true);
+		scrubTl.kill();
+		scrubTl = null;
+		gsap.set(stepsSection.querySelectorAll('.step, .step > *, .stair rect'), { clearProps: 'all' });
+		stepsSection.classList.remove('steps--scrub');
+	}
+	function setSteps(mode) {
+		stepsButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setSteps === mode)); });
+		try { localStorage.setItem('decotrap-treden', mode); } catch (e) {}
+		if (!stepsSection || !window.gsap) return;
+		killScrub();
+		if (mode === 'scroll' && canScrub()) { buildScrub(); stepsSection.classList.add('is-in'); }
+		ScrollTrigger.refresh();
+	}
+	if (stepsSection) {
+		if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+		var stepsMode = 'scroll';
+		try { stepsMode = localStorage.getItem('decotrap-treden') || 'scroll'; } catch (e) {}
+		stepsButtons.forEach(function (b) { b.addEventListener('click', function () { setSteps(b.dataset.setSteps); }); });
+		setSteps(stepsMode);
+		// bij wisselen tussen gsm- en desktopbreedte de tijdlijn opnieuw opbouwen
+		var wasDesktop = window.matchMedia('(min-width: 961px)').matches;
+		window.addEventListener('resize', function () {
+			var isDesktop = window.matchMedia('(min-width: 961px)').matches;
+			if (isDesktop !== wasDesktop && scrubTl) { wasDesktop = isDesktop; setSteps('scroll'); }
+		});
+		// herofoto's en lettertypes veranderen de hoogte van de pagina: posities herberekenen
+		window.addEventListener('load', function () { window.ScrollTrigger && ScrollTrigger.refresh(); });
 	}
 
 	// Mobiel menu met doorklikpanelen
