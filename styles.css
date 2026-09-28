@@ -76,7 +76,7 @@
 	--font: 'Geist', system-ui, sans-serif;
 	--mono: 'Geist Mono', ui-monospace, monospace;
 	--serif: 'Instrument Serif', Georgia, serif;
-	--gutter: clamp(20px, 4.5vw, 64px);
+	--gutter: max(clamp(20px, 4.5vw, 64px), calc((100vw - 1600px) / 2));
 	--radius: 4px;
 	--ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -132,7 +132,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.btn--outline:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 }
 .link {
-	display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
+	display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; min-height: 44px; box-sizing: border-box;
 	font-size: 15px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
 	text-decoration: none; border-bottom: 2px solid var(--brand); padding-bottom: 6px;
 }
@@ -157,8 +157,9 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	padding: 28px var(--gutter);
 }
 .nav__logo img { width: 52px; height: auto; }
-.nav__menu { display: flex; gap: 36px; list-style: none; margin: 0; padding: 0; }
+.nav__menu { display: flex; align-items: center; gap: 36px; list-style: none; margin: 0; padding: 0; }
 .nav__menu a, .nav__trigger {
+	display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; line-height: 1;
 	font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
 	padding: 8px 0; border-bottom: 2px solid transparent;
 }
@@ -278,7 +279,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .showroom__video .play { width: 72px; height: 72px; border-radius: 999px; background: var(--bg); display: grid; place-items: center; }
 .showroom__video .play path { fill: var(--ink); }
 .showroom__video .txt { background: rgb(var(--shade) / 0.55); padding: 8px 12px; border-radius: var(--radius); }
-.showroom__note { padding: 56px var(--gutter) 0; font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); max-width: 720px; }
+.showroom__note { padding: 56px var(--gutter) 0; margin-right: calc(min(560px, 100%) + var(--gutter)); font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); max-width: 720px; }
 .card {
 	position: absolute; right: var(--gutter); top: 500px; width: min(560px, calc(100% - 2 * var(--gutter)));
 	background: var(--deep); color: var(--paper); border-radius: var(--radius);
@@ -446,9 +447,17 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 }
 
 /* ---------- 14. Tablet en mobiel ---------- */
-@media (max-width: 1100px) {
+@media (max-width: 1240px) {
 	.nav__menu { gap: 22px; }
-	.nav__menu a { font-size: 13px; }
+	.nav__menu a, .nav__trigger { font-size: 13px; }
+	.steps__intro { grid-column: 1 / -1; grid-row: 1; margin-bottom: 40px; }
+	.step { grid-row: 2; }
+	.step:nth-of-type(1) { --h: 180px; }
+	.step:nth-of-type(2) { --h: 250px; }
+	.step:nth-of-type(3) { --h: 320px; }
+	.step:nth-of-type(4) { --h: 390px; }
+	.step { padding: 24px; }
+	.step h3 { font-size: 19px; }
 }
 @media (max-width: 960px) {
 	.nav__menu, .nav__cta { display: none; }
@@ -477,7 +486,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.showroom__img { height: 420px; }
 	.showroom__video { top: 250px; }
 	.card { position: relative; top: auto; right: auto; margin: -64px var(--gutter) 0 auto; }
-	.showroom__note { padding-top: 32px; }
+	.showroom__note { padding-top: 32px; margin-right: 0; }
 	.cta { grid-template-columns: 1fr; row-gap: 28px; padding-block: 88px; }
 	.cta h2, .cta__body { grid-column: 1; }
 	.footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
@@ -489,6 +498,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.tile img { aspect-ratio: 4 / 5; }
 	.card { margin: -48px var(--gutter) 0; padding: 32px; width: auto; }
 	.card__adr { grid-template-columns: 1fr; }
+	.card .h2 { font-size: clamp(26px, 8vw, 32px); }
 	.footer { gap: 56px; }
 	.footer__word { font-size: 12.5vw; }
 	.footer__base .mark { width: min(var(--footer-mark), 48px); height: min(var(--footer-mark), 48px); }
