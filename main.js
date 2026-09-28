@@ -339,6 +339,22 @@
 		window.addEventListener('decotrap:mnav', syncBar);
 	}
 
+	// Reviews op mobiel: bolletjes volgen de veegbeweging
+	var proof = document.querySelector('.proof');
+	var dots = document.querySelectorAll('.proof__dots span');
+	if (proof && dots.length) {
+		var dotTimer;
+		proof.addEventListener('scroll', function () {
+			cancelAnimationFrame(dotTimer);
+			dotTimer = requestAnimationFrame(function () {
+				var items = proof.querySelectorAll('.proof__item');
+				var left = proof.getBoundingClientRect().left, best = 0, bestD = Infinity;
+				items.forEach(function (it, k) { var d = Math.abs(it.getBoundingClientRect().left - left - 20); if (d < bestD) { bestD = d; best = k; } });
+				dots.forEach(function (d, k) { d.classList.toggle('is-on', k === best); });
+			});
+		}, { passive: true });
+	}
+
 	// Mobiel menu met doorklikpanelen
 	var mnav = document.getElementById('mnav');
 	var mToggle = document.querySelector('.nav__toggle');
