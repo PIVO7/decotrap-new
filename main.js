@@ -26,10 +26,10 @@
 	function setHero(hero) {
 		root.dataset.hero = hero;
 		heroButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setHero === hero)); });
-		try { localStorage.setItem('decotrap-hero', hero); } catch (e) {}
+		try { localStorage.setItem('decotrap-hero2', hero); } catch (e) {}
 	}
 	heroButtons.forEach(function (b) { b.addEventListener('click', function () { setHero(b.dataset.setHero); }); });
-	setHero(root.dataset.hero || 'latten');
+	setHero(root.dataset.hero || 'zon');
 
 
 	// Trap-o-theek-video: speelt enkel als hij in beeld is, pauzeerbaar, niet vanzelf bij beperkte beweging
