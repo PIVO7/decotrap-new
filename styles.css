@@ -288,6 +288,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 @media (prefers-reduced-motion: reduce) { .acc__item, .acc__more, .acc__img img { transition: none !important; } }
 
 /* ---------- 7. Treden ---------- */
+.step__line { display: none; }
 .steps {
 	position: relative;
 	background: var(--deep); color: var(--paper);
@@ -619,12 +620,24 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.acc__shade { position: absolute; inset: 0; z-index: 0; background: rgb(var(--shade) / 1); opacity: 0; pointer-events: none; }
 	.steps { grid-template-columns: 1fr; padding-block: 88px; gap: 10px; }
 	.steps__intro { grid-column: 1; grid-row: auto; margin-bottom: 28px; }
-	.step { grid-column: 1 !important; grid-row: auto; min-height: 0; }
-	.step:nth-of-type(2) { margin-left: 8%; }
-	.step:nth-of-type(3) { margin-left: 16%; }
-	.step:nth-of-type(4) { margin-left: 24%; }
+	/* mobiel: verticale traplijn met het logotrapje als markering per stap */
+	.step, .step:nth-of-type(n) {
+		grid-column: 1 !important; grid-row: auto; min-height: 0;
+		background: transparent; border-top: 0; border-radius: 0; color: var(--paper);
+		padding: 0 0 36px 56px; position: relative;
+	}
+	.step .stair { position: absolute; left: 0; top: 0; }
+	.step h3, .step:nth-of-type(4) h3 { padding-top: 2px; }
+	.step p, .step:nth-of-type(4) p { color: rgb(var(--on-dark) / 0.78); }
+	.step:nth-of-type(4) h3 { color: var(--brand); }
+	.step:nth-of-type(4) { padding-bottom: 0; }
+	.step .stair rect, .step:nth-of-type(4) .stair rect { fill: rgb(var(--on-dark) / 0.22); }
+	.step .stair rect.on, .step:nth-of-type(4) .stair rect.on { fill: var(--brand); }
+	/* lijnstuk van dit trapje naar het volgende; de lime vulling groeit mee met de scroll */
+	.step__line { display: block; position: absolute; left: 15px; top: 34px; bottom: 6px; width: 2px; background: rgb(var(--on-dark) / 0.18); }
+	.step__line > span { position: absolute; inset: 0; background: var(--brand); transform-origin: top; transform: scaleY(1); }
 	.steps::after { display: none; }
-	.js .step { transform: scaleX(0); transform-origin: left; }
+	.js .step, .js .steps.is-in .step { transform: none; }
 
 	.cta { grid-template-columns: 1fr; row-gap: 28px; padding-block: 88px; }
 	.cta h2, .cta__body { grid-column: 1; }
@@ -665,8 +678,9 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	/* treden: compacter */
 	.steps { padding-block: 72px; }
 	.steps__intro { margin-bottom: 20px; }
-	.step { padding: 20px; gap: 8px; }
-	.step h3 { font-size: 17px; }
+	.step, .step:nth-of-type(n) { padding: 0 0 32px 52px; gap: 6px; }
+	.step:nth-of-type(4) { padding-bottom: 0; }
+	.step h3 { font-size: 18px; }
 	.step p { font-size: 14px; }
 
 	/* klantervaring: foto eerst, quote kleiner, korte reviews veegbaar */

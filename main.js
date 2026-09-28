@@ -250,7 +250,7 @@
 	// blijft de gewone animatie (eenmalig opkomen) actief.
 	var stepsSection = document.querySelector('.steps');
 	var stepsButtons = document.querySelectorAll('[data-set-steps]');
-	var scrubTl = null;
+	var scrubTl = null, mobileTweens = [];
 	function canScrub() {
 		return window.gsap && window.ScrollTrigger && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	}
@@ -258,30 +258,40 @@
 		var steps = stepsSection.querySelectorAll('.step');
 		var desktop = window.matchMedia('(min-width: 961px)').matches;
 		stepsSection.classList.add('steps--scrub');
+		if (!desktop) {
+			// mobiel: de lime lijn groeit van trapje naar trapje en elke stap licht op als je hem bereikt
+			scrubTl = gsap.timeline({ paused: true }); // houder; de losse tweens staan in mobileTweens
+			steps.forEach(function (step, i) {
+				var fill = step.querySelector('.step__line > span');
+				var body = step.querySelectorAll('h3, p');
+				var rects = step.querySelectorAll('.stair rect.on');
+				var t = { trigger: step, start: 'top 72%', end: 'bottom 62%', scrub: 0.4 };
+				mobileTweens.push(gsap.fromTo(body, { opacity: 0.3 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: step, start: 'top 80%', end: 'top 60%', scrub: 0.4 } }));
+				mobileTweens.push(gsap.fromTo(rects, { opacity: 0.25 }, { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: step, start: 'top 80%', end: 'top 62%', scrub: 0.4 } }));
+				if (fill) mobileTweens.push(gsap.fromTo(fill, { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: t }));
+			});
+			return;
+		}
 		scrubTl = gsap.timeline({
 			defaults: { ease: 'none' },
-			scrollTrigger: desktop
-				// desktop: de sectie blijft even staan terwijl de trap trede per trede opgebouwd wordt
-				? { trigger: stepsSection, start: 'top top', end: '+=140%', pin: true, scrub: 0.6, anticipatePin: 1 }
-				// mobiel: niet vastzetten, de treden schuiven mee in terwijl ze in beeld scrollen
-				: { trigger: stepsSection, start: 'top 75%', end: 'bottom 70%', scrub: 0.6 }
+			scrollTrigger: { trigger: stepsSection, start: 'top top', end: '+=140%', pin: true, scrub: 0.6, anticipatePin: 1 }
 		});
 		steps.forEach(function (step, i) {
 			var at = i * 0.9;
-			scrubTl.fromTo(step, desktop ? { scaleY: 0, transformOrigin: 'bottom' } : { scaleX: 0, transformOrigin: 'left' },
-				desktop ? { scaleY: 1, duration: 1, ease: 'power2.out' } : { scaleX: 1, duration: 1, ease: 'power2.out' }, at);
+			scrubTl.fromTo(step, { scaleY: 0, transformOrigin: 'bottom' }, { scaleY: 1, duration: 1, ease: 'power2.out' }, at);
 			scrubTl.fromTo(step.children, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.08 }, at + 0.55);
-			// het trapje in de trede vult zich
 			scrubTl.fromTo(step.querySelectorAll('.stair rect.on'), { opacity: 0.2 }, { opacity: 1, duration: 0.3, stagger: 0.1 }, at + 0.6);
 		});
-		scrubTl.to({}, { duration: 0.6 }); // korte rust op het einde, trede 4 blijft even staan
+		scrubTl.to({}, { duration: 0.6 });
 	}
 	function killScrub() {
 		if (!scrubTl) return;
 		scrubTl.scrollTrigger && scrubTl.scrollTrigger.kill(true);
+		mobileTweens.forEach(function (t) { t.scrollTrigger && t.scrollTrigger.kill(true); t.kill(); });
+		mobileTweens = [];
 		scrubTl.kill();
 		scrubTl = null;
-		gsap.set(stepsSection.querySelectorAll('.step, .step > *, .stair rect'), { clearProps: 'all' });
+		gsap.set(stepsSection.querySelectorAll('.step, .step > *, .step h3, .step p, .stair rect, .step__line > span'), { clearProps: 'all' });
 		stepsSection.classList.remove('steps--scrub');
 	}
 	function setSteps(mode) {
