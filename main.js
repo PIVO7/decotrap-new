@@ -402,6 +402,19 @@
 	}
 	bindDots(document.querySelector('.projects__list'), document.querySelectorAll('.projects__dots span'), '.project');
 
+	// Realisaties op desktop: projectindex. Hover, focus of klik op een project toont zijn foto's in de bühne
+	var projects = Array.prototype.slice.call(document.querySelectorAll('.project'));
+	var projMq = window.matchMedia('(min-width: 961px)');
+	function setProject(p) { projects.forEach(function (q) { var on = q === p; q.classList.toggle('is-active', on); q.querySelector('.project__txt').setAttribute('aria-current', on ? 'true' : 'false'); }); }
+	projects.forEach(function (p) {
+		var txt = p.querySelector('.project__txt');
+		txt.addEventListener('mouseenter', function () { if (projMq.matches) setProject(p); });
+		txt.addEventListener('focus', function () { setProject(p); });
+		txt.addEventListener('click', function () { setProject(p); });
+	});
+	function syncProjTabs() { projects.forEach(function (p) { var t = p.querySelector('.project__txt'); if (projMq.matches) t.setAttribute('tabindex', '0'); else t.removeAttribute('tabindex'); }); }
+	if (projects.length) { setProject(projects[0]); syncProjTabs(); projMq.addEventListener('change', syncProjTabs); }
+
 	// Reviews op mobiel: bolletjes volgen de veegbeweging
 	var proof = document.querySelector('.proof');
 	var dots = document.querySelectorAll('.proof__dots span');

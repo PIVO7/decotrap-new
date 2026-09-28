@@ -206,21 +206,52 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 @media (hover: hover) { .hero__cta:hover { background: var(--paper); color: var(--ink); } [data-theme="zw"] .hero__cta:hover { background: var(--brand); } }
 
 /* ---------- 6b. Projecten (realisaties) ---------- */
-.projects { padding: 0 var(--gutter) 160px; display: flex; flex-direction: column; gap: 96px; }
+.projects { padding: 0 var(--gutter) 160px; display: flex; flex-direction: column; gap: 64px; }
 .projects__head { display: flex; flex-direction: column; gap: 16px; }
-.projects__list { display: contents; }
 .projects__dots { display: none; }
-.project { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 20px; align-items: end; }
-.project__main { grid-column: 1 / span 8; grid-row: 1 / span 2; }
-.project__detail { grid-column: 10 / span 3; grid-row: 1; }
-.project__txt { grid-column: 10 / span 3; grid-row: 2; display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px; }
-.project--flip .project__main { grid-column: 5 / span 8; }
-.project--flip .project__detail, .project--flip .project__txt { grid-column: 1 / span 3; }
 .project picture, .project img { display: block; width: 100%; }
-.project__main img { aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
-.project__detail img { aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
-.project__txt h3 { font-size: clamp(32px, 3vw, 48px); line-height: 1; font-weight: 500; text-transform: uppercase; letter-spacing: -0.01em; }
-.project__txt p { font-size: 15px; line-height: 1.5; color: var(--text); max-width: 280px; }
+
+/* desktop: projectindex. Links de lijst, rechts één grote foto die wisselt met het actieve project */
+.projects__list {
+	display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: repeat(3, auto) 1fr;
+	column-gap: clamp(40px, 5vw, 88px);
+}
+.project { display: contents; }
+.project:nth-child(1) .project__txt { grid-row: 1; }
+.project:nth-child(2) .project__txt { grid-row: 2; }
+.project:nth-child(3) .project__txt { grid-row: 3; }
+.project__txt {
+	grid-column: 1; position: relative;
+	display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 16px; row-gap: 8px; align-items: baseline;
+	padding: 28px 0; border-top: 1px solid var(--line); cursor: pointer; outline: none;
+}
+.project:nth-child(3) .project__txt { border-bottom: 1px solid var(--line); }
+.project__txt::before {
+	content: ""; grid-row: 1; width: 18px; height: 18px; align-self: center; background: var(--brand);
+	clip-path: polygon(0 100%, 0 66.6%, 33.3% 66.6%, 33.3% 33.3%, 66.6% 33.3%, 66.6% 0, 100% 0, 100% 100%);
+	transform: scale(0.4); opacity: 0; transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1), opacity 250ms var(--ease);
+}
+.project__txt h3 { grid-column: 2; font-size: clamp(34px, 3.6vw, 56px); line-height: 1; font-weight: 500; text-transform: uppercase; letter-spacing: -0.02em; color: var(--muted); transition: color 300ms var(--ease), transform 400ms cubic-bezier(0.22, 1, 0.36, 1); }
+.project__txt p { grid-column: 2; font-size: 15px; line-height: 1.5; color: var(--muted); max-width: 360px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 450ms var(--ease), opacity 300ms var(--ease); }
+/* voortgangslijn onder het actieve project */
+.project__txt::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--brand); transform: scaleX(0); transform-origin: left; transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1); }
+.project.is-active .project__txt::before { transform: none; opacity: 1; }
+.project.is-active .project__txt::after { transform: scaleX(1); }
+.project.is-active .project__txt h3 { color: var(--ink); }
+.project.is-active .project__txt p { color: var(--text); max-height: 80px; opacity: 1; transition-delay: 80ms; }
+@media (hover: hover) { .project:not(.is-active) .project__txt:hover h3 { color: var(--ink); transform: translateX(4px); } }
+.project__txt:focus-visible h3 { outline: 2px solid var(--brand); outline-offset: 6px; }
+
+/* bühne: alle foto's liggen op elkaar in de rechterkolom */
+.project__main, .project__detail { grid-column: 2; grid-row: 1 / -1; }
+.project .project__main { position: relative; overflow: hidden; border-radius: var(--radius); align-self: start; opacity: 0; transition: opacity 700ms var(--ease); }
+.project__main img { aspect-ratio: 5 / 4; object-fit: cover; transform: scale(1.06); transition: transform 1400ms cubic-bezier(0.22, 1, 0.36, 1); }
+.project .project__detail { position: relative; z-index: 2; align-self: end; justify-self: start; width: 28%; margin: 0 0 -40px -56px; opacity: 0; transform: translateY(24px); transition: opacity 500ms var(--ease), transform 700ms cubic-bezier(0.22, 1, 0.36, 1); pointer-events: none; }
+.project__detail img { aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.35); border: 6px solid var(--bg); }
+.project.is-active .project__main { opacity: 1; z-index: 1; }
+.project.is-active .project__main img { transform: none; }
+.project.is-active .project__detail { opacity: 1; transform: none; transition-delay: 180ms; }
+@media (prefers-reduced-motion: reduce) { .project__main, .project__main img, .project__detail, .project__txt h3, .project__txt p, .project__txt::before, .project__txt::after { transition: none !important; } }
 .projects__more { align-self: flex-start; }
 
 /* ---------- 4. USP-balk ---------- */
