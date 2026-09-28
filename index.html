@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" data-theme="lime" data-hero="latten">
+<html lang="nl" data-theme="lime" data-hero="latten" data-kop="a">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
-	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero'); if (f === 'raam' || f === 'latten' || f === 'reeks') document.documentElement.dataset.hero = f; } catch (e) {}
+	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero'); if (f === 'raam' || f === 'latten' || f === 'reeks') document.documentElement.dataset.hero = f; var k = localStorage.getItem('decotrap-kop'); if (k === 'a' || k === 'b') document.documentElement.dataset.kop = k; } catch (e) {}
 	document.documentElement.classList.add('js');
 </script>
 </head>
@@ -117,7 +117,7 @@
 			<li><a href="#trap-o-theek">Trap-o-theek</a></li>
 			<li><a href="#over">Over ons</a></li>
 		</ul>
-		<a class="btn btn--outline nav__cta" href="#trap-o-theek">Plan je bezoek</a>
+		<div class="nav__ctas"><a class="nav__link" href="#trap-o-theek">Plan je bezoek</a><a class="btn nav__offerte" href="#offerte">Gratis offerte <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 		<button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu openen">
 			<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 6h16M2 14h16" stroke="currentColor" stroke-width="1.6"></path></svg>
 		</button>
@@ -176,10 +176,11 @@
 	</div>
 	<div class="hero__content">
 		<p class="hero__eyebrow"><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Familiebedrijf · toonzalen in Heusden-Zolder en Wetteren</p>
-		<h1>Op maat gemaakt.<br>Ter plaatse afgewerkt.</h1>
+		<h1><span class="kop-a">Op maat gemaakt.<br>Ter plaatse afgewerkt.</span><span class="kop-b">Op maat gemaakt.<br>Tot in elk detail.</span></h1>
+		<p class="hero__sub kop-b">Ter plaatse afgewerkt, door een Limburgs familiebedrijf.</p>
 		<a class="link" href="#">Ontdek onze trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 	</div>
-	<a class="btn hero__offerte" href="#offerte">Gratis offerte <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
+	<a class="btn hero__offerte hero__offerte--mobiel" href="#offerte">Gratis offerte <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 </header>
 
 <main>
@@ -187,7 +188,6 @@
 		<li>Gratis werftrap</li>
 		<li>Maatwerk ter plaatse</li>
 		<li>Multiplex ondertrap</li>
-		<li>4e Trends Gazellen-nominatie</li>
 	</ul>
 
 	<section class="split" id="over" aria-labelledby="over-titel">
@@ -201,24 +201,19 @@
 		</div>
 	</section>
 
-	<section class="tiles" aria-labelledby="tegels-titel">
-		<div class="tiles__head reveal">
-			<h2 class="h2" id="tegels-titel">Maak je interieur compleet</h2>
-			<p>Je leeft en beleeft elke dag in je interieur. Laat alles op elkaar afstemmen om rust en harmonie te creëren.</p>
-		</div>
-		<div class="tiles__grid">
-			<a class="tile reveal" href="#"><div class="tile__img"><img src="img/gebogen.jpg" alt="Gebogen trap in een inkomhal" loading="lazy"></div><span>Trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></a>
-			<a class="tile reveal" href="#"><div class="tile__img"><img src="img/deur.jpg" alt="Stalen binnendeur met glas" loading="lazy"></div><span>Deuren <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></a>
-			<a class="tile reveal" href="#"><div class="tile__img"><img src="img/parket.jpg" alt="Visgraatparket in een woonkamer" loading="lazy"></div><span>Vloeren <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></a>
-			<a class="tile reveal" href="#"><div class="tile__img"><img src="img/balustrade.jpg" alt="Trap met zwarte balustrade" loading="lazy"></div><span>Trapleuningen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></a>
-		</div>
+	<section class="collections" aria-labelledby="collectie-titel">
+		<h2 class="h2 collections__title reveal" id="collectie-titel">Onze collecties</h2>
+		<a class="coll coll--groot reveal" href="https://www.decotrap.be/trappen/"><picture class="coll__img"><source type="image/webp" srcset="img/ass-trappen-800.webp 800w, img/ass-trappen-1600.webp 1600w" sizes="(min-width: 961px) 60vw, 100vw"><img src="img/ass-trappen-1600.jpg" srcset="img/ass-trappen-800.jpg 800w, img/ass-trappen-1600.jpg 1600w" sizes="(min-width: 961px) 60vw, 100vw" alt="Houten trap met zwarte stalen balustrade van bovenaf, met rieten hanglampen" loading="lazy" decoding="async"></picture><span class="coll__txt"><span class="coll__title">Trappen</span><span class="coll__more">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+		<a class="coll coll--smal reveal" href="https://www.decotrap.be/binnendeuren/"><picture class="coll__img"><source type="image/webp" srcset="img/ass-deuren-800.webp 800w, img/ass-deuren-1600.webp 1600w" sizes="(min-width: 961px) 60vw, 100vw"><img src="img/ass-deuren-1600.jpg" srcset="img/ass-deuren-800.jpg 800w, img/ass-deuren-1600.jpg 1600w" sizes="(min-width: 961px) 60vw, 100vw" alt="Gang met strakke witte binnendeuren zonder zichtbare kozijnen" loading="lazy" decoding="async"></picture><span class="coll__txt"><span class="coll__title">Deuren</span><span class="coll__more">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+		<a class="coll coll--smal reveal" href="https://www.decotrap.be/vloeren/"><picture class="coll__img"><source type="image/webp" srcset="img/ass-vloeren-800.webp 800w, img/ass-vloeren-1600.webp 1600w" sizes="(min-width: 961px) 60vw, 100vw"><img src="img/ass-vloeren-1600.jpg" srcset="img/ass-vloeren-800.jpg 800w, img/ass-vloeren-1600.jpg 1600w" sizes="(min-width: 961px) 60vw, 100vw" alt="Woonkamer met een lichte eiken plankenvloer en een grote zetel" loading="lazy" decoding="async"></picture><span class="coll__txt"><span class="coll__title">Vloeren</span><span class="coll__more">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+		<a class="coll coll--groot reveal" href="https://www.decotrap.be/interieur/"><picture class="coll__img"><source type="image/webp" srcset="img/ass-interieur-800.webp 800w, img/ass-interieur-1600.webp 1600w" sizes="(min-width: 961px) 60vw, 100vw"><img src="img/ass-interieur-1600.jpg" srcset="img/ass-interieur-800.jpg 800w, img/ass-interieur-1600.jpg 1600w" sizes="(min-width: 961px) 60vw, 100vw" alt="Houten lattenbalustrade op een lichte overloop met groot raam" loading="lazy" decoding="async"></picture><span class="coll__txt"><span class="coll__title">Interieur</span><span class="coll__more">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 	</section>
 
 	<section class="steps" aria-labelledby="treden-titel">
 		<div class="steps__intro">
 			<p class="label">Zo werkt het</p>
 			<h2 class="h2" id="treden-titel">Trede per trede naar je nieuwe interieur</h2>
-			<p>Van je eerste vraag tot de laatste trede: één familiebedrijf, eigen plaatsers.</p>
+			<p>Van je eerste vraag tot de laatste trede: één familiebedrijf dat je begeleidt.</p>
 		</div>
 		<article class="step">
 			<svg class="stair" width="32" height="24" viewBox="0 0 32 24" role="img" aria-label="Stap 1 van 4"><rect class="on" x="0" y="18" width="8" height="6"></rect><rect x="8" y="12" width="8" height="12"></rect><rect x="16" y="6" width="8" height="18"></rect><rect x="24" y="0" width="8" height="24"></rect></svg>
@@ -233,7 +228,7 @@
 		<article class="step">
 			<svg class="stair" width="32" height="24" viewBox="0 0 32 24" role="img" aria-label="Stap 3 van 4"><rect class="on" x="0" y="18" width="8" height="6"></rect><rect class="on" x="8" y="12" width="8" height="12"></rect><rect class="on" x="16" y="6" width="8" height="18"></rect><rect x="24" y="0" width="8" height="24"></rect></svg>
 			<h3>Plaatsing ter plaatse</h3>
-			<p>Onze eigen plaatsers werken alles op maat af, zonder schaduwvoegen en zonder plinten.</p>
+			<p>Wij werken alles ter plaatse op maat af, zonder schaduwvoegen en zonder plinten.</p>
 		</article>
 		<article class="step">
 			<svg class="stair" width="32" height="24" viewBox="0 0 32 24" role="img" aria-label="Stap 4 van 4"><rect class="on" x="0" y="18" width="8" height="6"></rect><rect class="on" x="8" y="12" width="8" height="12"></rect><rect class="on" x="16" y="6" width="8" height="18"></rect><rect class="on" x="24" y="0" width="8" height="24"></rect></svg>
@@ -247,27 +242,38 @@
 			<p class="label">Klantervaring</p>
 			<blockquote>“Het kon niet beter! Van verkoop, opvolging en planning tot installateurs en schilders. Dit was precies wat we verwacht hadden.”</blockquote>
 			<p class="quote__who">Timucin B., Beringen</p>
+			<div class="proof">
+				<figure class="proof__item"><div class="proof__stars" role="img" aria-label="5 op 5 sterren">★★★★★</div><blockquote>“Werkmannen werken heel proper met stofafzuiging en werken alles mooi af.”</blockquote><figcaption>Pieter L., Kemzeke</figcaption></figure>
+				<figure class="proof__item"><div class="proof__stars" role="img" aria-label="5 op 5 sterren">★★★★★</div><blockquote>“Als het kon gaven we 10 sterren!”</blockquote><figcaption>Esther T., Alken</figcaption></figure>
+				<figure class="proof__item"><div class="proof__stars" role="img" aria-label="5 op 5 sterren">★★★★★</div><blockquote>“Vriendelijke medewerkers die steeds op tijd begonnen en alles proper achterlieten.”</blockquote><figcaption>Lieve V., Westerlo</figcaption></figure>
+			</div>
+			<p class="award"><img src="img/trends-gazellen-2025.png" alt="Trends Gazellen 2025, genomineerd" width="64" height="64" loading="lazy">4e Trends Gazellen-nominatie op rij als snelst groeiend bedrijf in Limburg.</p>
 		</div>
 		<img class="reveal" src="img/familie.jpg" alt="Kind klimt een zwevende trap op" loading="lazy">
 	</section>
 
-	<section class="showroom" id="trap-o-theek" aria-labelledby="toonzaal-titel">
-		<img class="showroom__img" src="img/toonzaal.jpg" alt="De Trap-o-theek: toonzaal met een boom in het midden en wanden vol treden" loading="lazy">
-		<button class="showroom__video" type="button" data-video="video/decotrap-promo-web.mp4">
-			<span class="play"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3.5v13l11-6.5z"></path></svg></span>
-			<span class="txt">Bekijk de video · 1:41</span>
-		</button>
-		<div class="card reveal">
-			<p class="label">Gepatenteerd concept</p>
-			<h2 class="h2" id="toonzaal-titel">De Trap-o-theek</h2>
-			<p>Haal de treden uit de kast, plaats ze in een model en zie meteen houtsoort, kleur en afwerking. Je trap kiezen wordt kinderspel.</p>
-			<div class="card__adr">
-				<div><strong>Heusden-Zolder</strong><br>Mijnwerkerslaan 42</div>
-				<div><strong>Wetteren</strong><br>Oosterzelesteenweg 117A</div>
-			</div>
-			<a class="btn" href="#">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
+	<section class="tot" id="trap-o-theek" aria-labelledby="tot-titel">
+		<div class="tot__head reveal">
+			<p class="label">De Trap-o-theek · gepatenteerd concept in België</p>
+			<h2 class="tot__title" id="tot-titel">Je trap kies je niet van een foto.</h2>
 		</div>
-		<p class="showroom__note">Trap-o-theek bezoeken? Maak steeds online een afspraak.</p>
+		<div class="tot__media reveal">
+			<video class="tot__video" src="video/trap-o-theek-loop.mp4" poster="img/trap-o-theek-poster.jpg" muted loop playsinline preload="none" aria-label="Kinderen halen treden uit de kast en leggen ze in een trapmodel in de Trap-o-theek"></video>
+			<button class="tot__pause" type="button" aria-pressed="false" aria-label="Video pauzeren"><svg class="i-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2v10M10 2v10" stroke="currentColor" stroke-width="2"></path></svg><svg class="i-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2l8 5-8 5z" fill="currentColor"></path></svg></button>
+			<button class="tot__film" type="button" data-video="video/decotrap-promo-web.mp4"><span class="play"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3.5v13l11-6.5z"></path></svg></span>Bekijk de volledige film · 1:41</button>
+		</div>
+		<ol class="tot__steps">
+			<li class="reveal"><svg class="stair" width="32" height="24" viewBox="0 0 32 24" aria-hidden="true"><rect class="on" x="0" y="18" width="8" height="6"></rect><rect x="8" y="12" width="8" height="12"></rect><rect x="16" y="6" width="8" height="18"></rect><rect x="24" y="0" width="8" height="24"></rect></svg><h3>Haal de treden uit de kast</h3><p>Echte treden in echte houtsoorten, kleuren en afwerkingen.</p></li>
+			<li class="reveal"><svg class="stair" width="32" height="24" viewBox="0 0 32 24" aria-hidden="true"><rect class="on" x="0" y="18" width="8" height="6"></rect><rect class="on" x="8" y="12" width="8" height="12"></rect><rect x="16" y="6" width="8" height="18"></rect><rect x="24" y="0" width="8" height="24"></rect></svg><h3>Leg ze in een model</h3><p>Stel je trap samen op ware grootte, trede per trede.</p></li>
+			<li class="reveal"><svg class="stair" width="32" height="24" viewBox="0 0 32 24" aria-hidden="true"><rect class="on" x="0" y="18" width="8" height="6"></rect><rect class="on" x="8" y="12" width="8" height="12"></rect><rect class="on" x="16" y="6" width="8" height="18"></rect><rect x="24" y="0" width="8" height="24"></rect></svg><h3>Zie meteen het resultaat</h3><p>Houtsoort, kleur en afwerking samen. Je trap kiezen wordt kinderspel.</p></li>
+		</ol>
+		<div class="tot__visit reveal">
+			<div class="tot__places">
+				<div><strong>Heusden-Zolder</strong><br>Mijnwerkerslaan 42<br><a href="tel:+3211360460">011 360 460</a></div>
+				<div><strong>Wetteren</strong><br>Oosterzelesteenweg 117A<br><a href="tel:+3292961090">09 296 10 90</a></div>
+			</div>
+			<div class="tot__cta"><a class="btn tot__btn" href="https://www.decotrap.be/afspraak-maken/">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a><p>Maak steeds online een afspraak.</p></div>
+		</div>
 	</section>
 
 	<section class="cta" id="offerte" aria-labelledby="cta-titel">
@@ -286,7 +292,7 @@
 	<div class="footer__cols">
 		<div><p class="label">Heusden-Zolder</p>Mijnwerkerslaan 42<br>3550 Heusden-Zolder</div>
 		<div><p class="label">Wetteren</p>Oosterzelesteenweg 117A<br>9230 Wetteren</div>
-		<div><p class="label">Contact</p><a href="tel:+3211360460">011 360 460</a><br><a href="mailto:info@decotrap.be">info@decotrap.be</a></div>
+		<div><p class="label">Contact</p>Heusden-Zolder <a href="tel:+3211360460">011 360 460</a><br>Wetteren <a href="tel:+3292961090">09 296 10 90</a><br><a href="mailto:info@decotrap.be">info@decotrap.be</a></div>
 		<div><p class="label">Ontdek</p>Trap-o-theek<br>Voor professionelen<br>Blog</div>
 	</div>
 	<div class="footer__base">
@@ -300,6 +306,10 @@
 	<button type="button" data-set-hero="latten" aria-pressed="true">Foto latten</button>
 	<button type="button" data-set-hero="raam" aria-pressed="false">Foto raam</button>
 	<button type="button" data-set-hero="reeks" aria-pressed="false">Fotoreeks</button>
+</div>
+<div class="theme-switch" role="group" aria-label="Herokop (enkel in de preview)">
+	<button type="button" data-set-kop="a" aria-pressed="true">Kop ter plaatse</button>
+	<button type="button" data-set-kop="b" aria-pressed="false">Kop in elk detail</button>
 </div>
 <div class="theme-switch" role="group" aria-label="Treden-animatie (enkel in de preview)">
 	<button type="button" data-set-steps="eenmalig" aria-pressed="false">Treden eenmalig</button>

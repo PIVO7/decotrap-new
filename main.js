@@ -22,6 +22,37 @@
 	heroButtons.forEach(function (b) { b.addEventListener('click', function () { setHero(b.dataset.setHero); }); });
 	setHero(root.dataset.hero || 'latten');
 
+	// Herokop A/B (enkel preview)
+	var kopButtons = document.querySelectorAll('[data-set-kop]');
+	function setKop(k) {
+		root.dataset.kop = k;
+		kopButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setKop === k)); });
+		try { localStorage.setItem('decotrap-kop', k); } catch (e) {}
+	}
+	kopButtons.forEach(function (b) { b.addEventListener('click', function () { setKop(b.dataset.setKop); }); });
+	setKop(root.dataset.kop || 'a');
+
+	// Trap-o-theek-video: speelt enkel als hij in beeld is, pauzeerbaar, niet vanzelf bij beperkte beweging
+	var totVideo = document.querySelector('.tot__video');
+	var totPause = document.querySelector('.tot__pause');
+	if (totVideo && totPause) {
+		var totUserPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var totVisible = false;
+		function syncTot() {
+			totPause.setAttribute('aria-pressed', String(totUserPaused));
+			totPause.setAttribute('aria-label', totUserPaused ? 'Video afspelen' : 'Video pauzeren');
+			if (!totUserPaused && totVisible) {
+				if (totVideo.preload === 'none') totVideo.preload = 'auto';
+				var p = totVideo.play(); if (p && p.catch) p.catch(function () {});
+			} else { totVideo.pause(); }
+		}
+		totPause.addEventListener('click', function () { totUserPaused = !totUserPaused; syncTot(); });
+		if ('IntersectionObserver' in window) {
+			new IntersectionObserver(function (entries) { totVisible = entries[0].isIntersecting; syncTot(); }, { threshold: 0.35 }).observe(totVideo);
+		}
+		syncTot();
+	}
+
 	// Megamenu (desktop): knop opent paneel; muis opent met kleine vertraging; Escape en klik buiten sluiten
 	var hero = document.querySelector('.hero');
 	var navEl = document.querySelector('.nav');
