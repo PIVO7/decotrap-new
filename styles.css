@@ -173,8 +173,14 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .nav__link { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 500; text-decoration: none; border-bottom: 2px solid transparent; }
 @media (hover: hover) { .nav__link:hover { border-bottom-color: var(--brand); } }
 /* Gratis offerte = primaire knop (lime: logogroen; zwart-wit: licht op foto, inkt op licht vlak) */
-.nav__offerte { min-height: 48px; font-weight: 600; background: var(--hero-btn-bg); color: var(--hero-btn-fg); }
-@media (hover: hover) { .nav__offerte:hover { background: var(--ink); color: var(--paper); } [data-theme="zw"] .nav__offerte:hover { background: var(--brand); color: var(--ink); } }
+/* rustige glazen knop: de groene knop in de hero blijft de hoofdactie, deze is de snelle uitweg */
+.nav__offerte {
+	min-height: 48px; font-weight: 600; color: #F6F5F1;
+	background: rgb(246 245 241 / 0.12); border: 1px solid rgb(246 245 241 / 0.45);
+	-webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+	transition: background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease);
+}
+@media (hover: hover) { .nav__offerte:hover { background: var(--hero-btn-bg); color: var(--hero-btn-fg); border-color: var(--hero-btn-bg); } }
 .nav__toggle { display: none; }
 
 .hero__content {
@@ -679,7 +685,8 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .hero.is-mega .nav { background: var(--paper); color: var(--ink); }
 .hero.is-mega .logo--licht { display: none; }
 .hero.is-mega .logo--normaal { display: block; }
-[data-theme="zw"] .hero.is-mega .nav__offerte { background: var(--ink); color: var(--paper); }
+.hero.is-mega .nav__offerte { background: transparent; color: var(--ink); border-color: var(--line); }
+@media (hover: hover) { .hero.is-mega .nav__offerte:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); } }
 .mega {
 	position: absolute; left: 0; right: 0; top: var(--nav-h, 131px); z-index: 29;
 	border-top: 1px solid var(--line);
