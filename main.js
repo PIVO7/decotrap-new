@@ -12,6 +12,16 @@
 	buttons.forEach(function (b) { b.addEventListener('click', function () { setTheme(b.dataset.setTheme); }); });
 	setTheme(root.dataset.theme || 'lime');
 
+	// Herofoto wisselen (enkel preview)
+	var heroButtons = document.querySelectorAll('[data-set-hero]');
+	function setHero(hero) {
+		root.dataset.hero = hero;
+		heroButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setHero === hero)); });
+		try { localStorage.setItem('decotrap-hero', hero); } catch (e) {}
+	}
+	heroButtons.forEach(function (b) { b.addEventListener('click', function () { setHero(b.dataset.setHero); }); });
+	setHero(root.dataset.hero || 'latten');
+
 	// Mobiel menu
 	var nav = document.querySelector('.nav');
 	var toggle = document.querySelector('.nav__toggle');

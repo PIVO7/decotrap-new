@@ -6,6 +6,7 @@
 :root,
 [data-theme="lime"] {
 	--bg: #ECEAE5;              /* pagina */
+	--bg-rgb: 236 234 229;
 	--paper: #F6F5F1;           /* lichte tekst op donker, knoppen */
 	--ink: #1F211C;             /* tekst, donkere knoppen */
 	--deep: #2A3320;            /* donkere band (treden, toonzaalkaart) */
@@ -40,6 +41,7 @@
 
 [data-theme="zw"] {
 	--bg: #F1F1EF;
+	--bg-rgb: 241 241 239;
 	--paper: #FAFAF9;
 	--ink: #141414;
 	--deep: #1B1B1B;
@@ -303,8 +305,11 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .footer__base .mark { width: var(--footer-mark); height: var(--footer-mark); }
 
 /* ---------- 12. Themaschakelaar (enkel voor de preview) ---------- */
-.theme-switch {
+.preview-bar {
 	position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 50;
+	display: flex; gap: 8px;
+}
+.theme-switch {
 	display: flex; gap: 2px; padding: 4px;
 	background: rgb(20 20 20 / 0.82); backdrop-filter: blur(8px);
 	border-radius: 999px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
@@ -317,6 +322,34 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 }
 .theme-switch button[aria-pressed="true"] { background: #F6F5F1; color: #141414; }
 .theme-switch .dot { width: 10px; height: 10px; border-radius: 999px; }
+
+/* ---------- 12b. Herofoto 'raam' (lichte foto, donkere tekst) ---------- */
+.hero__pic--raam, .logo--normaal { display: none; }
+[data-hero="raam"] .hero__img--latten, [data-hero="raam"] .logo--licht { display: none; }
+[data-hero="raam"] .hero__pic--raam, [data-hero="raam"] .logo--normaal { display: block; }
+[data-hero="raam"] .hero__pic--raam { position: absolute; top: 0; bottom: 0; left: 20%; right: 0; z-index: -2; }
+[data-hero="raam"] .hero__img--raam { object-position: 0% 50%; }
+[data-hero="raam"] .hero { color: var(--ink); background: var(--bg); }
+[data-hero="raam"] .hero::before {
+	background:
+		linear-gradient(90deg, rgb(var(--bg-rgb)) 0%, rgb(var(--bg-rgb)) 20%, rgb(var(--bg-rgb) / 0.7) 27%, rgb(var(--bg-rgb) / 0) 38%),
+		linear-gradient(180deg, rgb(var(--bg-rgb) / 0.6) 0%, rgb(var(--bg-rgb) / 0) 16%);
+}
+[data-hero="raam"] .hero h1 { font-size: clamp(40px, 4.4vw, 64px); }
+@media (min-width: 961px) { [data-hero="raam"] .hero__content { max-width: 600px; } }
+[data-hero="raam"] .nav__cta { color: var(--ink); border-color: var(--ink); }
+[data-hero="raam"] .nav__toggle { color: var(--ink); border-color: var(--ink); background: rgb(var(--bg-rgb) / 0.6); }
+[data-hero="raam"] .nav.is-open, [data-hero="raam"] .nav.is-open .nav__cta, [data-hero="raam"] .nav.is-open .nav__toggle { color: var(--paper); border-color: rgb(var(--on-dark) / 0.6); }
+[data-hero="raam"][data-theme="zw"] .hero__offerte { background: var(--ink); color: var(--paper); }
+@media (max-width: 960px) {
+	[data-hero="raam"] .hero__pic--raam { left: 0; }
+	[data-hero="raam"] .hero__img--raam { object-position: 25% 50%; }
+	[data-hero="raam"] .hero::before {
+		background:
+			linear-gradient(0deg, rgb(var(--bg-rgb) / 0.96) 0%, rgb(var(--bg-rgb) / 0.85) 34%, rgb(var(--bg-rgb) / 0) 62%),
+			linear-gradient(180deg, rgb(var(--bg-rgb) / 0.75) 0%, rgb(var(--bg-rgb) / 0) 20%);
+	}
+}
 
 /* ---------- 13. Beweging ---------- */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
@@ -391,5 +424,5 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.footer__word { font-size: 12.5vw; }
 	.footer__base .mark { width: min(var(--footer-mark), 48px); height: min(var(--footer-mark), 48px); }
 	.theme-switch button { padding: 0 12px; white-space: nowrap; }
-	.theme-switch { bottom: auto; top: 36px; }
+	.preview-bar { bottom: auto; top: 96px; flex-direction: column; align-items: center; gap: 6px; }
 }
