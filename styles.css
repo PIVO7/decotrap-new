@@ -789,7 +789,13 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.hero__content { gap: 18px; }
 
 	/* USP's: één compacte regel, geen lijst */
-	.usp { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; padding: 18px var(--gutter); font-size: 13px; }
+	/* USP's: drie gelijke kolommen, elk met een trapje in logogroen */
+	.usp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; padding: 22px var(--gutter) 24px; font-size: 13px; line-height: 1.3; }
+	.usp li { flex-direction: column; align-items: flex-start; gap: 10px; padding-inline: 12px; text-wrap: balance; }
+	.usp li:first-child { padding-left: 0; }
+	.usp li:last-child { padding-right: 0; }
+	.usp li + li { border-left: 1px solid var(--line); }
+	.usp li::before { width: 14px; height: 14px; clip-path: polygon(0 100%, 0 66.6%, 33.3% 66.6%, 33.3% 33.3%, 66.6% 33.3%, 66.6% 0, 100% 0, 100% 100%); }
 
 	/* over Decotrap: liggend beeld, één alinea */
 	.split { padding-block: 72px; row-gap: 32px; }
