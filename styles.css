@@ -524,6 +524,22 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	}
 }
 
+/* ---------- 12b0. Herofoto 'hal' (hoge hal, trap in het midden, tuin rechts) ---------- */
+.hero__pic--hal { display: none; }
+[data-hero="hal"] .hero__img--latten { display: none; }
+[data-hero="hal"] .hero__pic--hal { display: block; }
+[data-hero="hal"] .hero__img--hal { object-position: 55% 55%; }
+/* lichte bovenkant (dakraam): sterkere laag achter de navigatie; links onder rust achter de titel */
+[data-hero="hal"] .hero::before {
+	background:
+		radial-gradient(115% 85% at 0% 100%, rgb(var(--shade) / 0.62) 0%, rgb(var(--shade) / 0.3) 45%, rgb(var(--shade) / 0) 75%),
+		linear-gradient(180deg, rgb(var(--shade) / 0.55) 0%, rgb(var(--shade) / 0.12) 22%, rgb(var(--shade) / 0) 50%, rgb(var(--shade) / 0.45) 100%);
+}
+@media (max-width: 960px) {
+	[data-hero="hal"] .hero__img--hal { object-position: 52% 50%; }
+	[data-hero="hal"] .hero::before { background: linear-gradient(180deg, rgb(var(--shade) / 0.55) 0%, rgb(var(--shade) / 0.15) 22%, rgb(var(--shade) / 0.45) 46%, rgb(var(--shade) / 0.82) 100%); }
+}
+
 /* ---------- 12b1. Herofoto 'zon' (warm zonlicht, trap rechts, rust links voor de titel) ---------- */
 .hero__pic--zon { display: none; }
 [data-hero="zon"] .hero__img--latten { display: none; }
