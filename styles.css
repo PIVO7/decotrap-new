@@ -345,7 +345,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .acc__more .acc__cta { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; min-height: 44px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--brand); }
 /* snelkoppelingen naar de modellen, als glazen labels op de foto */
 .acc__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; max-width: 520px; }
-.acc__tags a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 500; text-decoration: none; color: #F6F5F1; background: rgb(246 245 241 / 0.12); border: 1px solid rgb(246 245 241 / 0.28); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background-color 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease); }
+.acc__tags a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 500; text-decoration: none; color: #F6F5F1; background: rgb(246 245 241 / 0.12); border: 1px solid rgb(246 245 241 / 0.28); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transition: background-color 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease); }
 @media (hover: hover) { .acc__tags a:hover { background: var(--brand); border-color: var(--brand); color: #1F211C; } }
 .acc__tags a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 .acc__item.is-open .acc__more { max-height: 320px; }
@@ -395,8 +395,8 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .place { display: flex; flex-direction: column; gap: 2px; padding: 16px 18px; border: 1px solid rgb(var(--on-dark) / 0.18); border-radius: var(--radius); font-size: 14px; line-height: 1.5; }
 .place strong { font-weight: 600; font-size: 15px; }
 .place span { color: rgb(var(--on-dark) / 0.75); }
-.place__links { display: flex; gap: 16px; margin-top: 8px; }
-.place__links a { color: var(--paper); font-weight: 500; text-underline-offset: 3px; }
+.place__links { display: flex; gap: 16px; margin-top: 0; }
+.place__links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--paper); font-weight: 500; text-underline-offset: 3px; }
 .tot__cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .tot__cta p { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--on-dark) / 0.7); }
 .tot__btn { background: var(--card-btn-bg); color: var(--card-btn-fg); font-weight: 600; min-height: 52px; }
@@ -551,7 +551,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 @media (hover: hover) { .footer__contact a:hover .arrow { opacity: 1; transform: translate(2px, -2px); color: var(--brand); } }
 .footer__col { display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.6; color: rgb(246 245 241 / 0.85); }
 .footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.footer__links a { display: inline-flex; min-height: 32px; align-items: center; border-bottom: 1px solid transparent; }
+.footer__links a { display: inline-flex; min-height: 44px; align-items: center; border-bottom: 1px solid transparent; }
 @media (hover: hover) { .footer__links a:hover { border-bottom-color: var(--brand); } }
 .footer__word { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; font-size: clamp(56px, 15.5vw, 230px); line-height: 0.78; font-weight: 500; letter-spacing: -0.03em; color: rgb(246 245 241 / 0.08); overflow: hidden; }
 .footer__word .mark { width: var(--footer-mark); height: var(--footer-mark); flex: none; }
@@ -559,8 +559,8 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 .footer__social { list-style: none; margin: 0; padding: 0; display: flex; gap: 24px; }
 .footer__social a { display: inline-flex; min-height: 44px; align-items: center; color: rgb(246 245 241 / 0.85); }
 @media (hover: hover) { .footer__social a:hover, .footer__legal a:hover { color: var(--brand); } }
-.footer__legal a { text-decoration: underline; text-underline-offset: 3px; }
-.footer__route { display: inline-flex; margin-top: 6px; font-weight: 500; color: #F6F5F1; border-bottom: 1px solid rgb(246 245 241 / 0.4); line-height: 1.5; }
+.footer__legal a { display: inline-block; padding-block: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.footer__route { display: inline-flex; align-items: center; min-height: 44px; margin-top: 0; font-weight: 500; color: #F6F5F1; border-bottom: 1px solid rgb(246 245 241 / 0.4); line-height: 1.5; }
 @media (hover: hover) { .footer__route:hover { border-bottom-color: var(--brand); } }
 .footer__top-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: rgb(246 245 241 / 0.85); }
 @media (hover: hover) { .footer__top-link:hover { color: var(--brand); } }
@@ -999,7 +999,13 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.project .project__detail { display: none; }
 	.project__txt, .project--flip .project__txt { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 22px; gap: 6px; }
 	.project__txt h3 { font-size: 34px; }
-	.project__txt p { color: rgb(246 245 241 / 0.88); font-size: 15px; max-width: none; }
+	/* de projectindex van desktop mag niet doorlekken in de veegkaarten: alle kaarten tonen foto en tekst */
+	.project .project__txt, .project.is-active .project__txt { display: flex; flex-direction: column; border: 0; cursor: auto; }
+	.project .project__txt::before, .project .project__txt::after { display: none; }
+	.project .project__txt h3, .project.is-active .project__txt h3 { color: #F6F5F1; transform: none; }
+	.project .project__txt p, .project.is-active .project__txt p { max-height: none; opacity: 1; color: rgb(246 245 241 / 0.88); font-size: 15px; max-width: none; }
+	.project .project__main, .project.is-active .project__main { opacity: 1; }
+	.project .project__main img { transform: none; }
 	.projects__dots { display: flex; justify-content: center; gap: 8px; margin-top: -8px; }
 	.projects__dots span { width: 6px; height: 6px; border-radius: 999px; background: var(--line); transition: width 250ms var(--ease), background-color 250ms var(--ease); }
 	.projects__dots span.is-on { width: 20px; background: var(--ink); }
@@ -1101,4 +1107,13 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	/* Trap-o-theek: video over de volle breedte */
 
 	/* CTA en footer */
+}
+
+/* ---------- Tablet (601–960): projecten compacter, reviews als drie kaarten ---------- */
+@media (min-width: 601px) and (max-width: 960px) {
+	.project, .project--flip { flex-basis: 58%; }
+	.proof { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border-top: 0; padding-top: 0; }
+	.proof__item { background: var(--paper); border-radius: var(--radius); padding: 22px 20px; gap: 12px; }
+	.proof__item figcaption { margin-top: auto; }
+	.proof blockquote { font-size: 15px; }
 }
