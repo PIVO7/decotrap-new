@@ -1011,8 +1011,9 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 	.projects__dots { display: flex; justify-content: center; gap: 8px; margin-top: -8px; }
 	.projects__dots span { width: 6px; height: 6px; border-radius: 999px; background: var(--line); transition: width 250ms var(--ease), background-color 250ms var(--ease); }
 	.projects__dots span.is-on { width: 20px; background: var(--ink); }
-	.hero__actions { flex-direction: column; align-items: stretch; gap: 14px; }
-	.hero__cta { justify-content: space-between; }
+	/* knop zo breed als zijn tekst: de vaste onderbalk neemt de brede knop over bij het scrollen */
+	.hero__actions { flex-direction: column; align-items: flex-start; gap: 18px; }
+	.hero__cta { gap: 14px; padding: 0 22px; }
 	.hero__actions .link { align-self: flex-start; }
 	.steps { grid-template-columns: 1fr; padding-block: 88px; gap: 10px; }
 	.steps__intro { grid-column: 1; grid-row: auto; margin-bottom: 28px; }
@@ -1037,7 +1038,7 @@ h1, h2, h3, p, blockquote, figure { margin: 0; }
 
 }
 @media (max-width: 520px) {
-	.hero__content { padding-bottom: 112px; }
+	.hero__content { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
 	.hero__offerte { left: var(--gutter); right: var(--gutter); bottom: 32px; justify-content: space-between; }
 	.theme-switch button { padding: 0 12px; white-space: nowrap; }
 }
