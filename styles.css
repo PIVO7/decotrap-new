@@ -1231,3 +1231,21 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.preview-bar.is-open .theme-switch button { min-height: 38px; padding: 0 12px; font-size: 11px; white-space: nowrap; }
 	.preview-bar.is-open .preview-bar__toggle { box-shadow: none; background: #F6F5F1; color: #141414; }
 }
+
+/* ---------- Over ons op gsm en tablet ---------- */
+@media (max-width: 960px) {
+	.split { padding-top: 0; }
+	/* foto van rand tot rand, met de trapuitsnede van het logo rechtsboven */
+	.split .split__img {
+		width: calc(100% + 2 * var(--gutter)); margin-inline: calc(-1 * var(--gutter)); max-width: none;
+		aspect-ratio: 4 / 3; border-radius: 0;
+		--cut: 54px;
+		clip-path: polygon(0 0, calc(100% - var(--cut)) 0, calc(100% - var(--cut)) calc(var(--cut) / 3), calc(100% - var(--cut) * 2 / 3) calc(var(--cut) / 3), calc(100% - var(--cut) * 2 / 3) calc(var(--cut) * 2 / 3), calc(100% - var(--cut) / 3) calc(var(--cut) * 2 / 3), calc(100% - var(--cut) / 3) var(--cut), 100% var(--cut), 100% 100%, 0 100%);
+	}
+	/* drie korte feiten, zoals op desktop */
+	.split__facts { display: flex; flex-direction: column; margin: 0; border-top: 1px solid var(--line); }
+	.split__facts div { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; row-gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+	.split__facts div::before { content: ""; grid-row: 1 / span 2; width: 12px; height: 12px; margin-top: 3px; background: var(--brand); clip-path: polygon(0 100%, 0 66.6%, 33.3% 66.6%, 33.3% 33.3%, 66.6% 33.3%, 66.6% 0, 100% 0, 100% 100%); }
+	.split__facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+	.split__facts dd { margin: 0; font-size: 15px; line-height: 1.4; font-weight: 500; color: var(--ink); }
+}
