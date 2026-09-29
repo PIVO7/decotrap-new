@@ -1170,3 +1170,24 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.project .project__detail img { height: 100%; aspect-ratio: auto; border: 0; box-shadow: none; border-radius: 0; transform: scale(1.06); transition: transform 1400ms cubic-bezier(0.22, 1, 0.36, 1) 120ms; }
 	.project.is-active .project__detail img { transform: none; }
 }
+
+/* ---------- Realisaties op gsm en tablet: kaart met foto boven en een lichte strook met detail en tekst eronder ---------- */
+@media (max-width: 960px) {
+	.project, .project--flip {
+		display: grid; grid-template-columns: 90px minmax(0, 1fr); grid-template-areas: "main main" "detail txt";
+		column-gap: 14px; row-gap: 0; align-items: center;
+		background: var(--paper); color: var(--ink); border-radius: var(--radius); overflow: hidden;
+	}
+	.project::after { display: none; }
+	.project .project__main, .project--flip .project__main { grid-area: main; border-radius: 0; }
+	.project .project__main img { aspect-ratio: 1 / 1; }
+	.project .project__detail, .project--flip .project__detail { display: block; grid-area: detail; width: 76px; height: 76px; margin: 14px 0 14px 14px; border-radius: calc(var(--radius) * 0.75); overflow: hidden; }
+	.project .project__detail img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; border: 0; box-shadow: none; }
+	.project .project__txt, .project--flip .project__txt, .project.is-active .project__txt { grid-area: txt; position: static; padding: 12px 16px 12px 0; gap: 4px; }
+	.project .project__txt h3, .project.is-active .project__txt h3 { color: var(--ink); font-size: 26px; }
+	.project .project__txt p, .project.is-active .project__txt p { color: var(--text); font-size: 14px; line-height: 1.4; }
+	/* de desktopregels (rijen per project, verborgen detail) hier uitschakelen */
+	.projects .project .project__main { grid-area: main; align-self: stretch; }
+	.projects .project .project__detail { grid-area: detail; align-self: center; justify-self: start; opacity: 1; transform: none; pointer-events: auto; }
+	.projects .project .project__txt { grid-area: txt; border: 0; align-self: center; }
+}
