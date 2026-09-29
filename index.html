@@ -10,6 +10,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="icon" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
+<meta name="theme-color" content="#1F211C">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_BE">
+<meta property="og:site_name" content="Decotrap">
+<meta property="og:title" content="Decotrap – trappen, deuren en vloeren op maat">
+<meta property="og:description" content="Een Limburgs familiebedrijf dat trappen, deuren en vloeren op maat maakt en ter plaatse afwerkt. Toonzalen in Heusden-Zolder en Wetteren.">
+<meta property="og:image" content="img/hero-zon-1200.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
@@ -24,7 +33,7 @@
 	<symbol id="pijl" viewBox="0 0 14 14"><path d="M4 10L10 4M5 4h5v5" fill="none" stroke="currentColor" stroke-width="1.5"></path></symbol>
 </svg>
 
-<div class="mnav" id="mnav" hidden>
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
 	<div class="mnav__bar"><img src="img/logo.png" alt="" width="52" height="75"><button class="mnav__close" type="button" aria-label="Menu sluiten"><span class="burger" aria-hidden="true"><span></span><span></span></span></button></div>
 	<div class="mnav__view" data-view="root">
 		<ul class="mnav__root">
@@ -36,7 +45,7 @@
 			<li><a href="#over">Over ons</a></li>
 		</ul>
 		<div class="mnav__ctas"><a class="btn btn--dark" href="https://www.decotrap.be/gratis-offerte/">Gratis offerte <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a><a class="btn btn--outline" href="#trap-o-theek">Plan je bezoek</a></div>
-		<ul class="mnav__meta"><li><a href="#">Voor professionelen</a></li><li><a href="#">Openingsuren</a></li><li><a href="#">Contact</a></li></ul>
+		<ul class="mnav__meta"><li><a href="https://www.decotrap.be/voor-professionelen/">Voor professionelen</a></li><li><a href="#trap-o-theek">Toonzalen</a></li><li><a href="https://www.decotrap.be/contact/">Contact</a></li></ul>
 	</div>
 	<div class="mnav__view" data-view="trappen" id="mnav-trappen" hidden>
 		<button class="mnav__back" type="button" data-back><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 3L5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>Terug</button>
@@ -49,7 +58,7 @@
 			<li><a href="https://www.decotrap.be/trappen/trap-met-rechte-treden"><img src="img/menu/trap-met-rechte-treden.jpg" alt="" width="56" height="42" loading="lazy" decoding="async"><span>Trap met rechte treden</span></a></li>
 		</ul><a class="mega__alle" href="https://www.decotrap.be/trappen/">Alle trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 		<p class="label">Info</p><ul class="mega__info"><li><a href="https://www.decotrap.be/trap-o-theek/">Trap-o-theek</a></li><li><a href="https://www.decotrap.be/trappen/multiplex-ondertrap">Multiplex ondertrap</a></li><li><a href="https://www.decotrap.be/trappen/betontrap-bekleden">Betontrap bekleden</a></li><li><a href="https://www.decotrap.be/trappen/trapleuningen/">Trapleuningen</a></li><li><a href="https://www.decotrap.be/trappen/led-verlichting">LED-verlichting</a></li></ul>
-		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte trappen, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte trappen, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 	</div>
 	<div class="mnav__view" data-view="deuren" id="mnav-deuren" hidden>
 		<button class="mnav__back" type="button" data-back><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 3L5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>Terug</button>
@@ -63,7 +72,7 @@
 			<li><a href="https://www.decotrap.be/binnendeuren/verfdeur-type-drie/"><img src="img/menu/verfdeur-type-3.jpg" alt="" width="56" height="42" loading="lazy" decoding="async"><span>Verfdeur type 3</span></a></li>
 		</ul><a class="mega__alle" href="https://www.decotrap.be/binnendeuren/">Alle deuren <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 		<p class="label">Info</p><ul class="mega__info"><li><a href="https://www.decotrap.be/wp-content/themes/decotrap/assets/decotrap-metsopening.pdf">Metsopening (pdf)</a></li></ul>
-		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte deuren, echte afwerkingen. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte deuren, echte afwerkingen. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 	</div>
 	<div class="mnav__view" data-view="vloeren" id="mnav-vloeren" hidden>
 		<button class="mnav__back" type="button" data-back><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 3L5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>Terug</button>
@@ -72,7 +81,7 @@
 			<li><a href="https://www.decotrap.be/vloeren/vinyl"><img src="img/menu/vinyl.jpg" alt="" width="56" height="42" loading="lazy" decoding="async"><span>Vinyl</span></a></li>
 		</ul><a class="mega__alle" href="https://www.decotrap.be/vloeren/">Alle vloeren <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 		<p class="label">Info</p><ul class="mega__info"><li><a href="https://www.decotrap.be/onderhoud">Onderhoud</a></li></ul>
-		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte vloeren, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte vloeren, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 	</div>
 	<div class="mnav__view" data-view="interieur" id="mnav-interieur" hidden>
 		<button class="mnav__back" type="button" data-back><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 3L5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.5"></path></svg>Terug</button>
@@ -83,12 +92,12 @@
 			<li><a href="https://www.decotrap.be/interieur/maatkasten/"><img src="img/menu/maatkasten.jpg" alt="" width="56" height="42" loading="lazy" decoding="async"><span>Maatkasten</span></a></li>
 			<li><a href="https://www.decotrap.be/brievenbussen/"><img src="img/menu/pakketbrievenbussen.jpg" alt="" width="56" height="42" loading="lazy" decoding="async"><span>Pakketbrievenbussen</span></a></li>
 		</ul><a class="mega__alle" href="https://www.decotrap.be/interieur/">Alle interieur <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
-		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Bekijk tafels, stoelen en maatwerk in het echt. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+		<a class="mega-panel mega-panel--mobile" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Bekijk tafels, stoelen en maatwerk in het echt. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 	</div>
 </div>
 
 <header class="hero">
-	<img class="hero__img hero__img--latten" src="img/hero.jpg" alt="Houten trap achter latten met geïntegreerde ledleuning" loading="lazy">
+	<img width="2400" height="1500" class="hero__img hero__img--latten" src="img/hero.jpg" alt="Houten trap achter latten met geïntegreerde ledleuning" loading="lazy">
 	<picture class="hero__pic--hal">
 		<source type="image/webp" srcset="img/hero-hal-1200.webp 1200w, img/hero-hal-2400.webp 2400w" sizes="100vw">
 		<img class="hero__img hero__img--hal" src="img/hero-hal-2400.jpg" srcset="img/hero-hal-1200.jpg 1200w, img/hero-hal-2400.jpg 2400w" sizes="100vw" width="2400" height="1340" alt="Notelaren trap met glazen balustrade en ledverlichting in een hoge, warm verlichte hal met zicht op de tuin" loading="lazy">
@@ -116,7 +125,7 @@
 		</button>
 	</div>
 	<nav class="nav" aria-label="Hoofdmenu">
-		<a class="nav__logo" href="#"><img class="logo--licht" src="img/logo-licht.png" alt="Decotrap, naar de homepagina" width="52" height="75"><img class="logo--normaal" src="img/logo.png" alt="Decotrap, naar de homepagina" width="52" height="75"></a>
+		<a class="nav__logo" href="#top"><img class="logo--licht" src="img/logo-licht.png" alt="Decotrap, naar de homepagina" width="52" height="75"><img class="logo--normaal" src="img/logo.png" alt="Decotrap, naar de homepagina" width="52" height="75"></a>
 		<ul class="nav__menu">
 			<li><button class="nav__trigger" type="button" aria-expanded="false" aria-controls="mega-trappen" data-mega="trappen">Trappen<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4"></path></svg></button></li>
 			<li><button class="nav__trigger" type="button" aria-expanded="false" aria-controls="mega-deuren" data-mega="deuren">Deuren<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4"></path></svg></button></li>
@@ -141,7 +150,7 @@
 				<li><a href="https://www.decotrap.be/trappen/trap-met-rechte-treden"><img src="img/menu/trap-met-rechte-treden.jpg" alt="" width="72" height="54" loading="lazy" decoding="async"><span>Trap met rechte treden</span></a></li>
 			</ul><a class="mega__alle" href="https://www.decotrap.be/trappen/">Alle trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 			<div class="mega__col mega__col--info"><p class="label">Info</p><ul class="mega__info"><li><a href="https://www.decotrap.be/trap-o-theek/">Trap-o-theek</a></li><li><a href="https://www.decotrap.be/trappen/multiplex-ondertrap">Multiplex ondertrap</a></li><li><a href="https://www.decotrap.be/trappen/betontrap-bekleden">Betontrap bekleden</a></li><li><a href="https://www.decotrap.be/trappen/trapleuningen/">Trapleuningen</a></li><li><a href="https://www.decotrap.be/trappen/led-verlichting">LED-verlichting</a></li></ul></div>
-			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte trappen, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte trappen, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 		</div>
 	</div>
 	<div class="mega" id="mega-deuren" role="region" aria-label="Ontdek deuren" hidden>
@@ -156,7 +165,7 @@
 				<li><a href="https://www.decotrap.be/binnendeuren/verfdeur-type-drie/"><img src="img/menu/verfdeur-type-3.jpg" alt="" width="72" height="54" loading="lazy" decoding="async"><span>Verfdeur type 3</span></a></li>
 			</ul><a class="mega__alle" href="https://www.decotrap.be/binnendeuren/">Alle deuren <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 			<div class="mega__col mega__col--info"><p class="label">Info</p><ul class="mega__info"><li><a href="https://www.decotrap.be/wp-content/themes/decotrap/assets/decotrap-metsopening.pdf">Metsopening (pdf)</a></li></ul></div>
-			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte deuren, echte afwerkingen. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte deuren, echte afwerkingen. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 		</div>
 	</div>
 	<div class="mega" id="mega-vloeren" role="region" aria-label="Ontdek vloeren" hidden>
@@ -166,7 +175,7 @@
 				<li><a href="https://www.decotrap.be/vloeren/vinyl"><img src="img/menu/vinyl.jpg" alt="" width="72" height="54" loading="lazy" decoding="async"><span>Vinyl</span></a></li>
 			</ul><a class="mega__alle" href="https://www.decotrap.be/vloeren/">Alle vloeren <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 			<div class="mega__col mega__col--info"><p class="label">Info</p><ul class="mega__info"><li><a href="https://www.decotrap.be/onderhoud">Onderhoud</a></li></ul></div>
-			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte vloeren, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Echte vloeren, echte houtsoorten. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 		</div>
 	</div>
 	<div class="mega" id="mega-interieur" role="region" aria-label="Ontdek interieur" hidden>
@@ -179,7 +188,7 @@
 				<li><a href="https://www.decotrap.be/brievenbussen/"><img src="img/menu/pakketbrievenbussen.jpg" alt="" width="72" height="54" loading="lazy" decoding="async"><span>Pakketbrievenbussen</span></a></li>
 			</ul><a class="mega__alle" href="https://www.decotrap.be/interieur/">Alle interieur <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 			<div class="mega__col mega__col--info" aria-hidden="true"></div>
-			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Bekijk tafels, stoelen en maatwerk in het echt. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
+			<a class="mega-panel" href="https://www.decotrap.be/afspraak-maken/"><img width="840" height="640" src="img/menu/toonzaal.jpg" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"><span class="mega-panel__body"><span class="mega-panel__eyebrow">Toonzaal</span><span class="mega-panel__title">Bezoek onze toonzaal</span><span class="mega-panel__text">Bekijk tafels, stoelen en maatwerk in het echt. In Wetteren en Heusden-Zolder.</span><span class="mega-panel__cta">Plan je bezoek <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span></span></a>
 		</div>
 	</div>
 	<div class="hero__content">
@@ -198,7 +207,7 @@
 	</ul>
 
 	<section class="split" id="over" aria-labelledby="over-titel">
-		<img class="split__img reveal" src="img/leven.jpg" alt="Iemand loopt een zwevende trap met ledleuning af" loading="lazy">
+		<picture class="split__pic"><source type="image/webp" srcset="img/leven-600.webp 600w, img/leven-1000.webp 1000w" sizes="(min-width: 961px) 50vw, 100vw"><img class="split__img reveal" src="img/leven-1000.jpg" srcset="img/leven-600.jpg 600w, img/leven-1000.jpg 1000w" sizes="(min-width: 961px) 50vw, 100vw" width="1000" height="1500" alt="Iemand loopt een zwevende trap met ledleuning af" loading="lazy" decoding="async"></picture>
 		<div class="split__body reveal">
 			<p class="label">Over Decotrap</p>
 			<h2 class="h2" id="over-titel">Een Limburgs familiebedrijf. Maatwerk ter plaatse.</h2>
@@ -209,7 +218,7 @@
 				<div><dt>Afwerking</dt><dd>Ter plaatse, zonder schaduwvoegen en zonder plinten</dd></div>
 				<div><dt>Van A tot Z</dt><dd>Uittekenen, storten en bekleden</dd></div>
 			</dl>
-			<a class="btn btn--dark" href="#" style="align-self: flex-start">Meer over ons <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
+			<a class="btn btn--dark" href="https://www.decotrap.be/over-ons/" style="align-self: flex-start">Meer over ons <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
 		</div>
 	</section>
 
@@ -217,28 +226,28 @@
 		<div class="collections__head reveal"><h2 class="h2" id="collectie-titel">Onze collecties</h2><p>Trappen, deuren, vloeren en interieur die op elkaar afgestemd zijn.</p></div>
 		<ul class="acc reveal">
 			<li class="acc__item is-open" data-acc>
-				<picture class="acc__img"><source type="image/webp" srcset="img/ass-trappen-800.webp 800w, img/ass-trappen-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img src="img/ass-trappen-1600.jpg" srcset="img/ass-trappen-800.jpg 800w, img/ass-trappen-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Houten trap met zwarte stalen balustrade van bovenaf, met rieten hanglampen" loading="lazy" decoding="async"></picture>
+				<picture class="acc__img"><source type="image/webp" srcset="img/ass-trappen-800.webp 800w, img/ass-trappen-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img width="1600" height="1066" src="img/ass-trappen-1600.jpg" srcset="img/ass-trappen-800.jpg 800w, img/ass-trappen-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Houten trap met zwarte stalen balustrade van bovenaf, met rieten hanglampen" loading="lazy" decoding="async"></picture>
 				<div class="acc__body">
 					<h3 class="acc__title">Trappen</h3>
 					<div class="acc__more"><p>Zwevend, Z-trap, klassiek of met rechte treden. Altijd op maat.</p><ul class="acc__tags"><li><a href="https://www.decotrap.be/trappen/zwevende-trap">Zwevende trap</a></li><li><a href="https://www.decotrap.be/trappen/z-trap">Z-trap</a></li><li><a href="https://www.decotrap.be/trappen/klassieke-trap">Klassieke trap</a></li><li><a href="https://www.decotrap.be/trappen/trap-met-rechte-treden">Rechte treden</a></li></ul><a class="acc__cta" href="https://www.decotrap.be/trappen/">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 				</div>
 			</li>
 			<li class="acc__item" data-acc>
-				<picture class="acc__img"><source type="image/webp" srcset="img/ass-deuren-800.webp 800w, img/ass-deuren-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img src="img/ass-deuren-1600.jpg" srcset="img/ass-deuren-800.jpg 800w, img/ass-deuren-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Gang met strakke witte binnendeuren zonder zichtbare kozijnen" loading="lazy" decoding="async"></picture>
+				<picture class="acc__img"><source type="image/webp" srcset="img/ass-deuren-800.webp 800w, img/ass-deuren-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img width="1600" height="1066" src="img/ass-deuren-1600.jpg" srcset="img/ass-deuren-800.jpg 800w, img/ass-deuren-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Gang met strakke witte binnendeuren zonder zichtbare kozijnen" loading="lazy" decoding="async"></picture>
 				<div class="acc__body">
 					<h3 class="acc__title">Deuren</h3>
 					<div class="acc__more"><p>Decodoor, stalen en steellook deuren, verfdeuren.</p><ul class="acc__tags"><li><a href="https://www.decotrap.be/binnendeuren/decodoor/">Decodoor</a></li><li><a href="https://www.decotrap.be/binnendeuren/stalen-deuren/">Stalen deur</a></li><li><a href="https://www.decotrap.be/binnendeuren/steellook-deuren/">Steellook deur</a></li><li><a href="https://www.decotrap.be/binnendeuren/verfdeur-type-een/">Verfdeur</a></li></ul><a class="acc__cta" href="https://www.decotrap.be/binnendeuren/">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 				</div>
 			</li>
 			<li class="acc__item" data-acc>
-				<picture class="acc__img"><source type="image/webp" srcset="img/ass-vloeren-800.webp 800w, img/ass-vloeren-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img src="img/ass-vloeren-1600.jpg" srcset="img/ass-vloeren-800.jpg 800w, img/ass-vloeren-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Woonkamer met een lichte eiken plankenvloer en een grote zetel" loading="lazy" decoding="async"></picture>
+				<picture class="acc__img"><source type="image/webp" srcset="img/ass-vloeren-800.webp 800w, img/ass-vloeren-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img width="1600" height="1066" src="img/ass-vloeren-1600.jpg" srcset="img/ass-vloeren-800.jpg 800w, img/ass-vloeren-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Woonkamer met een lichte eiken plankenvloer en een grote zetel" loading="lazy" decoding="async"></picture>
 				<div class="acc__body">
 					<h3 class="acc__title">Vloeren</h3>
 					<div class="acc__more"><p>Parket en vinyl, afgestemd op je trap en deuren.</p><ul class="acc__tags"><li><a href="https://www.decotrap.be/vloeren/parket">Parket</a></li><li><a href="https://www.decotrap.be/vloeren/vinyl">Vinyl</a></li></ul><a class="acc__cta" href="https://www.decotrap.be/vloeren/">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 				</div>
 			</li>
 			<li class="acc__item" data-acc>
-				<picture class="acc__img"><source type="image/webp" srcset="img/ass-interieur-800.webp 800w, img/ass-interieur-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img src="img/ass-interieur-1600.jpg" srcset="img/ass-interieur-800.jpg 800w, img/ass-interieur-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Houten lattenbalustrade op een lichte overloop met groot raam" loading="lazy" decoding="async"></picture>
+				<picture class="acc__img"><source type="image/webp" srcset="img/ass-interieur-800.webp 800w, img/ass-interieur-1600.webp 1600w" sizes="(min-width: 961px) 50vw, 100vw"><img width="1600" height="1066" src="img/ass-interieur-1600.jpg" srcset="img/ass-interieur-800.jpg 800w, img/ass-interieur-1600.jpg 1600w" sizes="(min-width: 961px) 50vw, 100vw" alt="Houten lattenbalustrade op een lichte overloop met groot raam" loading="lazy" decoding="async"></picture>
 				<div class="acc__body">
 					<h3 class="acc__title">Interieur</h3>
 					<div class="acc__more"><p>Trapleuningen, tafels, stoelen en maatkasten.</p><ul class="acc__tags"><li><a href="https://www.decotrap.be/trappen/trapleuningen/">Trapleuningen</a></li><li><a href="https://www.decotrap.be/interieur/tafels/">Tafels</a></li><li><a href="https://www.decotrap.be/interieur/stoelen/">Stoelen</a></li><li><a href="https://www.decotrap.be/interieur/maatkasten/">Maatkasten</a></li></ul><a class="acc__cta" href="https://www.decotrap.be/interieur/">Ontdek de collectie <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
@@ -251,18 +260,18 @@
 		<div class="projects__head reveal"><p class="label">Realisaties</p><h2 class="h2" id="projecten-titel">Gemaakt voor echte interieurs.</h2></div>
 		<div class="projects__list">
 		<article class="project reveal">
-			<picture class="project__main"><source type="image/webp" srcset="img/proj-geel-800.webp 800w, img/proj-geel-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img src="img/proj-geel-1600.jpg" srcset="img/proj-geel-800.jpg 800w, img/proj-geel-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Zwevende trap met donkere eiken treden naast een eettafel" loading="lazy" decoding="async"></picture>
-			<picture class="project__detail"><source type="image/webp" srcset="img/proj-geel-detail-450.webp 450w, img/proj-geel-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img src="img/proj-geel-detail-900.jpg" srcset="img/proj-geel-detail-450.jpg 450w, img/proj-geel-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Donkere eiken trap van bovenaf gezien" loading="lazy" decoding="async"></picture>
+			<picture class="project__main"><source type="image/webp" srcset="img/proj-geel-800.webp 800w, img/proj-geel-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img width="1600" height="1066" src="img/proj-geel-1600.jpg" srcset="img/proj-geel-800.jpg 800w, img/proj-geel-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Zwevende trap met donkere eiken treden naast een eettafel" loading="lazy" decoding="async"></picture>
+			<picture class="project__detail"><source type="image/webp" srcset="img/proj-geel-detail-450.webp 450w, img/proj-geel-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img width="900" height="600" src="img/proj-geel-detail-900.jpg" srcset="img/proj-geel-detail-450.jpg 450w, img/proj-geel-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Donkere eiken trap van bovenaf gezien" loading="lazy" decoding="async"></picture>
 			<div class="project__txt"><h3>Geel</h3><p>Zwevende treden in donkere eik, in een open leefruimte</p></div>
 		</article>
 		<article class="project project--flip reveal">
-			<picture class="project__main"><source type="image/webp" srcset="img/proj-lier-800.webp 800w, img/proj-lier-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img src="img/proj-lier-1600.jpg" srcset="img/proj-lier-800.jpg 800w, img/proj-lier-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Gebogen lichte eiken trap in een inkomhal met boogdeur" loading="lazy" decoding="async"></picture>
-			<picture class="project__detail"><source type="image/webp" srcset="img/proj-lier-detail-450.webp 450w, img/proj-lier-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img src="img/proj-lier-detail-900.jpg" srcset="img/proj-lier-detail-450.jpg 450w, img/proj-lier-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Detail van de gebogen trap naast een boogdeur" loading="lazy" decoding="async"></picture>
+			<picture class="project__main"><source type="image/webp" srcset="img/proj-lier-800.webp 800w, img/proj-lier-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img width="1600" height="1069" src="img/proj-lier-1600.jpg" srcset="img/proj-lier-800.jpg 800w, img/proj-lier-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Gebogen lichte eiken trap in een inkomhal met boogdeur" loading="lazy" decoding="async"></picture>
+			<picture class="project__detail"><source type="image/webp" srcset="img/proj-lier-detail-450.webp 450w, img/proj-lier-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img width="900" height="600" src="img/proj-lier-detail-900.jpg" srcset="img/proj-lier-detail-450.jpg 450w, img/proj-lier-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Detail van de gebogen trap naast een boogdeur" loading="lazy" decoding="async"></picture>
 			<div class="project__txt"><h3>Lier</h3><p>Gebogen trap op maat in lichte eik</p></div>
 		</article>
 		<article class="project reveal">
-			<picture class="project__main"><source type="image/webp" srcset="img/proj-genk-800.webp 800w, img/proj-genk-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img src="img/proj-genk-1600.jpg" srcset="img/proj-genk-800.jpg 800w, img/proj-genk-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Kind speelt tussen de zwevende eiken treden" loading="lazy" decoding="async"></picture>
-			<picture class="project__detail"><source type="image/webp" srcset="img/proj-genk-detail-450.webp 450w, img/proj-genk-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img src="img/proj-genk-detail-900.jpg" srcset="img/proj-genk-detail-450.jpg 450w, img/proj-genk-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Close-up van zwevende eiken treden" loading="lazy" decoding="async"></picture>
+			<picture class="project__main"><source type="image/webp" srcset="img/proj-genk-800.webp 800w, img/proj-genk-1600.webp 1600w" sizes="(min-width: 961px) 66vw, 100vw"><img width="1600" height="1066" src="img/proj-genk-1600.jpg" srcset="img/proj-genk-800.jpg 800w, img/proj-genk-1600.jpg 1600w" sizes="(min-width: 961px) 66vw, 100vw" alt="Kind speelt tussen de zwevende eiken treden" loading="lazy" decoding="async"></picture>
+			<picture class="project__detail"><source type="image/webp" srcset="img/proj-genk-detail-450.webp 450w, img/proj-genk-detail-900.webp 900w" sizes="(min-width: 961px) 30vw, 50vw"><img width="900" height="600" src="img/proj-genk-detail-900.jpg" srcset="img/proj-genk-detail-450.jpg 450w, img/proj-genk-detail-900.jpg 900w" sizes="(min-width: 961px) 30vw, 50vw" alt="Close-up van zwevende eiken treden" loading="lazy" decoding="async"></picture>
 			<div class="project__txt"><h3>Genk</h3><p>Zwevende trap met geïntegreerde ledleuning</p></div>
 		</article>
 		</div>
@@ -300,10 +309,10 @@
 		</article>
 	</section>
 
-	<section class="quote" aria-label="Klantervaring">
+	<section class="quote" aria-labelledby="klant-titel">
 		<div class="quote__body reveal">
 			<div class="quote__main">
-			<p class="label">Klantervaring</p>
+			<h2 class="label" id="klant-titel">Klantervaring</h2>
 			<blockquote>Het kon niet beter! Van verkoop, opvolging en planning tot installateurs en schilders. Dit was precies wat we verwacht hadden.</blockquote>
 			<p class="quote__who">Timucin B., Beringen</p></div>
 			<p class="label proof__label">Meer klanten aan het woord</p>
@@ -315,7 +324,7 @@
 			<div class="proof__dots" aria-hidden="true"><span class="is-on"></span><span></span><span></span></div>
 			<p class="award"><img src="img/trends-gazellen-2025.png" alt="Trends Gazellen 2025, genomineerd" width="64" height="64" loading="lazy">4e Trends Gazellen-nominatie op rij als snelst groeiend bedrijf in Limburg.</p>
 		</div>
-		<img class="reveal" src="img/familie.jpg" alt="Kind klimt een zwevende trap op" loading="lazy">
+		<picture class="quote__pic"><source type="image/webp" srcset="img/familie-600.webp 600w, img/familie-1000.webp 1000w" sizes="(min-width: 961px) 34vw, 100vw"><img class="reveal" src="img/familie-1000.jpg" srcset="img/familie-600.jpg 600w, img/familie-1000.jpg 1000w" sizes="(min-width: 961px) 34vw, 100vw" width="1000" height="1500" alt="Kind klimt een zwevende trap op" loading="lazy" decoding="async"></picture>
 	</section>
 
 	<section class="tot" id="trap-o-theek" aria-labelledby="tot-titel">

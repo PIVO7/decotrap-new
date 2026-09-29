@@ -490,7 +490,16 @@
 			if (e.target.closest('a[href^="#"]')) closeMnav();
 		});
 		document.addEventListener('keydown', function (e) {
-			if (e.key === 'Escape' && !mnav.hidden) closeMnav();
+			if (mnav.hidden) return;
+			if (e.key === 'Escape') { closeMnav(); return; }
+			// Tab blijft binnen het open menu (het is een dialoog over de pagina)
+			if (e.key === 'Tab') {
+				var f = Array.prototype.filter.call(mnav.querySelectorAll('a, button'), function (el) { return el.offsetParent !== null; });
+				if (!f.length) return;
+				var first = f[0], last = f[f.length - 1];
+				if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+				else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+			}
 		});
 	}
 
