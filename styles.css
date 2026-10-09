@@ -1,5 +1,5 @@
 /* Decotrap – homepagina "A · Geist"
-   Eén stijlgids, twee thema's: [data-theme="lime"] en [data-theme="zw"] (zwart-wit met subtiele lime).
+   Eén stijlgids, drie thema's: [data-theme="lime"], [data-theme="zw"] (zwart-wit met subtiele lime) en [data-theme="huisstijl"] (tokens van decotrap.be).
    Componenten gebruiken enkel de semantische tokens hieronder; een thema zet alleen tokens. */
 
 /* ---------- 1. Tokens ---------- */
@@ -71,6 +71,52 @@
 	--footer-label: rgb(var(--on-dark) / 0.55);
 	--footer-mark: 56px;
 }
+
+[data-theme="huisstijl"] {
+	/* tokens van www.decotrap.be (theme.css): accent #BCBE00, beige #F7F3EB, donker #232828, tekst #717171, Fedra Sans Screen, radius 3px */
+	--bg: #FAF9F4;
+	--bg-rgb: 250 249 244;
+	--paper: #FFFFFF;
+	--ink: #232828;
+	--deep: #232828;
+	--text: #717171;
+	--muted: #717171;
+	--line: #E4E0D6;
+	--footer: #232828;
+	--shade: 35 40 40;
+	--on-dark: 255 255 255;
+	--brand: #BCBE00;
+
+	--hero-btn-bg: var(--brand);
+	--hero-btn-fg: var(--ink);
+	--usp-dot: 8px;
+	--label-on-dark: var(--brand);
+	--step-border: 6px solid var(--brand);
+	--step-last-bg: var(--brand);
+	--step-last-fg: var(--ink);
+	--step-last-border: 6px solid var(--brand);
+	--step-last-icon-on: var(--ink);
+	--step-last-icon-off: rgb(35 40 40 / 0.25);
+	--card-btn-bg: var(--brand);
+	--card-btn-fg: var(--ink);
+	--cta-bg: var(--brand);
+	--cta-fg: var(--ink);
+	--cta-border: 0;
+	--cta-mark: none;
+	--footer-label: var(--brand);
+	--footer-mark: 120px;
+}
+
+/* lettertype en hoeken van de huisstijl (html[...] gaat voor op :root hieronder) */
+html[data-theme="huisstijl"] {
+	--font: 'Fedra Sans Screen', Arial, sans-serif;
+	--mono: 'Fedra Sans Screen', Arial, sans-serif;
+	--serif: 'Fedra Sans Screen', Arial, sans-serif;
+	--radius: 3px;
+}
+/* Fedra Sans Screen (huisstijl decotrap.be), enkel geladen in het thema 'huisstijl' */
+@font-face { font-family: 'Fedra Sans Screen'; src: url('fonts/FedraSansScreen.woff2') format('woff2'), url('fonts/FedraSansScreen.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fedra Sans Screen'; src: url('fonts/FedraSansScreen-Bold.woff2') format('woff2'), url('fonts/FedraSansScreen-Bold.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
 
 :root {
 	--font: 'Geist', system-ui, sans-serif;
@@ -1349,3 +1395,13 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.split__facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 	.split__facts dd { margin: 0; font-size: 15px; line-height: 1.4; font-weight: 500; color: var(--ink); }
 }
+
+/* ---------- 14. Thema 'huisstijl': componenten zoals op decotrap.be ----------
+   Titels vet en niet in hoofdletters; knoppen klein, vet, in hoofdletters met wat letterafstand. Fedra heeft enkel 400 en 700. */
+[data-theme="huisstijl"] :is(h1, h2, h3, .h2, .tot__title, .acc__title, .project__txt h3, .step h3, .mega-panel__title) { font-weight: 700; text-transform: none; letter-spacing: 0; }
+[data-theme="huisstijl"] .hero h1 { font-size: clamp(36px, 4.2vw, 60px); line-height: 1.12; }
+[data-theme="huisstijl"] .quote__main > blockquote { font-style: normal; font-weight: 700; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.25; }
+[data-theme="huisstijl"] .btn { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+[data-theme="huisstijl"] .label { letter-spacing: 1px; }
+[data-theme="huisstijl"] b, [data-theme="huisstijl"] strong { font-weight: 700; }
+@media (max-width: 960px) { [data-theme="huisstijl"] .hero h1 { font-size: clamp(30px, 8.6vw, 40px); } }

@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
-	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal' || f === 'inkom') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2' || m === 'tekst') document.documentElement.dataset.menu = m; } catch (e) {}
+	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime' || t === 'huisstijl') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal' || f === 'inkom') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2' || m === 'tekst') document.documentElement.dataset.menu = m; } catch (e) {}
 	document.documentElement.classList.add('js');
 </script>
 </head>
@@ -199,7 +199,7 @@
 	</div>
 	<div class="hero__content">
 		<p class="hero__eyebrow"><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Familiebedrijf · toonzalen in Heusden-Zolder en Wetteren</p>
-		<h1>Op maat gemaakt.<br>Tot in elk detail.</h1>
+		<h1>Wij maken trappen, binnendeuren, vloeren en meer.</h1>
 		<p class="hero__sub">Ter plaatse afgewerkt, door een Limburgs familiebedrijf.</p>
 		<div class="hero__actions"><a class="btn hero__cta" href="https://www.decotrap.be/gratis-offerte/">Gratis offerte <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a><a class="link" href="https://www.decotrap.be/trappen/">Ontdek onze trappen <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a></div>
 	</div>
@@ -426,6 +426,7 @@
 <div class="theme-switch" role="group" aria-label="Kleurversie (enkel in de preview)">
 	<button type="button" data-set-theme="lime" aria-pressed="true"><span class="dot" style="background: #C4C800"></span>Lime</button>
 	<button type="button" data-set-theme="zw" aria-pressed="false"><span class="dot" style="background: #141414; box-shadow: inset 0 0 0 1px #888"></span>Zwart-wit</button>
+	<button type="button" data-set-theme="huisstijl" aria-pressed="false"><span class="dot" style="background: #BCBE00; box-shadow: inset 0 0 0 2px #232828"></span>Huisstijl</button>
 </div>
 </div>
 
