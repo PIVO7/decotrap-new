@@ -122,12 +122,12 @@ html[data-theme="huisstijl"] {
 	--font: 'Geist', system-ui, sans-serif;
 	--mono: 'Geist Mono', ui-monospace, monospace;
 	--serif: 'Instrument Serif', Georgia, serif;
-	--gutter: max(clamp(20px, 4.5vw, 64px), calc((100vw - 1260px) / 2)); /* gsm en tablet; inhoud max. 1260px breed zoals decotrap.be */
+	--gutter: max(clamp(20px, 4.5vw, 64px), calc((100vw - 1680px) / 2)); /* gsm en tablet */
 	--radius: 4px;
 	--ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 /* desktop: 6,25% ruimte aan elke kant (inhoud 87,5vw), zoals --section-content-width op decotrap.be */
-@media (min-width: 961px) { :root { --gutter: max(6.25vw, calc((100vw - 1260px) / 2)); } }
+@media (min-width: 961px) { :root { --gutter: max(6.25vw, calc((100vw - 1680px) / 2)); } } /* grote schermen: inhoud tot 1680px, zodat er links en rechts niet te veel leegte is */
 
 /* ---------- 2. Basis ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -1439,7 +1439,7 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 [data-layout="split"] .logo--normaal { display: block; }
 [data-layout="split"] .hero > picture { grid-column: 2; grid-row: 2; position: relative; min-height: 0; }
 [data-layout="split"] .hero__content {
-	grid-column: 1; grid-row: 2; align-self: center; margin: 0; max-width: 680px;
+	grid-column: 1; grid-row: 2; align-self: center; margin: 0; max-width: calc(var(--gutter) + 640px); /* tekstbreedte gelijk, ongeacht de zijruimte */
 	padding: 48px clamp(32px, 5vw, 80px) 48px var(--gutter);
 }
 [data-layout="split"] .hero h1, [data-layout="split"] .hero__sub { text-shadow: none; }
@@ -1480,11 +1480,11 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.nav__link:hover { background: #FFFFFF; color: var(--ink); border-color: #FFFFFF; }
 	.hero.is-mega .nav__link:hover, [data-layout="split"] .nav__link:hover { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
 }
-/* navigatiebalk 92px hoog; logo 64px hoog en verticaal gecentreerd met ruimte erboven en eronder (zonder bovenbalk zoals op decotrap.be oogt een logo tegen de rand afgesneden) */
+/* navigatiebalk 76px hoog; logo 52px hoog en verticaal gecentreerd met ruimte erboven en eronder (zonder bovenbalk zoals op decotrap.be oogt een logo tegen de rand afgesneden) */
 @media (min-width: 961px) {
-	.nav, [data-layout="split"] .nav { padding-block: 14px; min-height: 92px; }
+	.nav, [data-layout="split"] .nav { padding-block: 12px; min-height: 76px; }
 	.nav .nav__logo { display: flex; align-items: center; flex: none; }
-	.nav .nav__logo img { width: auto; height: 64px; }
+	.nav .nav__logo img { width: auto; height: 52px; }
 	/* menu iets groter en luchtiger, zodat het in evenwicht is met de knoppen */
 	[data-menu="groot"] .nav__menu { gap: 32px; }
 	[data-menu="groot"] .nav__menu a, [data-menu="groot"] .nav__trigger { font-size: 16px; font-weight: 400; }
@@ -1494,5 +1494,5 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 @media (min-width: 961px) and (max-width: 1280px) {
 	[data-menu="groot"] .nav__menu { gap: 20px; }
 	[data-menu="groot"] .nav__menu a, [data-menu="groot"] .nav__trigger { font-size: 14.5px; }
-	.nav .nav__logo img { height: 56px; }
+	.nav .nav__logo img { height: 48px; }
 }
