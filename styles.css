@@ -663,6 +663,22 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	[data-hero="hal"] .hero::before { background: linear-gradient(180deg, rgb(var(--shade) / 0.55) 0%, rgb(var(--shade) / 0.2) 22%, rgb(var(--shade) / 0.62) 42%, rgb(var(--shade) / 0.88) 100%); }
 }
 
+/* ---------- 12b2. Herofoto 'inkom' (lichte inkomhal, eiken trap rechts) ---------- */
+.hero__pic--inkom { display: none; }
+[data-hero="inkom"] .hero__img--latten { display: none; }
+[data-hero="inkom"] .hero__pic--inkom { display: block; }
+[data-hero="inkom"] .hero__img--inkom { object-position: 60% 55%; }
+/* heel lichte foto: duidelijke laag links en onder voor de titel, bovenaan voor de navigatie; de trap rechts blijft helder */
+[data-hero="inkom"] .hero::before {
+	background:
+		linear-gradient(90deg, rgb(var(--shade) / 0.72) 0%, rgb(var(--shade) / 0.55) 32%, rgb(var(--shade) / 0.15) 58%, rgb(var(--shade) / 0) 72%),
+		linear-gradient(180deg, rgb(var(--shade) / 0.5) 0%, rgb(var(--shade) / 0.08) 22%, rgb(var(--shade) / 0.05) 45%, rgb(var(--shade) / 0.6) 100%);
+}
+@media (max-width: 960px) {
+	[data-hero="inkom"] .hero__img--inkom { object-position: 66% 50%; }
+	[data-hero="inkom"] .hero::before { background: linear-gradient(180deg, rgb(var(--shade) / 0.55) 0%, rgb(var(--shade) / 0.2) 22%, rgb(var(--shade) / 0.62) 42%, rgb(var(--shade) / 0.9) 100%); }
+}
+
 /* tekst op elke herofoto: een zachte schaduw houdt de letters los van drukke details */
 .hero h1, .hero__sub, .hero__eyebrow { text-shadow: 0 1px 2px rgb(0 0 0 / 0.25), 0 4px 28px rgb(0 0 0 / 0.35); }
 

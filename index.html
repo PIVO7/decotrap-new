@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
-	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2' || m === 'tekst') document.documentElement.dataset.menu = m; } catch (e) {}
+	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal' || f === 'inkom') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2' || m === 'tekst') document.documentElement.dataset.menu = m; } catch (e) {}
 	document.documentElement.classList.add('js');
 </script>
 </head>
@@ -109,6 +109,10 @@
 	<picture class="hero__pic--raam">
 		<source type="image/webp" srcset="img/hero-raam-960.webp 960w, img/hero-raam-1920.webp 1920w" sizes="100vw">
 		<img class="hero__img hero__img--raam" src="img/hero-raam-1920.jpg" srcset="img/hero-raam-960.jpg 960w, img/hero-raam-1920.jpg 1920w" sizes="100vw" width="1920" height="1278" alt="Iemand loopt een witte Z-trap met houten treden af, voor een groot raam" loading="lazy">
+	</picture>
+	<picture class="hero__pic--inkom">
+		<source type="image/webp" srcset="img/hero-inkom-1200.webp 1200w, img/hero-inkom-2048.webp 2048w" sizes="100vw">
+		<img class="hero__img hero__img--inkom" src="img/hero-inkom-2048.jpg" srcset="img/hero-inkom-1200.jpg 1200w, img/hero-inkom-2048.jpg 2048w" sizes="100vw" width="2048" height="1365" alt="Lichte inkomhal met een eiken trap met gebogen onderste treden, een witte gebogen trapwand en zicht op de leefruimte" loading="lazy">
 	</picture>
 	<div class="hero__reeks" role="group" aria-roledescription="diavoorstelling" aria-label="Realisaties van Decotrap">
 		<picture class="hero__slide is-active" data-slide="0"><source type="image/webp" data-srcset="img/reeks-1-latten-960.webp 960w, img/reeks-1-latten-1920.webp 1920w" sizes="100vw"><img data-src="img/reeks-1-latten-1920.jpg" data-srcset="img/reeks-1-latten-960.jpg 960w, img/reeks-1-latten-1920.jpg 1920w" sizes="100vw" width="1920" height="1200" alt="Houten trap achter latten met geïntegreerde ledleuning"></picture>
@@ -406,6 +410,7 @@
 	<button type="button" data-set-hero="hal" aria-pressed="false">Foto hal</button>
 	<button type="button" data-set-hero="latten" aria-pressed="false">Foto latten</button>
 	<button type="button" data-set-hero="raam" aria-pressed="false">Foto raam</button>
+	<button type="button" data-set-hero="inkom" aria-pressed="false">Foto inkom</button>
 	<button type="button" data-set-hero="reeks" aria-pressed="false">Fotoreeks</button>
 </div>
 <div class="theme-switch" role="group" aria-label="Treden-animatie (enkel in de preview)">
