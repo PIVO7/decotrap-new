@@ -943,7 +943,7 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 [data-menu="groot"] .mega .mega__thumbs li { border-bottom: 0; }
 [data-menu="groot"] .mega__thumbs a, [data-menu="groot"] .mega .mega__thumbs a {
 	min-height: 0; padding: 4px 0; gap: 0;
-	font-size: clamp(18px, 1.45vw, 22px); font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; text-transform: none;
+	font-size: clamp(18px, 1.45vw, 22px); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; text-transform: none; /* Fedra kent enkel 400 en 700 */
 }
 [data-menu="groot"] .mega .mega__thumbs a::after { display: none; }
 @media (hover: hover) { [data-menu="groot"] .mega .mega__thumbs a:hover { color: var(--muted); } }
