@@ -1999,3 +1999,9 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	/* de scrollrij is precies zo breed als één kaart: 10px vrij naast elke pijltab */
 	.steps3__list { margin-inline: calc(36px + 10px - var(--gutter)); padding-inline: 0; scroll-padding-inline: 0; gap: 24px; }
 }
+
+/* ---------- 62. Vaste knoppenbalk (gsm): twee even brede knoppen zoals in de hero, past ook op 320px ---------- */
+@media (max-width: 960px) {
+	.mbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.mbar .btn { min-width: 0; padding-inline: 12px; }
+}
