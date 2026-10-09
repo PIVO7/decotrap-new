@@ -1324,11 +1324,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 /* realisaties: raster met twee grote foto's, klik om groot te bekijken */
 
 /* zo verloopt het */
-.flow__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: none; }
-.flow__list li { padding-top: 24px; border-top: 2px solid var(--line); }
-.flow__nr { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: var(--brand); color: #FFFFFF; font-weight: 700; }
-.flow__list h3 { margin-top: 16px; font-size: 19px; }
-.flow__list p { margin-top: 8px; font-size: 15px; line-height: 1.55; }
 
 /* veelgestelde vragen */
 .faq__list { max-width: 880px; border-top: 1px solid var(--line); }
@@ -1354,8 +1349,8 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.later__img img { aspect-ratio: 4 / 3; }
 	.types__list { grid-template-columns: minmax(0, 1fr); gap: 32px; }
 	
-	.flow__list { grid-template-columns: minmax(0, 1fr); gap: 0; }
-	.flow__list li { padding: 24px 0; }
+	
+	
 	.op__cta { margin-inline: 0; border-radius: 0; text-align: left; align-items: flex-start; }
 	.op__cta .hero__actions { justify-content: flex-start; }
 }
@@ -1401,11 +1396,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 /* troeven: open raster met dunne lijnen in plaats van losse kaarten */
 
 /* stappen als fotokaarten */
-.flow__list li.flow__card { position: relative; padding: 0; border-top: 0; }
-.flow__card picture { display: block; overflow: hidden; border-radius: var(--radius); }
-.flow__card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.flow__card .flow__nr { position: absolute; top: 14px; left: 14px; }
-.flow__card h3 { margin-top: 20px; }
 
 /* vragen in twee kolommen: titel en contact links (blijft staan), vragen rechts */
 .faq { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
@@ -1422,8 +1412,8 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	[id="troeven"], [id="traptypes"], [id="realisaties"], [id="werkwijze"], [id="vragen"] { scroll-margin-top: 52px; }
 	.faq { grid-template-columns: minmax(0, 1fr); }
 	.faq__aside { position: static; }
-	.flow__list { gap: 32px; }
-	.flow__list li.flow__card { padding: 0; }
+	
+	
 }
 
 /* sub-navigatie op kleine laptops: zonder titel, zodat alle ankers en de knop passen */
@@ -1629,9 +1619,9 @@ html, body { overflow-x: clip; }
 @media (min-width: 641px) and (max-width: 960px) {
 	.later { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 32px; }
 	.later__img img { aspect-ratio: 4 / 5; }
-	.flow__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-	.flow__list h3 { font-size: 17px; }
-	.flow__list p { font-size: 14px; }
+	
+	
+	
 }
 /* realisaties zonder parallax: foto vult gewoon zijn kader; pijltjes onder de slider */
 .parallax-slider__item-img { left: 0; width: 100%; }
@@ -1677,7 +1667,7 @@ html[data-theme="huisstijl"] body { font-size: 16px; }
 .mpx-teaser__title { font-size: clamp(24px, 2.3vw, 32px) !important; }
 /* kleinere titels */
 .types__title { font-size: 18px; }
-.flow__list h3 { font-size: 18px; }
+
 .later__txt p { font-size: 16px; }
 /* sub-navigatie en vragen */
 .subnav__links a { font-size: 15px; }
@@ -1749,3 +1739,42 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { min-height: 48px; padding-
 .subnav__cta { opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity 250ms var(--ease), transform 300ms var(--ease), visibility 0s linear 300ms; }
 .subnav.is-stuck .subnav__cta { opacity: 1; visibility: visible; transform: none; transition: opacity 250ms var(--ease), transform 300ms var(--ease), visibility 0s; }
 @media (prefers-reduced-motion: reduce) { .subnav__cta, .subnav.is-stuck .subnav__cta { transition: none; transform: none; } }
+
+/* ---------- 42. Werkwijze in drie stappen (naar het voorbeeld van Stage): stappen links op een lijn, foto rechts die meewisselt ---------- */
+.steps2 { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
+.steps2__intro { margin-top: 14px; max-width: 460px; font-size: 16px; line-height: 1.6; color: var(--text); }
+.steps2__list { list-style: none; margin: clamp(28px, 3.4vw, 44px) 0 0; padding: 0; border-left: 1px dashed var(--line); }
+.steps2__item { position: relative; padding: 16px 0 16px 28px; }
+/* groene lijn van de actieve stap; vult zich als voortgangsbalk terwijl de stappen vanzelf doorschuiven */
+.steps2__bar { position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: var(--brand); transform: scaleY(0); transform-origin: top; }
+.steps2__item.is-active .steps2__bar { transform: scaleY(1); }
+.steps2.is-playing .steps2__item.is-active .steps2__bar { animation: steps2-voortgang var(--steps2-duur, 6s) linear both; }
+@keyframes steps2-voortgang { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.steps2__btn { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.steps2__btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 6px; border-radius: 2px; }
+.steps2__tag { display: none; padding: 4px 10px; border-radius: 999px; background: var(--brand); color: var(--ink); font-size: 13px; line-height: 1.3; }
+.steps2__item.is-active .steps2__tag { display: inline-block; }
+.steps2__title { font-size: 18px; line-height: 1.3; color: var(--muted); transition: color 250ms var(--ease); }
+.steps2__item.is-active .steps2__title { color: var(--ink); font-weight: 700; }
+@media (hover: hover) { .steps2__btn:hover .steps2__title { color: var(--ink); } }
+/* uitleg klapt open bij de actieve stap */
+.steps2__desc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 350ms var(--ease); }
+.steps2__desc > p { overflow: hidden; max-width: 420px; font-size: 15px; line-height: 1.6; color: var(--text); }
+.steps2__item.is-active .steps2__desc { grid-template-rows: 1fr; }
+.steps2__item.is-active .steps2__desc > p { padding-top: 8px; }
+/* foto rechts: kruisovergang */
+.steps2__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--paper); }
+.steps2__shot { position: absolute; inset: 0; opacity: 0; transform: scale(1.03); transition: opacity 500ms var(--ease), transform 900ms var(--ease); }
+.steps2__shot.is-active { opacity: 1; transform: none; }
+.steps2__shot img { width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) {
+	.steps2__shot, .steps2__desc, .steps2__title { transition: none; }
+	.steps2.is-playing .steps2__item.is-active .steps2__bar { animation: none; transform: scaleY(1); }
+}
+@media (max-width: 960px) {
+	.steps2 { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+	.steps2__media { order: 2; }
+	.steps2__text { order: 1; }
+	.steps2__list { margin-top: 24px; }
+}
+.steps2.is-paused .steps2__item.is-active .steps2__bar { animation-play-state: paused; }

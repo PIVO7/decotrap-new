@@ -23,3 +23,45 @@
 		subnav.classList.toggle('is-stuck', !entries[0].isIntersecting);
 	}, { threshold: 0 }).observe(hero);
 })();
+
+// Werkwijze in drie stappen: klik op een stap, of laat ze vanzelf doorschuiven zolang de sectie in beeld is
+(function () {
+	var root = document.querySelector('.steps2');
+	if (!root) return;
+	var items = Array.prototype.slice.call(root.querySelectorAll('.steps2__item'));
+	var shots = Array.prototype.slice.call(root.querySelectorAll('.steps2__shot'));
+	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	var index = 0, inView = false, paused = false;
+	function show(i) {
+		index = (i + items.length) % items.length;
+		items.forEach(function (it, k) {
+			var on = k === index;
+			it.classList.toggle('is-active', on);
+			it.querySelector('.steps2__btn').setAttribute('aria-expanded', String(on));
+		});
+		shots.forEach(function (sh, k) { sh.classList.toggle('is-active', k === index); });
+	}
+	function syncPlay() {
+		root.classList.toggle('is-playing', !reduce && inView);
+		root.classList.toggle('is-paused', paused); // hover of focus: balk pauzeert, begint niet opnieuw
+	}
+	// voortgangsbalk vol = volgende stap
+	items.forEach(function (it, k) {
+		it.querySelector('.steps2__bar').addEventListener('animationend', function () {
+			if (root.classList.contains('is-playing') && !paused && k === index) show(index + 1);
+		});
+		it.querySelector('.steps2__btn').addEventListener('click', function () {
+			show(k);
+			// balk opnieuw laten starten
+			root.classList.remove('is-playing'); void root.offsetWidth; syncPlay();
+		});
+	});
+	root.addEventListener('mouseenter', function () { paused = true; syncPlay(); });
+	root.addEventListener('mouseleave', function () { paused = false; syncPlay(); });
+	root.addEventListener('focusin', function () { paused = true; syncPlay(); });
+	root.addEventListener('focusout', function (e) { if (!root.contains(e.relatedTarget)) { paused = false; syncPlay(); } });
+	if ('IntersectionObserver' in window) {
+		new IntersectionObserver(function (entries) { inView = entries[0].isIntersecting; syncPlay(); }, { threshold: 0.4 }).observe(root);
+	}
+	show(0);
+})();
