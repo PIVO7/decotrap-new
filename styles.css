@@ -1731,76 +1731,15 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 
 
 
-/* ---------- 47. Werkwijze (naar 'van dichtbij' op apple.com): donker vlak binnen de zijmarges, bubbels links, foto rechts ---------- */
-.steps3__box {
-	display: grid; grid-template-columns: auto minmax(0, 5fr) minmax(0, 6fr); align-items: center; gap: clamp(20px, 3vw, 48px);
-	padding: clamp(32px, 4.5vw, 72px); border-radius: var(--radius); background: var(--deep); color: #FFFFFF;
-}
 /* pijltjes helemaal links */
-.steps3__arrows { display: flex; flex-direction: column; gap: 12px; }
-.steps3__arrow { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgb(255 255 255 / 0.3); border-radius: var(--radius); background: transparent; color: #FFFFFF; cursor: pointer; transition: background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease), opacity 200ms var(--ease); }
-.steps3__arrow svg { width: 16px; height: 16px; }
-.steps3__arrow:disabled { opacity: 0.4; cursor: default; }
-@media (hover: hover) { .steps3__arrow:not(:disabled):hover { background: #FFFFFF; border-color: #FFFFFF; color: var(--ink); } }
-.steps3__arrow:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 /* bubbels */
-.steps3__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-.steps3__list li { width: 100%; }
-.steps3__pill {
-	position: relative; overflow: hidden; display: block; width: fit-content; max-width: 100%;
-	padding: 14px 24px 14px 14px; border: 1px solid rgb(255 255 255 / 0.16); border-radius: var(--radius); background: rgb(255 255 255 / 0.06); color: #FFFFFF;
-	font: inherit; font-size: 17px; text-align: left; cursor: pointer;
-	/* breedte en hoogte zet ondertrap.js vooraf (zoals apple.com): enkel het kader animeert, de tekst herschikt nooit */
-	transition: width 560ms cubic-bezier(0.32, 0.72, 0, 1), height 560ms cubic-bezier(0.32, 0.72, 0, 1), background-color 250ms var(--ease), border-color 250ms var(--ease);
-}
-@media (hover: hover) { .steps3__pill:not(.is-active):hover { background: rgb(255 255 255 / 0.12); border-color: rgb(255 255 255 / 0.32); } }
-.steps3__pill:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
-.steps3__head { display: flex; align-items: center; gap: 12px; transition: opacity 300ms var(--ease) 120ms; }
-.steps3__icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: var(--radius); background: var(--brand); color: var(--ink); }
-.steps3__icon { font-size: 15px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
-.steps3__label { font-weight: 700; white-space: nowrap; }
 /* uitleg: ligt al op zijn eindbreedte (--tw) en vloeit pas in als het kader bijna open is */
-.steps3__text { position: absolute; top: 0; left: 0; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 200ms var(--ease), transform 300ms var(--ease); }
-.steps3__text > span { display: block; width: var(--tw, 400px); font-size: 16px; line-height: 1.55; color: rgb(255 255 255 / 0.85); }
-.steps3__text strong { color: #FFFFFF; font-weight: 700; }
 /* open bubbel */
-.steps3__pill.is-active { width: 100%; max-width: 460px; padding: 22px 26px; background: color-mix(in srgb, #FFFFFF 14%, var(--deep)); border-color: rgb(255 255 255 / 0.22); cursor: default; }
-.steps3__pill.is-active .steps3__head { position: absolute; top: 14px; left: 14px; opacity: 0; transition: opacity 200ms var(--ease); }
-.steps3__pill.is-active .steps3__text { position: static; opacity: 1; transform: none; pointer-events: auto; transition: opacity 600ms var(--ease) 220ms, transform 450ms cubic-bezier(0.32, 0.72, 0, 1) 160ms; }
 /* foto rechts */
-.steps3__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: rgb(255 255 255 / 0.06); }
-.steps3__shot { position: absolute; inset: 0; opacity: 0; transform: scale(1.03); transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), transform 1000ms cubic-bezier(0.22, 1, 0.36, 1); }
-.steps3__shot.is-active { opacity: 1; transform: none; }
-.steps3__shot img { width: 100%; height: 100%; object-fit: cover; }
-@media (prefers-reduced-motion: reduce) { .steps3__pill, .steps3__head, .steps3__text, .steps3__shot { transition: none !important; } }
-/* gsm (naar apple.com): foto boven, kaarten eronder die je native swipet (scroll-snap), pijltabs aan de zijkanten, voortgangsbalk */
-.steps3__dots { display: none; }
 @media (max-width: 960px) {
-	.steps3__box { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 20px; }
-	.steps3__media { grid-row: 1; grid-column: 1; aspect-ratio: 4 / 3; }
-	.steps3__list {
-		grid-row: 2; grid-column: 1; flex-direction: row; align-items: stretch; gap: 12px;
-		margin-inline: -20px; padding-inline: 34px; scroll-padding-inline: 34px;
-		overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
-	}
-	.steps3__list::-webkit-scrollbar { display: none; }
-	.steps3__list li { flex: 0 0 100%; scroll-snap-align: start; }
 	/* op gsm is elke kaart open: enkel de uitleg, even hoog */
-	.steps3__pill, .steps3__pill.is-active { width: 100% !important; height: 100% !important; max-width: none; padding: 20px 22px; background: color-mix(in srgb, #FFFFFF 14%, var(--deep)); border-color: rgb(255 255 255 / 0.22); cursor: grab; transition: none; }
-	.steps3__head { display: none; }
-	.steps3__text, .steps3__pill.is-active .steps3__text { position: static; opacity: 1; transform: none; transition: none; }
-	.steps3__text > span { width: auto; font-size: 16px; }
 	/* pijltabs tegen de randen van het donkere vlak, ter hoogte van de kaart */
-	.steps3__arrows { grid-row: 2; grid-column: 1; z-index: 1; flex-direction: row; justify-content: space-between; align-self: center; margin-inline: -20px; pointer-events: none; }
-	.steps3__arrow { width: 30px; height: 64px; border: 0; background: rgb(255 255 255 / 0.14); pointer-events: auto; }
-	.steps3__arrow[data-dir="-1"] { border-radius: 0 var(--radius) var(--radius) 0; }
-	.steps3__arrow[data-dir="1"] { border-radius: var(--radius) 0 0 var(--radius); }
-	.steps3__arrow svg { transform: rotate(-90deg); }
-	.steps3__arrow:disabled { opacity: 0.3; }
 	/* voortgang: drie segmenten, actieve in de huisstijlkleur */
-	.steps3__dots { grid-row: 3; grid-column: 1; display: flex; justify-content: center; gap: 6px; margin-top: -4px; }
-	.steps3__dots span { width: 24px; height: 3px; border-radius: 3px; background: rgb(255 255 255 / 0.25); transition: width 350ms var(--ease), background-color 350ms var(--ease); }
-	.steps3__dots span.is-active { width: 40px; background: var(--brand); }
 }
 
 /* ---------- 48. Realisaties: 'Draggable Infinite Slider' van Osmo Supply (gallery.js), in een donker vlak binnen de zijmarges ---------- */
@@ -1923,9 +1862,6 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	.slider__section { margin-inline: calc(-1 * var(--gutter)); border-radius: 0; --pad: var(--gutter); }
 }
 @media (max-width: 960px) {
-	.steps3__box { margin-inline: calc(-1 * var(--gutter)); border-radius: 0; padding: 24px var(--gutter); }
-	.steps3__list { margin-inline: calc(-1 * var(--gutter)); padding-inline: calc(var(--gutter) + 14px); scroll-padding-inline: calc(var(--gutter) + 14px); }
-	.steps3__arrows { margin-inline: calc(-1 * var(--gutter)); }
 }
 
 /* ---------- 54. Afsluitende CTA: label in huisstijlkleur; gsm links uitgelijnd op de paginamarge ---------- */
@@ -1983,8 +1919,6 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	.later__txt .op__link { align-self: flex-start; }
 }
 @media (max-width: 960px) {
-	.steps3__arrow { width: 36px; }
-	.steps3__list { padding-inline: calc(var(--gutter) + 20px); scroll-padding-inline: calc(var(--gutter) + 20px); }
 }
 @media (max-width: 640px) {
 	.types__link-rest { display: none; }
@@ -1994,10 +1928,8 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 .demo-blok__badge { display: inline-block; margin-bottom: 10px; padding: 4px 10px; border: 1px dashed var(--ink); border-radius: var(--radius); font-size: 13px; color: var(--ink) !important; }
 .demo-blok__text code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; padding: 1px 5px; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--line); }
 
-/* ---------- 61. Stappen op gsm (naar apple.com): één kaart tussen de pijltabs, geen buurkaarten die erachter uitsteken ---------- */
 @media (max-width: 960px) {
 	/* de scrollrij is precies zo breed als één kaart: 10px vrij naast elke pijltab */
-	.steps3__list { margin-inline: calc(36px + 10px - var(--gutter)); padding-inline: 0; scroll-padding-inline: 0; gap: 24px; }
 }
 
 /* ---------- 62. Vaste knoppenbalk (gsm): twee even brede knoppen zoals in de hero, past ook op 320px ---------- */
@@ -2009,4 +1941,18 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 /* ---------- 63. Realisaties desktop: titel in de smallere linkerkolom iets kleiner, zodat hij op twee regels past ---------- */
 @media (min-width: 992px) {
 	.slider__overlay-head .h2 { font-size: clamp(24px, 1.9vw, 30px); }
+}
+
+/* ---------- 64. Werkwijze: drie stappen naast elkaar, statisch en in één blik leesbaar ---------- */
+.steps4__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); }
+.steps4__list li { padding-top: 24px; border-top: 1px solid var(--line); }
+.steps4__nr { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius); background: var(--brand); color: var(--ink); font-size: 15px; font-weight: 700; line-height: 1; }
+.steps4__title { margin-top: 16px; font-size: 18px; line-height: 1.3; font-weight: 700; color: var(--ink); }
+.steps4__list p { margin-top: 6px; max-width: 36ch; font-size: 16px; line-height: 1.55; color: var(--text); }
+@media (max-width: 760px) {
+	.steps4__list { grid-template-columns: minmax(0, 1fr); gap: 0; }
+	.steps4__list li { display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: 14px; padding: 18px 0; }
+	.steps4__nr { grid-row: span 2; }
+	.steps4__title { margin-top: 4px; }
+	.steps4__list p { grid-column: 2; margin-top: 4px; }
 }
