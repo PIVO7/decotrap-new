@@ -1888,3 +1888,21 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.usps2__col + .usps2__col { margin-top: 52px; padding-top: 52px; }
 	.usps2__intro { font-size: 17px; }
 }
+
+/* ---------- 31. Troeven compacter: kleinere letters en minder witruimte ---------- */
+.usps2__box { padding: clamp(48px, 5vw, 80px) clamp(24px, 5vw, 80px) clamp(44px, 4.5vw, 72px); }
+.usps2__icon { width: clamp(38px, 3.2vw, 48px); height: clamp(38px, 3.2vw, 48px); }
+.usps2__title { font-size: clamp(30px, 3.6vw, 52px) !important; }
+.usps2__intro { max-width: 600px; margin-top: clamp(16px, 1.8vw, 24px); font-size: clamp(16px, 1.2vw, 17px); line-height: 1.6; }
+.usps2__cols { max-width: 800px; margin-top: clamp(40px, 4.5vw, 64px); }
+.usps2__col-icon { width: 30px; height: 30px; }
+.usps2__col-title { margin-top: 14px; font-size: clamp(19px, 1.6vw, 22px) !important; }
+.usps2__stats { margin-top: clamp(24px, 2.6vw, 36px); gap: clamp(24px, 2.4vw, 34px); }
+.usps2__stats dt { font-size: 13px; }
+.usps2__stats dd { margin-top: 6px; gap: 6px; }
+.usps2__stats strong { font-size: clamp(28px, 2.6vw, 38px); }
+.usps2__stats span { font-size: 14px; }
+.usps2__link { margin-top: clamp(32px, 3.6vw, 48px); font-size: 16px; }
+@media (max-width: 640px) {
+	.usps2__col + .usps2__col { margin-top: 36px; padding-top: 36px; }
+}
