@@ -1976,3 +1976,49 @@ html, body { overflow-x: clip; }
 /* ---------- 35. Split-opbouw: navigatiebalk doorzichtig (zelfde achtergrond als de pagina), enkel effen bij open megamenu ---------- */
 [data-layout="split"] .nav { background: transparent; }
 [data-layout="split"] .hero.is-mega .nav { background: var(--paper); }
+
+/* ---------- 36. Productpagina: collage van drie foto's in de hero (hoge foto links, twee kleinere rechts) ---------- */
+[data-layout="split"] .hero--sub > .hero__collage {
+	grid-column: 2; grid-row: 2; align-self: center; justify-self: end;
+	display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); grid-template-rows: 1fr 1fr; gap: 12px;
+	width: clamp(360px, 40vw, 600px); aspect-ratio: 6 / 5;
+	margin: clamp(32px, 4vw, 56px) var(--gutter) clamp(32px, 4vw, 56px) 0;
+}
+.hero__collage-item { position: relative; display: block; overflow: hidden; border-radius: var(--radius); background: var(--paper); }
+.hero__collage-item--groot { grid-row: span 2; }
+.hero__collage-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 960px) {
+	[data-layout="split"] .hero--sub > .hero__collage { grid-column: 1; grid-row: 3; justify-self: stretch; width: auto; aspect-ratio: 4 / 3; gap: 8px; margin: 0 var(--gutter) 28px; }
+}
+
+/* ---------- 37. Lettergroottes in lijn met het gemiddelde op Mobbin (huisstijl) ----------
+   broodtekst 16px, sectietitels 32–36px, kleinere titels 18px, sub-navigatie 15px, FAQ 17px, footer 15px. H1 blijft. */
+html[data-theme="huisstijl"] body { font-size: 16px; }
+[data-theme="huisstijl"] .nav__menu a, [data-theme="huisstijl"] .nav__trigger { font-size: 15px; }
+[data-theme="huisstijl"] .hero__sub { font-size: clamp(16px, 1.25vw, 18px); }
+/* sectietitels */
+.op .h2, .op__cta .h2 { font-size: clamp(26px, 2.5vw, 36px); line-height: 1.15; }
+.op__head .h2 { margin-top: 8px; }
+.op__head { margin-bottom: clamp(28px, 3.2vw, 44px); }
+.usps2__title { font-size: clamp(28px, 3.1vw, 44px) !important; }
+.mpx-teaser__title { font-size: clamp(24px, 2.3vw, 32px) !important; }
+/* kleinere titels */
+.types__title { font-size: 18px; }
+.flow__list h3 { font-size: 18px; }
+.later__txt p { font-size: 16px; }
+/* sub-navigatie en vragen */
+.subnav__links a { font-size: 15px; }
+.subnav__title { font-size: 15px; }
+.faq__item summary { font-size: 17px; min-height: 58px; }
+.faq__item p { font-size: 16px; }
+/* footer */
+.sfoot__brand p { font-size: 15px; }
+.sfoot__list a, .sfoot__col p { font-size: 15px; }
+.sfoot__route { font-size: 14px; }
+.sfoot__label { font-size: 13px; }
+/* gsm: duidelijk verschil tussen H1 en sectietitels */
+@media (max-width: 960px) {
+	.op .h2, .op__cta .h2 { font-size: clamp(24px, 6.4vw, 26px); }
+	.usps2__title { font-size: clamp(26px, 7vw, 30px) !important; }
+	.faq__item summary { font-size: 16px; }
+}
