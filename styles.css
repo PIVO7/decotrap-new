@@ -1511,3 +1511,126 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 
 /* ---------- 22. Hover in het menu: duidelijker lijn onder het item (ook bij Trap-o-theek en Over ons) ---------- */
 .nav__ink { height: 3px; border-radius: 2px; }
+
+/* ---------- 23. Productpagina: multiplex ondertrap (multiplex-ondertrap.html) ---------- */
+/* hero: zelfde split-opbouw als de homepagina, maar niet schermvullend */
+.hero.hero--sub { min-height: clamp(560px, 82svh, 820px); }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+.crumbs a { color: inherit; text-decoration: none; }
+@media (hover: hover) { .crumbs a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; } }
+.crumbs [aria-current] { color: var(--ink); }
+
+.op__section { padding: clamp(72px, 8vw, 128px) var(--gutter); }
+.op__section + .op__section { padding-top: 0; }
+.op__head { max-width: 760px; margin-bottom: clamp(32px, 4vw, 56px); }
+.op__head .h2 { margin-top: 12px; }
+.op .h2 { font-size: clamp(30px, 3.2vw, 44px); line-height: 1.12; }
+.op p { color: var(--text); }
+.op__link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; font-weight: 700; color: var(--ink) !important; text-decoration: none; border-bottom: 2px solid var(--brand); }
+
+/* troeven: acht rustige kaarten met het trapje */
+.usps__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.usps__item { padding: 28px 24px; background: var(--paper); border-radius: var(--radius); }
+.usps__item .mark { width: 22px; height: 22px; }
+.usps__item h3 { margin-top: 18px; font-size: 19px; line-height: 1.25; }
+.usps__item p { margin-top: 8px; font-size: 15px; line-height: 1.55; }
+
+/* nu een werftrap, later je eindtrap */
+.later { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.later__img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
+.later__txt { max-width: 560px; display: flex; flex-direction: column; gap: 16px; }
+.later__txt .h2 { margin-top: -4px; }
+.later__txt p { font-size: 17px; line-height: 1.65; }
+
+/* traptypes */
+.types__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.types__card { display: block; color: var(--ink); text-decoration: none; }
+.types__card img { width: 100%; aspect-ratio: 72 / 52; object-fit: cover; border-radius: var(--radius); transition: transform 500ms var(--ease); }
+.types__card picture { display: block; overflow: hidden; border-radius: var(--radius); }
+.types__body { display: flex; flex-direction: column; gap: 6px; padding-top: 16px; }
+.types__title { font-size: 21px; font-weight: 700; }
+.types__link { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-size: 15px; color: var(--text); border-bottom: 1px solid transparent; transition: border-color 200ms var(--ease), color 200ms var(--ease); }
+@media (hover: hover) {
+	.types__card:hover img { transform: scale(1.03); }
+	.types__card:hover .types__link { color: var(--ink); border-bottom-color: var(--brand); }
+}
+
+/* realisaties: raster met twee grote foto's, klik om groot te bekijken */
+.gallery__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(160px, 15vw, 240px); grid-auto-flow: dense; gap: 12px; }
+.gallery__item a { display: block; height: 100%; overflow: hidden; border-radius: var(--radius); cursor: zoom-in; }
+.gallery__item picture, .gallery__item img { display: block; width: 100%; height: 100%; }
+.gallery__item img { object-fit: cover; transition: transform 500ms var(--ease); }
+.gallery__item--groot { grid-column: span 2; grid-row: span 2; }
+@media (hover: hover) { .gallery__item a:hover img { transform: scale(1.04); } }
+
+/* zo verloopt het */
+.flow__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: none; }
+.flow__list li { padding-top: 24px; border-top: 2px solid var(--line); }
+.flow__nr { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: var(--brand); color: #FFFFFF; font-weight: 700; }
+.flow__list h3 { margin-top: 16px; font-size: 19px; }
+.flow__list p { margin-top: 8px; font-size: 15px; line-height: 1.55; }
+
+/* veelgestelde vragen */
+.faq__list { max-width: 880px; border-top: 1px solid var(--line); }
+.faq__item { border-bottom: 1px solid var(--line); }
+.faq__item summary { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 64px; padding: 16px 0; font-size: 18px; font-weight: 700; cursor: pointer; list-style: none; }
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__icon { position: relative; flex: none; width: 14px; height: 14px; }
+.faq__icon::before, .faq__icon::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--ink); transition: transform 250ms var(--ease); }
+.faq__icon::after { transform: rotate(90deg); }
+.faq__item[open] .faq__icon::after { transform: rotate(0deg); }
+.faq__item p { padding: 0 0 24px; max-width: 720px; font-size: 16px; line-height: 1.65; }
+.faq__item summary:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
+
+/* afsluitende actie */
+.op__cta { margin: 0 var(--gutter) clamp(72px, 8vw, 128px); padding: clamp(48px, 6vw, 88px) clamp(24px, 5vw, 80px); border-radius: var(--radius); background: var(--deep); color: #FFFFFF; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.op__cta p { max-width: 560px; color: rgb(255 255 255 / 0.75); }
+.op__cta .hero__actions { justify-content: center; margin-top: 8px; }
+
+/* foto groot bekijken */
+.lightbox { width: auto; max-width: 94vw; max-height: 92svh; padding: 0; border: 0; background: transparent; overflow: visible; }
+.lightbox::backdrop { background: rgb(20 22 22 / 0.88); }
+.lightbox img { display: block; width: auto; max-width: 100%; height: auto; max-height: 86svh; border-radius: var(--radius); } /* nooit groter dan de foto zelf */
+.lightbox button { position: absolute; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.92); color: var(--ink); cursor: pointer; }
+.lightbox__close { top: -60px; right: 0; }
+.lightbox__prev { left: -64px; top: 50%; transform: translateY(-50%); }
+.lightbox__next { right: -64px; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 1100px) {
+	.usps__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.lightbox__prev { left: 8px; } .lightbox__next { right: 8px; }
+}
+@media (max-width: 960px) {
+	.hero.hero--sub { min-height: 0; }
+	[data-layout="split"] .hero--sub > picture { min-height: 0; aspect-ratio: 4 / 3; }
+	.later { grid-template-columns: minmax(0, 1fr); }
+	.later__img img { aspect-ratio: 4 / 3; }
+	.types__list { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+	.gallery__list { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 42vw; gap: 8px; }
+	.flow__list { grid-template-columns: minmax(0, 1fr); gap: 0; }
+	.flow__list li { padding: 24px 0; }
+	.op__cta { margin-inline: 0; border-radius: 0; text-align: left; align-items: flex-start; }
+	.op__cta .hero__actions { justify-content: flex-start; }
+}
+@media (max-width: 560px) {
+	.usps__list { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+	.usps__item { padding: 22px 20px; display: grid; grid-template-columns: 22px 1fr; column-gap: 14px; }
+	.usps__item h3 { margin-top: 0; font-size: 17px; }
+	.usps__item p { grid-column: 2; margin-top: 4px; }
+	.faq__item summary { font-size: 16px; }
+}
+.op .label, .op__cta .label { font-size: 15px; letter-spacing: 0; text-transform: none; } /* labels op de productpagina in gewone letters */
+/* vaste knoppenbalk op gsm: 'Afspraak maken' op één regel en in normaal gewicht, zoals de outline-knoppen */
+[data-theme="huisstijl"] .mbar .btn { white-space: nowrap; font-size: 15px; letter-spacing: 0; text-transform: none; }
+[data-theme="huisstijl"] .mbar__bezoek { font-weight: 400; }
+@media (max-width: 960px) {
+	/* donkere actie sluit naadloos aan op de (even donkere) footer, met een lijn ertussen */
+	.op__cta { margin-bottom: 0; border-bottom: 1px solid rgb(255 255 255 / 0.12); }
+	/* traptypes compact: foto naast de tekst */
+	.types__list { gap: 16px; }
+	.types__card { display: grid; grid-template-columns: 132px 1fr; gap: 16px; align-items: center; }
+	.types__card img { aspect-ratio: 4 / 3; }
+	.types__body { padding-top: 0; }
+	.types__title { font-size: 18px; }
+}
+.gallery__item--breed { grid-column: span 2; } /* twee brede tegels, zodat het raster netjes sluit */

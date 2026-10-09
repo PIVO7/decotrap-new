@@ -43,12 +43,12 @@
 
 	// Opbouw van de hero (enkel preview): foto over het hele scherm, of tekst links en foto rechts met de navigatie apart erboven
 	var layoutButtons = document.querySelectorAll('[data-set-layout]');
-	function setLayout(layout) {
+	function setLayout(layout, remember) {
 		root.dataset.layout = layout;
 		layoutButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setLayout === layout)); });
-		try { localStorage.setItem('decotrap-layout', layout); } catch (e) {}
+		if (remember) { try { localStorage.setItem('decotrap-layout', layout); } catch (e) {} } // enkel een echte keuze onthouden, niet een subpagina
 	}
-	layoutButtons.forEach(function (b) { b.addEventListener('click', function () { setLayout(b.dataset.setLayout); }); });
+	layoutButtons.forEach(function (b) { b.addEventListener('click', function () { setLayout(b.dataset.setLayout, true); }); });
 	setLayout(root.dataset.layout === 'split' ? 'split' : 'foto');
 
 
