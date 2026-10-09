@@ -13,3 +13,13 @@
 	}, { rootMargin: '-40% 0px -55% 0px' });
 	sections.forEach(function (s) { io.observe(s); });
 })();
+
+// Knop in de sub-navigatie pas tonen als de hero uit beeld is (anders staat 'Gratis offerte' drie keer op één scherm)
+(function () {
+	var subnav = document.querySelector('.subnav');
+	var hero = document.querySelector('.hero');
+	if (!subnav || !hero || !('IntersectionObserver' in window)) { if (subnav) subnav.classList.add('is-stuck'); return; }
+	new IntersectionObserver(function (entries) {
+		subnav.classList.toggle('is-stuck', !entries[0].isIntersecting);
+	}, { threshold: 0 }).observe(hero);
+})();
