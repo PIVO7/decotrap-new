@@ -1972,3 +1972,7 @@ html, body { overflow-x: clip; }
 		margin: 0 var(--gutter) 28px;
 	}
 }
+
+/* ---------- 35. Split-opbouw: navigatiebalk doorzichtig (zelfde achtergrond als de pagina), enkel effen bij open megamenu ---------- */
+[data-layout="split"] .nav { background: transparent; }
+[data-layout="split"] .hero.is-mega .nav { background: var(--paper); }
