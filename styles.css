@@ -1445,28 +1445,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 
  
  
- 
-
-/* ---------- 27. Realisaties als parallax-slider (slider.js, naar 'Parallax Image Slider' van Osmo Supply) ---------- */
-.gallery__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; max-width: none; }
-.slider-arrows { display: flex; gap: 10px; flex: none; }
-.slider-arrow { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); cursor: pointer; transition: background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease); }
-@media (hover: hover) { .slider-arrow:hover { background: var(--ink); color: #FFFFFF; border-color: var(--ink); } }
-.slider-arrow:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
-
-/* slider loopt door tot aan de rechterrand van het scherm */
-.parallax-slider__group { width: calc(100% + var(--gutter)); margin-right: calc(-1 * var(--gutter)); }
-.parallax-slider__collection { width: 100%; }
-.parallax-slider__list { width: 100%; display: flex; overflow: hidden; cursor: grab; }
-.parallax-slider__list:active { cursor: grabbing; }
-.parallax-slider__item { flex: none; padding-right: 16px; position: relative; }
-.parallax-slider__item-inner { aspect-ratio: 3 / 2; width: clamp(300px, 36vw, 560px); border-radius: var(--radius); position: relative; overflow: clip; background: var(--paper); }
-.parallax-slider__item-visual { will-change: transform; position: absolute; inset: 0; width: 100%; height: 100%; }
-.parallax-slider__item-img { position: absolute; left: -15%; width: 130%; max-width: none; height: 100%; object-fit: cover; -webkit-user-select: none; user-select: none; }
-@media (max-width: 767px) {
-	.parallax-slider__item { padding-right: 10px; }
-	.parallax-slider__item-inner { width: 78vw; }
-	.slider-arrow { width: 44px; height: 44px; }
 }
 
 /* ---------- 28. Footer (compact): merk en acties boven, vier kolommen, juridisch onderaan ---------- */
@@ -1630,10 +1608,6 @@ html, body { overflow-x: clip; }
 	
 	
 }
-/* realisaties zonder parallax: foto vult gewoon zijn kader; pijltjes onder de slider */
-.parallax-slider__item-img { left: 0; width: 100%; }
-.parallax-slider__item-visual { will-change: auto; transform: none !important; }
-.slider-arrows--onder { margin-top: 24px; }
 /* voorbeeld van het herbruikbare blok op de multiplex-pagina, met titel erboven (enkel om te tonen) */
 .demo-blok { margin: 0 var(--gutter) clamp(64px, 7vw, 112px); padding-top: clamp(40px, 5vw, 64px); border-top: 2px dashed var(--line); }
 .demo-blok__head { max-width: 720px; margin-bottom: 20px; }
@@ -1813,10 +1787,10 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 }
 /* pijltjes helemaal links */
 .steps3__arrows { display: flex; flex-direction: column; gap: 12px; }
-.steps3__arrow { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.1); color: #FFFFFF; cursor: pointer; transition: background-color 200ms var(--ease), opacity 200ms var(--ease); }
+.steps3__arrow { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgb(255 255 255 / 0.3); border-radius: var(--radius); background: transparent; color: #FFFFFF; cursor: pointer; transition: background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease), opacity 200ms var(--ease); }
 .steps3__arrow svg { width: 16px; height: 16px; }
-.steps3__arrow:disabled { opacity: 0.35; cursor: default; }
-@media (hover: hover) { .steps3__arrow:not(:disabled):hover { background: rgb(255 255 255 / 0.2); } }
+.steps3__arrow:disabled { opacity: 0.4; cursor: default; }
+@media (hover: hover) { .steps3__arrow:not(:disabled):hover { background: #FFFFFF; border-color: #FFFFFF; color: var(--ink); } }
 .steps3__arrow:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 /* bubbels */
 .steps3__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -1824,21 +1798,21 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 .steps3__pill {
 	interpolate-size: allow-keywords;
 	display: flex; align-items: center; gap: 12px; width: fit-content; max-width: 100%;
-	padding: 14px 24px 14px 16px; border: 0; border-radius: 28px; background: rgb(255 255 255 / 0.1); color: #FFFFFF;
+	padding: 14px 24px 14px 16px; border: 1px solid rgb(255 255 255 / 0.16); border-radius: var(--radius); background: rgb(255 255 255 / 0.06); color: #FFFFFF;
 	font: inherit; font-size: 17px; text-align: left; cursor: pointer;
-	transition: width 450ms cubic-bezier(0.22, 1, 0.36, 1), padding 450ms cubic-bezier(0.22, 1, 0.36, 1), background-color 250ms var(--ease);
+	transition: width 450ms cubic-bezier(0.22, 1, 0.36, 1), padding 450ms cubic-bezier(0.22, 1, 0.36, 1), background-color 250ms var(--ease), color 250ms var(--ease), border-color 250ms var(--ease);
 }
-@media (hover: hover) { .steps3__pill:not(.is-active):hover { background: rgb(255 255 255 / 0.18); } }
+@media (hover: hover) { .steps3__pill:not(.is-active):hover { background: rgb(255 255 255 / 0.12); border-color: rgb(255 255 255 / 0.32); } }
 .steps3__pill:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
-.steps3__icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border: 1.5px solid currentColor; border-radius: 999px; }
+.steps3__icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: var(--radius); background: var(--brand); color: var(--ink); }
 .steps3__icon svg { width: 14px; height: 14px; }
 .steps3__label { font-weight: 700; white-space: nowrap; }
 /* uitleg: verborgen tot de bubbel open is */
 .steps3__text { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms var(--ease); }
-.steps3__text > span { overflow: hidden; font-size: 16px; line-height: 1.55; color: rgb(255 255 255 / 0.78); }
-.steps3__text strong { color: #FFFFFF; font-weight: 700; }
+.steps3__text > span { overflow: hidden; font-size: 16px; line-height: 1.55; color: color-mix(in srgb, var(--ink) 82%, #FFFFFF); }
+.steps3__text strong { color: var(--ink); font-weight: 700; }
 /* open bubbel: groter, uitleg in plaats van titel */
-.steps3__pill.is-active { width: 100%; max-width: 460px; padding: 24px 28px; background: rgb(255 255 255 / 0.14); cursor: default; }
+.steps3__pill.is-active { width: 100%; max-width: 460px; padding: 24px 28px; background: #FFFFFF; border-color: #FFFFFF; color: var(--ink); cursor: default; }
 .steps3__pill.is-active .steps3__icon, .steps3__pill.is-active .steps3__label { display: none; }
 .steps3__pill.is-active .steps3__text { grid-template-rows: 1fr; opacity: 1; }
 /* foto rechts */
@@ -1855,4 +1829,88 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	.steps3__pill { font-size: 16px; padding: 12px 20px 12px 12px; }
 	.steps3__pill.is-active { max-width: none; padding: 18px 20px; }
 	.steps3__text > span { font-size: 15px; }
+}
+
+/* ---------- 48. Realisaties: 'Draggable Infinite Slider' van Osmo Supply (gallery.js), in een donker vlak binnen de zijmarges ---------- */
+.slider__section {
+	--sw: clamp(320px, 38vw, 660px); --pad: clamp(32px, 4.5vw, 72px);
+	position: relative; display: flex; align-items: center; min-height: clamp(480px, 36vw, 640px);
+	border-radius: var(--radius); background: var(--deep); color: #FFFFFF; overflow: hidden;
+}
+.slider__main { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.slider__wrap { display: flex; align-items: center; width: 100%; height: 100%; }
+.slider__list { position: relative; display: flex; cursor: grab; touch-action: pan-y; }
+.slider__list:active { cursor: grabbing; }
+.slider__slide { flex: none; position: relative; width: var(--sw); aspect-ratio: 3 / 2; padding-inline: 10px; transition: opacity 400ms; }
+.slider__slide-inner { position: relative; width: 100%; height: 100%; border-radius: var(--radius); overflow: hidden; background: rgb(255 255 255 / 0.06); }
+.slide__img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-select: none; user-select: none; }
+
+/* caption van de actieve foto */
+.slide__caption {
+	position: absolute; top: 14px; left: 14px; z-index: 2; display: flex; align-items: center; gap: 8px;
+	padding: 6px 12px 6px 10px; border-radius: var(--radius); background: rgb(255 255 255 / 0.16);
+	-webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: #FFFFFF; white-space: nowrap;
+	opacity: 0; transform: translateX(-25%);
+	transition: transform 525ms cubic-bezier(0.625, 0.05, 0, 1), opacity 525ms cubic-bezier(0.625, 0.05, 0, 1);
+}
+.slide__caption-dot { flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--brand); }
+.slider__section .slide__caption-label { color: #FFFFFF; margin: 0; font-size: 13px; line-height: 1.5; }
+[data-slider="slide"] { opacity: 0.2; }
+[data-slider="slide"].active { opacity: 1; }
+[data-slider="slide"].active .slide__caption { opacity: 1; transform: none; transition-delay: 300ms; }
+
+/* links: titel, teller en pijltjes, over de eerste (gedimde) foto */
+.slider__overlay {
+	position: absolute; inset: 0 auto 0 0; z-index: 2; display: flex; width: var(--sw); padding: var(--pad);
+	background-image: linear-gradient(90deg, var(--deep) 85%, color-mix(in srgb, var(--deep) 0%, transparent));
+}
+.slider__overlay-inner { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 32px; width: 100%; }
+.slider__overlay-head .label { color: rgb(255 255 255 / 0.6); }
+.slider__overlay-head .h2 { color: #FFFFFF; margin-top: 8px; }
+.slider__overlay-count { display: flex; align-items: center; gap: 0.2em; font-size: clamp(48px, 4.6vw, 72px); line-height: 1; }
+.slider__count-col { height: 1em; overflow: hidden; }
+.slider__section .slider__count-heading { width: 2ch; margin: 0; color: #FFFFFF; font-size: 1em; font-weight: 400; line-height: 1; font-variant-numeric: tabular-nums; }
+.slider__count-divider { width: 2px; height: 0.75em; background: rgb(255 255 255 / 0.5); transform: rotate(15deg); }
+
+/* pijltjes met hoekjes */
+.slider__overlay-nav { display: flex; gap: 20px; }
+.slider__btn {
+	position: relative; display: flex; justify-content: center; align-items: center; width: 56px; height: 56px; padding: 0;
+	border: 1px solid rgb(255 255 255 / 0.2); border-radius: var(--radius); background: transparent; color: #FFFFFF; font: inherit; cursor: pointer;
+}
+.slider__btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+.slider__btn-arrow { flex: none; width: 17px; height: 12px; }
+.slider__btn-arrow.next { transform: rotate(180deg); }
+.slider__btn-overlay { position: absolute; inset: -1px; z-index: 2; pointer-events: none; }
+.slider__btn-overlay-corner { width: 12px; height: 12px; border-top: 1px solid #FFFFFF; border-left: 1px solid #FFFFFF; border-top-left-radius: var(--radius); }
+.slider__btn-overlay-corner.top-right { position: absolute; inset: 0 0 auto auto; transform: rotate(90deg); }
+.slider__btn-overlay-corner.bottom-right { position: absolute; inset: auto 0 0 auto; transform: rotate(180deg); }
+.slider__btn-overlay-corner.bottom-left { position: absolute; inset: auto auto 0 0; transform: rotate(-90deg); }
+.slider__btn, .slider__btn-overlay { transition: transform 475ms cubic-bezier(0.625, 0.05, 0, 1), opacity 475ms cubic-bezier(0.625, 0.05, 0, 1); }
+@media (hover: hover) {
+	.slider__btn:hover .slider__btn-overlay { transform: scale(1.4); }
+	.slider__overlay-nav:hover:has(.slider__btn:hover) .slider__btn { opacity: 0.4; }
+	.slider__btn:hover { transform: scale(0.85); opacity: 1 !important; }
+}
+
+/* tablet en gsm: tekst boven, slider eronder */
+@media (max-width: 991px) {
+	.slider__section { display: block; min-height: 0; --pad: clamp(24px, 5vw, 40px); }
+	.slider__main { position: relative; padding-bottom: var(--pad); }
+	.slider__wrap { padding-left: calc(var(--pad) - 10px); }
+	.slider__slide { width: 75vw; }
+	.slider__overlay { position: relative; inset: auto; width: 100%; padding-bottom: 24px; background: none; }
+	.slider__overlay-inner { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; }
+	.slider__overlay-head { grid-column: 1 / -1; }
+	.slider__overlay-count { font-size: 44px; }
+}
+@media (max-width: 479px) {
+	.slider__slide { width: 80vw; padding-inline: 6px; }
+	.slider__wrap { padding-left: calc(var(--pad) - 6px); }
+	.slider__btn { width: 48px; height: 48px; }
+	.slider__overlay-nav { gap: 12px; }
+	.slide__caption { top: 8px; left: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.slide__caption, .slider__btn, .slider__btn-overlay, .slider__slide { transition: none; }
 }
