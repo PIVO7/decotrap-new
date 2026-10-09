@@ -1634,3 +1634,62 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.types__title { font-size: 18px; }
 }
 .gallery__item--breed { grid-column: span 2; } /* twee brede tegels, zodat het raster netjes sluit */
+
+/* ---------- 24. Productpagina: moderne componenten (naar voorbeelden op Mobbin), zelfde tokens ---------- */
+/* hero: drie hoogtepunten onder de knoppen */
+.highlights { list-style: none; margin: 12px 0 0; padding: 20px 0 0; display: flex; flex-wrap: wrap; gap: 12px 28px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink); }
+.highlights li { display: inline-flex; align-items: center; gap: 10px; }
+.highlights .mark { width: 14px; height: 14px; }
+
+/* sticky sub-navigatie met ankers en de hoofdactie */
+.subnav { position: sticky; top: 0; z-index: 22; /* onder een open megamenu (25), boven de inhoud */ background: rgb(var(--bg-rgb) / 0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.subnav__inner { display: flex; align-items: center; gap: 32px; min-height: 64px; padding: 0 var(--gutter); }
+.subnav__title { flex: none; font-weight: 700; }
+.subnav__links { list-style: none; margin: 0; padding: 0; display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; }
+.subnav__links::-webkit-scrollbar { display: none; }
+.subnav__links a { display: inline-flex; align-items: center; min-height: 64px; color: var(--text); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 200ms var(--ease), border-color 200ms var(--ease); }
+.subnav__links a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--brand); }
+@media (hover: hover) { .subnav__links a:hover { color: var(--ink); } }
+.subnav__cta { margin-left: auto; flex: none; }
+[id="troeven"], [id="traptypes"], [id="realisaties"], [id="werkwijze"], [id="vragen"] { scroll-margin-top: 64px; }
+
+/* troeven: open raster met dunne lijnen in plaats van losse kaarten */
+.usps__list { gap: 0; border-top: 1px solid var(--line); }
+.usps__item { padding: 28px 28px 32px 0; background: none; border-radius: 0; border-bottom: 1px solid var(--line); }
+.usps__item:not(:nth-child(4n + 1)) { padding-left: 28px; border-left: 1px solid var(--line); }
+
+/* stappen als fotokaarten */
+.flow__list li.flow__card { position: relative; padding: 0; border-top: 0; }
+.flow__card picture { display: block; overflow: hidden; border-radius: var(--radius); }
+.flow__card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.flow__card .flow__nr { position: absolute; top: 14px; left: 14px; }
+.flow__card h3 { margin-top: 20px; }
+
+/* vragen in twee kolommen: titel en contact links (blijft staan), vragen rechts */
+.faq { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.faq__aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 12px; }
+.faq__aside .h2 { margin-bottom: 4px; }
+.faq__contact { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.faq__contact a { display: inline-flex; align-items: baseline; gap: 10px; min-height: 36px; font-weight: 700; color: var(--ink); text-decoration: none; }
+.faq__contact span { font-weight: 400; font-size: 14px; color: var(--muted); }
+@media (hover: hover) { .faq__contact a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--brand); } }
+.faq .faq__list { max-width: none; }
+
+@media (max-width: 1100px) {
+	.usps__item:not(:nth-child(4n + 1)) { padding-left: 0; border-left: 0; }
+	.usps__item:nth-child(2n) { padding-left: 28px; border-left: 1px solid var(--line); }
+}
+@media (max-width: 960px) {
+	.subnav__title, .subnav__cta { display: none; } /* gsm: enkel de ankers; de knoppenbalk onderaan doet de actie */
+	.subnav__inner { min-height: 52px; }
+	.subnav__links { gap: 22px; }
+	.subnav__links a { min-height: 52px; font-size: 15px; }
+	[id="troeven"], [id="traptypes"], [id="realisaties"], [id="werkwijze"], [id="vragen"] { scroll-margin-top: 52px; }
+	.faq { grid-template-columns: minmax(0, 1fr); }
+	.faq__aside { position: static; }
+	.flow__list { gap: 32px; }
+	.flow__list li.flow__card { padding: 0; }
+}
+@media (max-width: 560px) {
+	.usps__item, .usps__item:nth-child(2n) { padding: 20px 0; border-left: 0; }
+}

@@ -259,11 +259,30 @@
 		<h1>Multiplex ondertrap</h1>
 		<p class="hero__sub">Een stevige basis in watervaste multiplex, ter plaatse gemaakt in de ruwbouwfase. Goedkoper dan een betontrap, en meteen bruikbaar als werftrap.</p>
 		<div class="hero__actions"><a class="btn hero__cta" href="https://www.decotrap.be/gratis-offerte/">Gratis offerte</a><a class="btn btn--outline hero__afspraak" href="https://www.decotrap.be/afspraak-maken/">Afspraak maken</a></div>
+		<ul class="highlights" aria-label="In het kort">
+			<li><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Goedkoper dan beton</li>
+			<li><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Watervast</li>
+			<li><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Al in de ruwbouwfase</li>
+		</ul>
 	</div>
 </header>
 
+<nav class="subnav" aria-label="Op deze pagina">
+	<div class="subnav__inner">
+		<span class="subnav__title">Multiplex ondertrap</span>
+		<ul class="subnav__links">
+			<li><a href="#troeven">Troeven</a></li>
+			<li><a href="#traptypes">Traptypes</a></li>
+			<li><a href="#realisaties">Realisaties</a></li>
+			<li><a href="#werkwijze">Werkwijze</a></li>
+			<li><a href="#vragen">Vragen</a></li>
+		</ul>
+		<a class="btn hero__cta subnav__cta" href="https://www.decotrap.be/gratis-offerte/">Gratis offerte</a>
+	</div>
+</nav>
+
 <main class="op">
-	<section class="op__section usps reveal" aria-labelledby="usps-titel">
+	<section class="op__section usps reveal" id="troeven" aria-labelledby="usps-titel">
 		<div class="op__head">
 			<p class="label">Waarom multiplex</p>
 			<h2 class="h2" id="usps-titel">Slim beginnen aan je trap</h2>
@@ -293,7 +312,7 @@
 		</div>
 	</section>
 
-	<section class="op__section types reveal" aria-labelledby="types-titel">
+	<section class="op__section types reveal" id="traptypes" aria-labelledby="types-titel">
 		<div class="op__head">
 			<p class="label">Kan bij deze trappen</p>
 			<h2 class="h2" id="types-titel">Voor een Z-trap, klassieke trap of rechte treden</h2>
@@ -305,7 +324,7 @@
 		</ul>
 	</section>
 
-	<section class="op__section gallery reveal" aria-labelledby="gallery-titel">
+	<section class="op__section gallery reveal" id="realisaties" aria-labelledby="gallery-titel">
 		<div class="op__head">
 			<p class="label">Realisaties</p>
 			<h2 class="h2" id="gallery-titel">Onze multiplex ondertrappen</h2>
@@ -326,22 +345,43 @@
 		</ul>
 	</section>
 
-	<section class="op__section flow reveal" aria-labelledby="flow-titel">
+	<section class="op__section flow reveal" id="werkwijze" aria-labelledby="flow-titel">
 		<div class="op__head">
 			<p class="label">Zo verloopt het</p>
 			<h2 class="h2" id="flow-titel">In drie stappen</h2>
 		</div>
 		<ol class="flow__list">
-			<li><span class="flow__nr">1</span><h3>Gratis offerte</h3><p>Vraag online je offerte aan, of kom langs in een van onze toonzalen.</p></li>
-			<li><span class="flow__nr">2</span><h3>Plaatsing in de ruwbouw</h3><p>Zodra de ruwbouw regendicht is, maken we de ondertrap ter plaatse op maat.</p></li>
-			<li><span class="flow__nr">3</span><h3>Later bekleden</h3><p>Gebruik hem als werftrap en laat hem bij de afwerking bekleden. Of laat hem zo, als keldertrap.</p></li>
+			<li class="flow__card">
+				<picture><source type="image/webp" srcset="img/ondertrap/realisatie-03-640.webp"><img src="img/ondertrap/realisatie-03-640.jpg" alt="" width="640" height="426" loading="lazy" decoding="async"></picture>
+				<span class="flow__nr">1</span>
+				<h3>Gratis offerte</h3>
+				<p>Vraag online je offerte aan, of kom langs in een van onze toonzalen.</p>
+			</li>
+			<li class="flow__card">
+				<picture><source type="image/webp" srcset="img/ondertrap/realisatie-02-640.webp"><img src="img/ondertrap/realisatie-02-640.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture>
+				<span class="flow__nr">2</span>
+				<h3>Plaatsing in de ruwbouw</h3>
+				<p>Zodra de ruwbouw regendicht is, maken we de ondertrap ter plaatse op maat.</p>
+			</li>
+			<li class="flow__card">
+				<picture><source type="image/webp" srcset="img/ondertrap/type-klassieke-trap.webp"><img src="img/ondertrap/type-klassieke-trap.jpg" alt="" width="720" height="520" loading="lazy" decoding="async"></picture>
+				<span class="flow__nr">3</span>
+				<h3>Later bekleden</h3>
+				<p>Gebruik hem als werftrap en laat hem bij de afwerking bekleden. Of laat hem zo, als keldertrap.</p>
+			</li>
 		</ol>
 	</section>
 
-	<section class="op__section faq reveal" aria-labelledby="faq-titel">
-		<div class="op__head">
+	<section class="op__section faq reveal" id="vragen" aria-labelledby="faq-titel">
+		<div class="faq__aside">
 			<p class="label">Veelgestelde vragen</p>
 			<h2 class="h2" id="faq-titel">Alles over de multiplex ondertrap</h2>
+			<p>Staat je vraag er niet bij? Bel of mail ons gerust.</p>
+			<ul class="faq__contact">
+				<li><a href="tel:+3211360460">011 360 460 <span>Heusden-Zolder</span></a></li>
+				<li><a href="tel:+3292961090">09 296 10 90 <span>Wetteren</span></a></li>
+				<li><a href="mailto:info@decotrap.be">info@decotrap.be</a></li>
+			</ul>
 		</div>
 		<div class="faq__list">
 			<details class="faq__item"><summary>Wat is een multiplex ondertrap?<span class="faq__icon" aria-hidden="true"></span></summary><p>Een trap met treden en tegentreden in watervaste multiplex, die we ter plaatse op maat maken. Het is de ruwe basis van je trap: je gebruikt hem meteen, en kan hem later laten bekleden.</p></details>
