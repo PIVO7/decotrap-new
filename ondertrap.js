@@ -33,12 +33,29 @@
 	var arrows = Array.prototype.slice.call(root.querySelectorAll('.steps3__arrow'));
 	var index = 0;
 	function show(i) {
+		var prev = index;
 		index = Math.max(0, Math.min(pills.length - 1, i));
+		// gsm: de nieuwe kaart schuift in vanuit de richting waarin je navigeert
+		if (index !== prev) {
+			var li = pills[index].parentNode;
+			li.classList.remove('is-in-fwd', 'is-in-back');
+			void li.offsetWidth;
+			li.classList.add(index > prev ? 'is-in-fwd' : 'is-in-back');
+		}
 		pills.forEach(function (p, k) { var on = k === index; p.classList.toggle('is-active', on); p.setAttribute('aria-expanded', String(on)); });
 		shots.forEach(function (s, k) { s.classList.toggle('is-active', k === index); });
 		arrows.forEach(function (a) { a.disabled = (a.dataset.dir === '-1' && index === 0) || (a.dataset.dir === '1' && index === pills.length - 1); });
 	}
 	pills.forEach(function (p, k) { p.addEventListener('click', function () { show(k); }); });
 	arrows.forEach(function (a) { a.addEventListener('click', function () { show(index + Number(a.dataset.dir)); }); });
+	// horizontaal swipen over foto en kaart
+	var box = root.querySelector('.steps3__box'), x0 = null, y0 = 0;
+	box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+	box.addEventListener('touchend', function (e) {
+		if (x0 === null) return;
+		var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+		x0 = null;
+		if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(index + (dx < 0 ? 1 : -1));
+	}, { passive: true });
 	show(0);
 })();
