@@ -1778,3 +1778,25 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { min-height: 48px; padding-
 	.steps2__list { margin-top: 24px; }
 }
 .steps2.is-paused .steps2__item.is-active .steps2__bar { animation-play-state: paused; }
+
+/* ---------- 43. Mobiel menu verfijnd (naar Open, Instacart en de mobiele menu's van Apple/Stripe) ----------
+   Compacte bovenbalk, extra links op één rij, knoppen vast onderaan naast elkaar. */
+@media (max-width: 960px) {
+	/* logo even groot in de paginabalk als in het menu, zodat er bij openen niets verspringt */
+	.nav .nav__logo img, .mnav__bar img { width: auto; height: 48px; }
+}
+.mnav__bar { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.mnav__close { width: 44px; height: 44px; }
+.mnav__root { margin-top: 8px; border-top: 0; }
+/* hoofdmenu: knoppen onderaan vast, extra links er net boven */
+.mnav [data-view="root"] { display: flex; flex-direction: column; min-height: calc(100svh - 77px); }
+.mnav [data-view="root"] > .mnav__meta { order: 2; margin-top: auto; padding-top: 28px; flex-direction: row; flex-wrap: wrap; gap: 0 22px; }
+.mnav__meta a { font-size: 15px; color: var(--muted); }
+.mnav [data-view="root"] > .mnav__ctas { order: 3; position: sticky; bottom: 0; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px calc(-1 * var(--gutter)) -40px; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 1px solid var(--line); }
+html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; padding-left: 12px; padding-right: 12px; }
+.mnav { padding-bottom: 0; }
+.mnav__view:not([data-view="root"]) { padding-bottom: 40px; }
+.mnav [data-view="root"] { min-height: calc(100svh - 77px); } /* 77px = bovenbalk (14 + 48 + 14 + lijn) */
+.mnav [data-view="root"] > .mnav__ctas { margin-bottom: 0; }
+.mnav [data-view="root"] > .mnav__meta { padding-top: 20px; }
+[data-theme="huisstijl"] .mega-panel__cta { font-weight: 400; } /* zelfde gewicht als de andere knoppen */
