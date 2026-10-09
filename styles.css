@@ -1480,9 +1480,19 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.nav__link:hover { background: #FFFFFF; color: var(--ink); border-color: #FFFFFF; }
 	.hero.is-mega .nav__link:hover, [data-layout="split"] .nav__link:hover { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
 }
-/* logo zoals op decotrap.be: even hoog als de navigatiebalk (92px), zonder ruimte erboven of eronder; menu en knoppen verticaal gecentreerd */
+/* navigatiebalk 92px hoog; logo 64px hoog en verticaal gecentreerd met ruimte erboven en eronder (zonder bovenbalk zoals op decotrap.be oogt een logo tegen de rand afgesneden) */
 @media (min-width: 961px) {
-	.nav, [data-layout="split"] .nav { padding-block: 0; min-height: 92px; }
-	.nav .nav__logo { align-self: stretch; display: flex; }
-	.nav .nav__logo img { width: auto; height: 92px; }
+	.nav, [data-layout="split"] .nav { padding-block: 14px; min-height: 92px; }
+	.nav .nav__logo { display: flex; align-items: center; flex: none; }
+	.nav .nav__logo img { width: auto; height: 64px; }
+	/* menu iets groter en luchtiger, zodat het in evenwicht is met de knoppen */
+	[data-menu="groot"] .nav__menu { gap: 32px; }
+	[data-menu="groot"] .nav__menu a, [data-menu="groot"] .nav__trigger { font-size: 16px; font-weight: 400; }
+	.nav__trigger .chev { width: 11px; height: 11px; opacity: 0.7; }
+}
+/* kleine laptops (tot 1280px): menu iets compacter, zodat logo, menu en knoppen op één regel passen */
+@media (min-width: 961px) and (max-width: 1280px) {
+	[data-menu="groot"] .nav__menu { gap: 20px; }
+	[data-menu="groot"] .nav__menu a, [data-menu="groot"] .nav__trigger { font-size: 14.5px; }
+	.nav .nav__logo img { height: 56px; }
 }
