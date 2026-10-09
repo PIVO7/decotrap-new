@@ -2005,3 +2005,8 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	.mbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.mbar .btn { min-width: 0; padding-inline: 12px; }
 }
+
+/* ---------- 63. Realisaties desktop: titel in de smallere linkerkolom iets kleiner, zodat hij op twee regels past ---------- */
+@media (min-width: 992px) {
+	.slider__overlay-head .h2 { font-size: clamp(24px, 1.9vw, 30px); }
+}
