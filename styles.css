@@ -1976,3 +1976,20 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	.slider__wrap { width: calc(100% + var(--sw) - var(--ow)); margin-left: calc(var(--ow) - var(--sw)); }
 	.slider__overlay-count { font-size: clamp(40px, 3.4vw, 56px); }
 }
+
+/* ---------- 59. Gsm-afwerking: werftrap links uitgelijnd, bredere pijltabs bij de stappen, korte traptype-links ---------- */
+@media (max-width: 760px) {
+	.later__txt { align-items: flex-start; text-align: left; }
+	.later__txt .op__link { align-self: flex-start; }
+}
+@media (max-width: 960px) {
+	.steps3__arrow { width: 36px; }
+	.steps3__list { padding-inline: calc(var(--gutter) + 20px); scroll-padding-inline: calc(var(--gutter) + 20px); }
+}
+@media (max-width: 640px) {
+	.types__link-rest { display: none; }
+}
+
+/* ---------- 60. Voorbeeldblok: duidelijk gemarkeerd als component (enkel ter illustratie voor collega's) ---------- */
+.demo-blok__badge { display: inline-block; margin-bottom: 10px; padding: 4px 10px; border: 1px dashed var(--ink); border-radius: var(--radius); font-size: 13px; color: var(--ink) !important; }
+.demo-blok__text code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; padding: 1px 5px; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--line); }
