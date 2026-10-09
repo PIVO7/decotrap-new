@@ -665,8 +665,8 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 .theme-switch .dot { width: 10px; height: 10px; border-radius: 999px; }
 
 .preview-bar__toggle { display: none; }
-@media (max-width: 1600px) {
-	/* tot 1600px ingeklapt (de balk telt intussen veel opties) achter één knop, zodat de balk de pagina niet bedekt */
+@media (max-width: 960px) {
+	/* op gsm en tablet ingeklapt achter één knop, zodat de balk de pagina niet bedekt */
 	.preview-bar { top: auto !important; bottom: 88px; left: auto; right: 12px; transform: none; flex-direction: column; align-items: flex-end; width: auto; }
 	.preview-bar__toggle { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: rgb(20 20 20 / 0.82); color: #F6F5F1; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 6px 24px rgb(0 0 0 / 0.2); cursor: pointer; order: 2; }
 	.preview-bar .theme-switch { display: none; }
@@ -1365,7 +1365,7 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 @media (max-width: 340px) { .footer__top-link { grid-column: 1; grid-row: 3; justify-self: start; } }
 
 /* ---------- Preview-opties op gsm en tablet: één paneel dat binnen het scherm blijft ---------- */
-@media (max-width: 1600px) {
+@media (max-width: 960px) {
 	.preview-bar { max-width: calc(100vw - 24px); }
 	.preview-bar.is-open {
 		gap: 10px; padding: 12px; border-radius: 22px;
@@ -1411,3 +1411,42 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 [data-page="hero"], [data-page="hero"] body { height: 100%; overflow: hidden; }
 [data-page="hero"] body > main, [data-page="hero"] body > footer, [data-page="hero"] .mbar { display: none !important; }
 [data-page="hero"] .hero { height: 100vh; height: 100svh; }
+
+/* ---------- 16. Gratis offerte zoals op decotrap.be (thema 'huisstijl') ----------
+   Effen logogroen, witte tekst, klein en vet in hoofdletters, 3px hoeken; geen glas-, blur- of schaduweffect en geen pijltje. */
+[data-theme="huisstijl"] :is(.hero__cta, .nav__offerte, .hero.is-mega .nav__offerte, .mbar__offerte, .mnav__ctas .btn--dark) {
+	min-height: 0; padding: 12px 20px; gap: 0;
+	background: var(--brand); color: #FFFFFF; border: 1px solid transparent; border-radius: 3px;
+	-webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; text-shadow: none;
+	font-size: 13.5px; font-weight: 700; line-height: 1.4; letter-spacing: 1px; text-transform: uppercase;
+}
+[data-theme="huisstijl"] :is(.hero__cta, .nav__offerte, .mbar__offerte, .mnav__ctas .btn--dark) .arrow { display: none; }
+@media (hover: hover) {
+	[data-theme="huisstijl"] :is(.hero__cta, .nav__offerte, .hero.is-mega .nav__offerte, .mbar__offerte, .mnav__ctas .btn--dark):hover { background: #A6A800; color: #FFFFFF; border-color: transparent; }
+}
+
+/* ---------- 17. Hero-opbouw 'split' (enkel preview) ----------
+   Navigatie als aparte effen balk bovenaan; daaronder tekst links op de achtergrond en de foto rechts. */
+[data-layout="split"] .hero {
+	display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr);
+	background: var(--bg); color: var(--ink);
+}
+[data-layout="split"] .hero::before { display: none; }
+[data-layout="split"] .nav { grid-column: 1 / -1; grid-row: 1; padding-block: 20px; background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); }
+[data-layout="split"] .logo--licht { display: none; }
+[data-layout="split"] .logo--normaal { display: block; }
+[data-layout="split"] .hero > picture { grid-column: 2; grid-row: 2; position: relative; min-height: 0; }
+[data-layout="split"] .hero__content {
+	grid-column: 1; grid-row: 2; align-self: center; margin: 0; max-width: 680px;
+	padding: 48px clamp(32px, 5vw, 80px) 48px var(--gutter);
+}
+[data-layout="split"] .hero h1, [data-layout="split"] .hero__sub { text-shadow: none; }
+[data-layout="split"] .hero__sub { color: var(--text); }
+[data-layout="split"] .nav__toggle { background: rgb(var(--shade) / 0.06); color: var(--ink); }
+@media (max-width: 960px) {
+	/* gsm: navigatie, tekst en de foto die de rest van het scherm vult */
+	[data-layout="split"] .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
+	[data-layout="split"] .nav { padding-block: 14px; }
+	[data-layout="split"] .hero__content { grid-column: 1; grid-row: 2; padding: 28px var(--gutter) 24px; }
+	[data-layout="split"] .hero > picture { grid-column: 1; grid-row: 3; }
+}

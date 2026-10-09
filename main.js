@@ -41,6 +41,16 @@
 	pageButtons.forEach(function (b) { b.addEventListener('click', function () { setPage(b.dataset.setPage); }); });
 	setPage(root.dataset.page === 'hero' ? 'hero' : 'volledig');
 
+	// Opbouw van de hero (enkel preview): foto over het hele scherm, of tekst links en foto rechts met de navigatie apart erboven
+	var layoutButtons = document.querySelectorAll('[data-set-layout]');
+	function setLayout(layout) {
+		root.dataset.layout = layout;
+		layoutButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setLayout === layout)); });
+		try { localStorage.setItem('decotrap-layout', layout); } catch (e) {}
+	}
+	layoutButtons.forEach(function (b) { b.addEventListener('click', function () { setLayout(b.dataset.setLayout); }); });
+	setLayout(root.dataset.layout === 'split' ? 'split' : 'foto');
+
 
 	// Trap-o-theek-video: speelt enkel als hij in beeld is, pauzeerbaar, niet vanzelf bij beperkte beweging
 	var totVideo = document.querySelector('.tot__video');
