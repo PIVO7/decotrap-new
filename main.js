@@ -562,12 +562,28 @@
 	var mnav = document.getElementById('mnav');
 	var mToggle = document.querySelector('.nav__toggle');
 	var mClose = mnav && mnav.querySelector('.mnav__close');
-	function showView(name, focusEl) {
-		mnav.querySelectorAll('[data-view]').forEach(function (v) { v.hidden = v.dataset.view !== name; });
+	// wisselen tussen hoofdmenu en submenu: oud scherm schuift weg, nieuw schuift binnen (vooruit = naar links, terug = van links)
+	var viewTimer;
+	function showView(name, focusEl, dir) {
+		var views = Array.prototype.slice.call(mnav.querySelectorAll('[data-view]'));
+		var current = views.find(function (v) { return !v.hidden && !v.classList.contains('is-leaving'); });
+		var next = views.find(function (v) { return v.dataset.view === name; });
+		var animate = dir && current && current !== next && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		clearTimeout(viewTimer);
+		views.forEach(function (v) { v.classList.remove('is-leaving', 'is-in-fwd', 'is-in-back', 'is-out-fwd', 'is-out-back'); v.style.top = ''; });
+		if (animate) {
+			current.style.top = current.offsetTop + 'px';
+			current.classList.add('is-leaving', dir === 'back' ? 'is-out-back' : 'is-out-fwd');
+			viewTimer = setTimeout(function () { current.hidden = true; current.classList.remove('is-leaving', 'is-out-fwd', 'is-out-back'); current.style.top = ''; }, 260);
+			views.forEach(function (v) { if (v !== current) v.hidden = v !== next; });
+			next.classList.add(dir === 'back' ? 'is-in-back' : 'is-in-fwd');
+		} else {
+			views.forEach(function (v) { v.hidden = v !== next; });
+		}
 		mnav.querySelectorAll('[data-open-view]').forEach(function (b) { b.setAttribute('aria-expanded', String(b.dataset.openView === name)); });
 		mnav.scrollTop = 0;
 		var target = focusEl || mnav.querySelector('[data-view="' + name + '"] ' + (name === 'root' ? 'button, a' : '[data-back]'));
-		if (target) target.focus();
+		if (target) target.focus({ preventScroll: true });
 	}
 	var mnavCloseTimer;
 	function openMnav() {
@@ -598,10 +614,10 @@
 		mClose.addEventListener('click', closeMnav);
 		mnav.addEventListener('click', function (e) {
 			var opener = e.target.closest('[data-open-view]');
-			if (opener) { showView(opener.dataset.openView); return; }
+			if (opener) { showView(opener.dataset.openView, null, 'fwd'); return; }
 			if (e.target.closest('[data-back]')) {
 				var from = mnav.querySelector('[data-view]:not([hidden])').dataset.view;
-				showView('root', mnav.querySelector('[data-open-view="' + from + '"]'));
+				showView('root', mnav.querySelector('[data-open-view="' + from + '"]'), 'back');
 				return;
 			}
 			if (e.target.closest('a[href^="#"]')) closeMnav();

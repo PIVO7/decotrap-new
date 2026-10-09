@@ -1707,3 +1707,40 @@ html[data-theme="huisstijl"] body { font-size: 16px; }
 .usps2__title { text-align: center; }
 .mega-panel__eyebrow::before { display: none; }
 [data-theme="huisstijl"] .mnav__ctas .btn--outline { font-weight: 400; } /* zelfde gewicht als de andere outline-knoppen */
+
+/* ---------- 39. Mobiel menu: rustiger lettergroottes en klikvlakken van minstens 44px ---------- */
+.mnav__root a, .mnav__root button { font-size: 22px; min-height: 58px; }
+[data-menu="groot"] .mnav .mega__thumbs { gap: 0; }
+[data-menu="groot"] .mnav .mega__thumbs a { display: flex; align-items: center; min-height: 44px; padding: 4px 0; font-size: 18px; }
+.mnav .mega__info { gap: 0; }
+.mnav .mega__info a { display: flex; align-items: center; min-height: 44px; font-size: 16px; }
+.mnav__meta { gap: 0; }
+.mnav__meta a { display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; }
+[data-theme="huisstijl"] .mnav__ctas .btn { min-height: 48px; padding-top: 0; padding-bottom: 0; }
+
+/* ---------- 40. Mobiel menu: overgang tussen hoofdmenu en submenu (richting zoals op iOS) ---------- */
+.mnav__view { animation: none; }
+.mnav__view.is-leaving { position: absolute; left: var(--gutter); right: var(--gutter); pointer-events: none; }
+.mnav__view.is-in-fwd { animation: mnav-view-in-fwd 320ms var(--ease) both; }
+.mnav__view.is-in-back { animation: mnav-view-in-back 320ms var(--ease) both; }
+.mnav__view.is-out-fwd { animation: mnav-view-out-fwd 240ms cubic-bezier(0.4, 0, 1, 1) both; }
+.mnav__view.is-out-back { animation: mnav-view-out-back 240ms cubic-bezier(0.4, 0, 1, 1) both; }
+@keyframes mnav-view-in-fwd { from { opacity: 0; transform: translateX(32px); } }
+@keyframes mnav-view-in-back { from { opacity: 0; transform: translateX(-32px); } }
+@keyframes mnav-view-out-fwd { to { opacity: 0; transform: translateX(-32px); } }
+@keyframes mnav-view-out-back { to { opacity: 0; transform: translateX(32px); } }
+/* items van het nieuwe scherm komen gelaagd binnen */
+.mnav__view.is-in-fwd :is(.mega__thumbs, .mega__info, .mnav__root) > li,
+.mnav__view.is-in-back :is(.mega__thumbs, .mega__info, .mnav__root) > li { animation: mnav-item-in 380ms var(--ease) backwards; animation-delay: calc(80ms + var(--k, 0) * 35ms); }
+@keyframes mnav-item-in { from { opacity: 0; transform: translateY(10px); } }
+:is(.mega__thumbs, .mega__info, .mnav__root) > li:nth-child(2) { --k: 1; }
+:is(.mega__thumbs, .mega__info, .mnav__root) > li:nth-child(3) { --k: 2; }
+:is(.mega__thumbs, .mega__info, .mnav__root) > li:nth-child(4) { --k: 3; }
+:is(.mega__thumbs, .mega__info, .mnav__root) > li:nth-child(5) { --k: 4; }
+:is(.mega__thumbs, .mega__info, .mnav__root) > li:nth-child(6) { --k: 5; }
+:is(.mega__thumbs, .mega__info, .mnav__root) > li:nth-child(n+7) { --k: 6; }
+@media (prefers-reduced-motion: reduce) {
+	.mnav__view.is-in-fwd, .mnav__view.is-in-back, .mnav__view.is-out-fwd, .mnav__view.is-out-back,
+	.mnav__view :is(.mega__thumbs, .mega__info, .mnav__root) > li { animation: none !important; }
+}
+html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { min-height: 48px; padding-top: 0; padding-bottom: 0; } /* beide knoppen in het mobiele menu even hoog */
