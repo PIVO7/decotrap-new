@@ -297,6 +297,15 @@
 			t.addEventListener('mouseleave', function () { clearTimeout(openTimer); suppressHover = false; });
 		}
 	});
+	// muis naar een gewone link in het menu (Trap-o-theek, Over ons): het open paneel sluit, zoals op de meeste sites
+	if (finePointer) {
+		menuEl.querySelectorAll(':scope > li > a').forEach(function (a) {
+			a.addEventListener('mouseenter', function () {
+				clearTimeout(openTimer);
+				if (openName) { clearTimeout(closeTimer); closeTimer = setTimeout(function () { closeMega(false); }, 120); }
+			});
+		});
+	}
 	if (finePointer) {
 		document.querySelectorAll('.mega, .nav').forEach(function (el) {
 			el.addEventListener('mouseenter', function () { clearTimeout(closeTimer); });

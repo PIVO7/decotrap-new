@@ -1508,3 +1508,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	[data-theme="huisstijl"][data-layout="split"] .hero h1 { font-size: min(74px, calc(60px + (100vw - 1440px) * 0.0125)); }
 	[data-theme="huisstijl"] .hero__sub { font-size: min(21px, calc(19px + (100vw - 1440px) * 0.002)); max-width: 600px; }
 }
+
+/* ---------- 22. Hover in het menu: duidelijker lijn onder het item (ook bij Trap-o-theek en Over ons) ---------- */
+.nav__ink { height: 3px; border-radius: 2px; }
