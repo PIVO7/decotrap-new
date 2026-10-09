@@ -1693,3 +1693,5 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 @media (max-width: 560px) {
 	.usps__item, .usps__item:nth-child(2n) { padding: 20px 0; border-left: 0; }
 }
+/* sub-navigatie op kleine laptops: zonder titel, zodat alle ankers en de knop passen */
+@media (min-width: 961px) and (max-width: 1280px) { .subnav__title { display: none; } }
