@@ -1944,3 +1944,7 @@ html, body { overflow-x: clip; }
 	.flow__list h3 { font-size: 17px; }
 	.flow__list p { font-size: 14px; }
 }
+/* realisaties zonder parallax: foto vult gewoon zijn kader; pijltjes onder de slider */
+.parallax-slider__item-img { left: 0; width: 100%; }
+.parallax-slider__item-visual { will-change: auto; transform: none !important; }
+.slider-arrows--onder { margin-top: 24px; }
