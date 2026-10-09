@@ -31,6 +31,16 @@
 	heroButtons.forEach(function (b) { b.addEventListener('click', function () { setHero(b.dataset.setHero); }); });
 	setHero(root.dataset.hero || 'zon');
 
+	// Enkel de hero tonen, zonder verder te scrollen (enkel preview; ook via ?pagina=hero)
+	var pageButtons = document.querySelectorAll('[data-set-page]');
+	function setPage(page) {
+		if (page === 'hero') { root.dataset.page = 'hero'; window.scrollTo(0, 0); } else { delete root.dataset.page; }
+		pageButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setPage === page)); });
+		try { localStorage.setItem('decotrap-pagina', page); } catch (e) {}
+	}
+	pageButtons.forEach(function (b) { b.addEventListener('click', function () { setPage(b.dataset.setPage); }); });
+	setPage(root.dataset.page === 'hero' ? 'hero' : 'volledig');
+
 
 	// Trap-o-theek-video: speelt enkel als hij in beeld is, pauzeerbaar, niet vanzelf bij beperkte beweging
 	var totVideo = document.querySelector('.tot__video');

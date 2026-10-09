@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
-	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime' || t === 'huisstijl') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal' || f === 'inkom') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2' || m === 'tekst') document.documentElement.dataset.menu = m; } catch (e) {}
+	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime' || t === 'huisstijl') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal' || f === 'inkom') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2' || m === 'tekst') document.documentElement.dataset.menu = m; var pg = /[?&]pagina=hero\b/.test(location.search) ? 'hero' : localStorage.getItem('decotrap-pagina'); if (pg === 'hero') document.documentElement.dataset.page = 'hero'; } catch (e) {}
 	document.documentElement.classList.add('js');
 </script>
 </head>
@@ -405,6 +405,10 @@
 
 <div class="preview-bar">
 <button class="preview-bar__toggle" type="button" aria-expanded="false">Preview-opties</button>
+<div class="theme-switch" role="group" aria-label="Pagina (enkel in de preview)">
+	<button type="button" data-set-page="volledig" aria-pressed="true">Volledige pagina</button>
+	<button type="button" data-set-page="hero" aria-pressed="false">Enkel hero</button>
+</div>
 <div class="theme-switch" role="group" aria-label="Herofoto (enkel in de preview)">
 	<button type="button" data-set-hero="zon" aria-pressed="true">Foto zon</button>
 	<button type="button" data-set-hero="hal" aria-pressed="false">Foto hal</button>
