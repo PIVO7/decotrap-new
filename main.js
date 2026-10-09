@@ -142,7 +142,7 @@
 	menuEl.addEventListener('mouseleave', function () { setTimeout(inkRest, 60); });
 	// foto's in het megamenu alvast laden als de pagina rustig is, zodat ze bij de eerste keer openen meteen klaar staan
 	window.addEventListener('load', function () {
-		var warm = function () { document.querySelectorAll(root.dataset.menu === 'tekst' ? '.mega-panel img[loading="lazy"]' : '.mega img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; }); };
+		var warm = function () { document.querySelectorAll(root.dataset.menu === 'tekst' || root.dataset.menu === 'groot' ? '.mega-panel img[loading="lazy"]' : '.mega img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; }); };
 		if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 3000 }); else setTimeout(warm, 1500);
 	});
 	window.addEventListener('resize', function () {
@@ -294,7 +294,7 @@
 		if (openName && !e.target.closest('.nav, .mega')) closeMega(false);
 	});
 
-	// Megamenu-versie wisselen (enkel preview): huidige foto's, nieuwe foto's of enkel tekst
+	// Megamenu-versie wisselen (enkel preview): huidige foto's, nieuwe foto's, tekst naar Osmo of grote tekst naar Apple
 	var menuButtons = document.querySelectorAll('[data-set-menu]');
 	var altThumbs = document.querySelectorAll('img[data-src-v2]');
 	altThumbs.forEach(function (img) { img.dataset.srcV1 = img.getAttribute('src'); });
@@ -311,7 +311,7 @@
 		try { localStorage.setItem('decotrap-menu', menu); } catch (e) {}
 	}
 	menuButtons.forEach(function (b) { b.addEventListener('click', function () { setMenu(b.dataset.setMenu); }); });
-	setMenu(root.dataset.menu || 'tekst');
+	setMenu(root.dataset.menu || 'groot');
 
 	// Fotoreeks in de hero: laadt pas als de optie gekozen is, pauzeerbaar, stopt bij beperkte beweging
 	var reeks = document.querySelector('.hero__reeks');

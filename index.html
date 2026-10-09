@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" data-theme="lime" data-hero="latten" data-menu="tekst">
+<html lang="nl" data-theme="lime" data-hero="latten" data-menu="groot">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>
 	// thema vóór de eerste render zetten, zodat er niets flitst
-	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2') document.documentElement.dataset.menu = m; } catch (e) {}
+	try { var t = localStorage.getItem('decotrap-thema'); if (t === 'zw' || t === 'lime') document.documentElement.dataset.theme = t; var f = localStorage.getItem('decotrap-hero4'); document.documentElement.dataset.hero = (f === 'raam' || f === 'latten' || f === 'reeks' || f === 'zon' || f === 'hal') ? f : 'zon'; var m = localStorage.getItem('decotrap-menu'); if (m === 'foto' || m === 'foto2' || m === 'tekst') document.documentElement.dataset.menu = m; } catch (e) {}
 	document.documentElement.classList.add('js');
 </script>
 </head>
@@ -415,7 +415,8 @@
 <div class="theme-switch" role="group" aria-label="Megamenu (enkel in de preview)">
 	<button type="button" data-set-menu="foto" aria-pressed="false">Menu foto's</button>
 	<button type="button" data-set-menu="foto2" aria-pressed="false">Menu nieuwe foto's</button>
-	<button type="button" data-set-menu="tekst" aria-pressed="true">Menu tekst</button>
+	<button type="button" data-set-menu="tekst" aria-pressed="false">Menu Osmo</button>
+	<button type="button" data-set-menu="groot" aria-pressed="true">Menu groot</button>
 </div>
 <div class="theme-switch" role="group" aria-label="Kleurversie (enkel in de preview)">
 	<button type="button" data-set-theme="lime" aria-pressed="true"><span class="dot" style="background: #C4C800"></span>Lime</button>
