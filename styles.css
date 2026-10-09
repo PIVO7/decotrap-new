@@ -1993,3 +1993,9 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 /* ---------- 60. Voorbeeldblok: duidelijk gemarkeerd als component (enkel ter illustratie voor collega's) ---------- */
 .demo-blok__badge { display: inline-block; margin-bottom: 10px; padding: 4px 10px; border: 1px dashed var(--ink); border-radius: var(--radius); font-size: 13px; color: var(--ink) !important; }
 .demo-blok__text code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; padding: 1px 5px; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--line); }
+
+/* ---------- 61. Stappen op gsm (naar apple.com): één kaart tussen de pijltabs, geen buurkaarten die erachter uitsteken ---------- */
+@media (max-width: 960px) {
+	/* de scrollrij is precies zo breed als één kaart: 10px vrij naast elke pijltab */
+	.steps3__list { margin-inline: calc(36px + 10px - var(--gutter)); padding-inline: 0; scroll-padding-inline: 0; gap: 24px; }
+}
