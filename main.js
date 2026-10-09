@@ -142,15 +142,78 @@
 	menuEl.addEventListener('mouseleave', function () { setTimeout(inkRest, 60); });
 	// foto's in het megamenu alvast laden als de pagina rustig is, zodat ze bij de eerste keer openen meteen klaar staan
 	window.addEventListener('load', function () {
-		var warm = function () { document.querySelectorAll('.mega img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; }); };
+		var warm = function () { document.querySelectorAll(root.dataset.menu === 'tekst' ? '.mega-panel img[loading="lazy"]' : '.mega img[loading="lazy"]').forEach(function (img) { img.loading = 'eager'; }); };
 		if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 3000 }); else setTimeout(warm, 1500);
 	});
-	window.addEventListener('resize', inkRest);
+	window.addEventListener('resize', function () {
+		inkRest();
+		if (openName && tekstMenu()) gsap.set(megaWrap, { height: megaPanel(openName).offsetHeight });
+	});
 	var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+	// versie 'tekst' (preview): één vlak dat in hoogte meegroeit, naar de Mega Navigation van Osmo
+	var megaWrap = document.querySelector('.mega-wrap');
+	var megaTl = null;
+	function tekstMenu() { return root.dataset.menu === 'tekst' && !!window.gsap; }
+	function megaPanel(name) { return document.getElementById('mega-' + name); }
+	function megaFade(panel) { return panel.querySelectorAll('.label, .mega__thumbs li, .mega__info li, .mega__alle, .mega-panel'); }
+	function megaIndex(name) { return triggers.findIndex(function (t) { return t.dataset.mega === name; }); }
+	function morphMega(from, to) {
+		var toEl = megaPanel(to), fromEl = from ? megaPanel(from) : null;
+		if (megaTl) { megaTl.kill(); megaTl = null; }
+		clearTimeout(closingTimer); closingTimer = null;
+		hero.classList.remove('is-mega-closing', 'is-mega-switch');
+		triggers.forEach(function (t) {
+			var p = megaPanel(t.dataset.mega);
+			if (p === toEl || p === fromEl) return;
+			p.hidden = true;
+			gsap.set(megaFade(p), { clearProps: 'all' });
+		});
+		toEl.hidden = false;
+		var h = toEl.offsetHeight, fade = megaFade(toEl);
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			if (fromEl) fromEl.hidden = true;
+			gsap.set(fade, { clearProps: 'all' });
+			gsap.set(megaWrap, { height: h });
+			return;
+		}
+		var tl = megaTl = gsap.timeline();
+		var spread = fade.length > 1 ? { amount: 0.25 } : 0;
+		if (fromEl) {
+			// wisselen: oude inhoud schuift weg, nieuwe komt binnen vanuit de richting van de muis
+			var dir = megaIndex(to) > megaIndex(from) ? 1 : -1, fromFade = megaFade(fromEl);
+			gsap.set(fade, { autoAlpha: 0 });
+			tl.to(fromFade, { autoAlpha: 0, x: dir * -30, duration: 0.2, ease: 'power2.in' }, 0);
+			tl.add(function () { fromEl.hidden = true; gsap.set(fromFade, { clearProps: 'all' }); }, 0.2);
+			tl.to(megaWrap, { height: h, duration: 0.4, ease: 'power3.out' }, 0.05);
+			tl.fromTo(fade, { autoAlpha: 0, x: dir * 30, y: 0 }, { autoAlpha: 1, x: 0, duration: 0.3, stagger: spread, ease: 'power3.out' }, 0.12);
+		} else {
+			tl.to(megaWrap, { height: h, duration: 0.35, ease: 'power3.out' }, 0);
+			tl.fromTo(fade, { autoAlpha: 0, x: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3, stagger: spread, ease: 'power3.out' }, 0.1);
+		}
+	}
+	function collapseMega(name) {
+		if (megaTl) { megaTl.kill(); megaTl = null; }
+		hero.classList.add('is-mega-closing');
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finishClose(); return; }
+		var tl = megaTl = gsap.timeline({ onComplete: function () { megaTl = null; finishClose(); } });
+		tl.to(megaFade(megaPanel(name)), { autoAlpha: 0, y: -4, duration: 0.14, ease: 'power2.in' }, 0);
+		tl.to(megaWrap, { height: 0, duration: 0.25, ease: 'power2.in' }, 0.05);
+	}
 
 	function openMega(name) {
 		clearTimeout(closeTimer);
 		if (openName === name) return;
+		hero.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
+		if (tekstMenu()) {
+			morphMega(openName, name);
+			triggers.forEach(function (t) { t.setAttribute('aria-expanded', String(t.dataset.mega === name)); });
+			hero.classList.add('is-mega');
+			scrim.classList.add('is-on');
+			openName = name;
+			moveInk(document.querySelector('.nav__trigger[data-mega="' + name + '"]'));
+			return;
+		}
 		// was het paneel nog aan het sluiten? meteen afronden, dan opent het nieuwe proper
 		if (closingTimer) finishClose();
 		// al een paneel open? dan meteen wisselen, zonder infade
@@ -178,7 +241,12 @@
 	var closingTimer = null;
 	function finishClose() {
 		clearTimeout(closingTimer); closingTimer = null;
-		triggers.forEach(function (t) { document.getElementById('mega-' + t.dataset.mega).hidden = true; });
+		triggers.forEach(function (t) {
+			var p = megaPanel(t.dataset.mega);
+			p.hidden = true;
+			if (window.gsap) gsap.set(megaFade(p), { clearProps: 'all' });
+		});
+		if (window.gsap) gsap.set(megaWrap, { clearProps: 'height' });
 		hero.classList.remove('is-mega', 'is-mega-closing');
 	}
 	function closeMega(returnFocus) {
@@ -189,6 +257,7 @@
 		scrim.classList.remove('is-on');
 		openName = null;
 		if (!menuEl.matches(':hover')) moveInk(null);
+		if (tekstMenu()) { collapseMega(trigger.dataset.mega); if (returnFocus && trigger) trigger.focus(); return; }
 		// sluiten: het paneel krimpt als een cirkel terug naar het menu-onderdeel, daarna pas verbergen
 		var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		if (still) { finishClose(); } else { hero.classList.add('is-mega-closing'); closingTimer = setTimeout(finishClose, 420); }
@@ -224,6 +293,25 @@
 	document.addEventListener('focusin', function (e) {
 		if (openName && !e.target.closest('.nav, .mega')) closeMega(false);
 	});
+
+	// Megamenu-versie wisselen (enkel preview): huidige foto's, nieuwe foto's of enkel tekst
+	var menuButtons = document.querySelectorAll('[data-set-menu]');
+	var altThumbs = document.querySelectorAll('img[data-src-v2]');
+	altThumbs.forEach(function (img) { img.dataset.srcV1 = img.getAttribute('src'); });
+	function setMenu(menu) {
+		if (openName) closeMega(false);
+		if (megaTl) { megaTl.kill(); megaTl = null; }
+		finishClose();
+		root.dataset.menu = menu;
+		menuButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setMenu === menu)); });
+		altThumbs.forEach(function (img) {
+			img.onerror = menu === 'foto2' ? function () { img.onerror = null; img.src = img.dataset.srcV1; } : null;
+			img.src = menu === 'foto2' ? img.dataset.srcV2 : img.dataset.srcV1;
+		});
+		try { localStorage.setItem('decotrap-menu', menu); } catch (e) {}
+	}
+	menuButtons.forEach(function (b) { b.addEventListener('click', function () { setMenu(b.dataset.setMenu); }); });
+	setMenu(root.dataset.menu || 'tekst');
 
 	// Fotoreeks in de hero: laadt pas als de optie gekozen is, pauzeerbaar, stopt bij beperkte beweging
 	var reeks = document.querySelector('.hero__reeks');

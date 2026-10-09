@@ -820,6 +820,58 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 .mega-scrim { position: fixed; inset: 0; z-index: 20; background: rgb(var(--shade) / 0.28); opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease); }
 .mega-scrim.is-on { opacity: 1; pointer-events: auto; }
 
+/* ---------- 12c-bis. Megamenu 'tekst' (enkel preview) ----------
+   Zonder kleine foto's en zonder hoofdletters, naar de Mega Navigation van Osmo:
+   één vlak dat in hoogte meegroeit, kolommen met lijnen, inhoud schuift mee in de richting van de muis (GSAP in main.js). */
+.mega-wrap { display: contents; }
+[data-menu="tekst"] .mega-wrap {
+	display: block; position: absolute; left: 0; right: 0; top: var(--nav-h, 131px); z-index: 29;
+	height: 0; overflow: hidden; background: var(--paper); color: var(--ink);
+	border-top: 1px solid var(--line); box-shadow: 0 24px 48px -12px rgb(0 0 0 / 0.18);
+}
+[data-menu="tekst"] .hero:not(.is-mega) .mega-wrap { visibility: hidden; }
+[data-menu="tekst"] .mega { position: absolute; top: 0; left: 0; right: 0; border-top: 0; }
+[data-menu="tekst"] .mega__inner, [data-menu="tekst"] .mega__inner > *, [data-menu="tekst"] .mega__thumbs li, [data-menu="tekst"] .mega-panel img { animation: none !important; }
+[data-menu="tekst"] .mega__inner {
+	background: none; box-shadow: none; gap: 0;
+	padding: 0 0 0 calc(var(--gutter) - 24px);
+	grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr);
+}
+[data-menu="tekst"] .mega__col { display: flex; flex-direction: column; align-items: flex-start; padding: 40px 24px 48px; border-right: 1px solid var(--line); }
+[data-menu="tekst"] .mega .label { margin: 0 0 12px; padding-left: 12px; font-family: var(--font); font-size: 14px; letter-spacing: 0; text-transform: none; }
+[data-menu="tekst"] .mega .mega__thumbs, [data-menu="tekst"] .mega .mega__info { width: 100%; gap: 0; border-top: 0; }
+[data-menu="tekst"] .mega .mega__thumbs li { border-bottom: 0; }
+[data-menu="tekst"] .mega__thumbs img { display: none; }
+[data-menu="tekst"] .mega .mega__thumbs a, [data-menu="tekst"] .mega .mega__info a {
+	display: flex; align-items: center; min-height: 0; padding: 10px 12px; border: 0; border-radius: var(--radius);
+	font-size: 17px; font-weight: 500; line-height: 1.3; letter-spacing: 0; text-transform: none; text-decoration: none;
+	transition: background-color 200ms var(--ease);
+}
+[data-menu="tekst"] .mega .mega__info a { font-size: 16px; font-weight: 400; color: var(--muted); }
+[data-menu="tekst"] .mega .mega__thumbs a::after { opacity: 0; }
+@media (hover: hover) {
+	[data-menu="tekst"] .mega .mega__thumbs a:hover, [data-menu="tekst"] .mega .mega__info a:hover { background: rgb(var(--shade) / 0.05); color: var(--ink); }
+	[data-menu="tekst"] .mega .mega__thumbs a:hover span { transform: none; }
+	[data-menu="tekst"] .mega .mega__thumbs a:hover::after { opacity: 1; transform: rotate(45deg); }
+}
+[data-menu="tekst"] .mega__alle { font-size: 15px; letter-spacing: 0; text-transform: none; }
+[data-menu="tekst"] .mega .mega__alle { margin: 16px 0 0 12px; }
+/* laatste kolom: getint vlak met de toonzaalkaart, foto boven en tekst eronder */
+[data-menu="tekst"] .mega .mega-panel { display: flex; flex-direction: column; min-height: 0; padding: 24px var(--gutter) 24px 24px; border-radius: 0; background: var(--bg); color: var(--ink); overflow: visible; }
+[data-menu="tekst"] .mega .mega-panel::before { display: none; }
+[data-menu="tekst"] .mega .mega-panel img { position: static; height: 220px; border-radius: var(--radius) var(--radius) 0 0; }
+[data-menu="tekst"] .mega .mega-panel__body { position: static; padding: 20px 24px 24px; background: var(--paper); border-radius: 0 0 var(--radius) var(--radius); }
+[data-menu="tekst"] .mega-panel__eyebrow { font-family: var(--font); font-size: 14px; letter-spacing: 0; text-transform: none; }
+[data-menu="tekst"] .mega .mega-panel__eyebrow, [data-menu="tekst"] .mega .mega-panel__text { color: var(--muted); }
+[data-menu="tekst"] .mega-panel__title { font-size: 22px; text-transform: none; letter-spacing: -0.01em; }
+[data-menu="tekst"] .mega .mega-panel__cta { background: var(--ink); color: var(--paper); }
+/* balk en mobiel menu: ook geen hoofdletters */
+[data-menu="tekst"] .nav__menu a, [data-menu="tekst"] .nav__trigger { font-size: 15px; letter-spacing: 0; text-transform: none; }
+[data-menu="tekst"] .mnav__root a, [data-menu="tekst"] .mnav__root button { text-transform: none; letter-spacing: -0.01em; }
+[data-menu="tekst"] .mnav .label, [data-menu="tekst"] .mnav__back { font-family: var(--font); font-size: 14px; letter-spacing: 0; text-transform: none; }
+[data-menu="tekst"] .mnav .mega__thumbs img { display: none; }
+[data-menu="tekst"] .mnav .mega__thumbs a { padding: 8px 0; font-size: 19px; letter-spacing: 0; text-transform: none; }
+
 /* ---------- 12d. Mobiel menu (doorklikpanelen) ---------- */
 .mnav {
 	position: fixed; inset: 0; z-index: 60; background: var(--bg); color: var(--ink); overflow-y: auto; overscroll-behavior: contain; padding: 0 var(--gutter) 40px;
