@@ -877,11 +877,11 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 [data-menu="groot"] .mega__thumbs img { display: none; }
 [data-menu="groot"] .mega .label, [data-menu="groot"] .mnav .label, [data-menu="groot"] .mnav__back { font-family: var(--font); font-size: 13px; letter-spacing: 0; text-transform: none; }
 [data-menu="groot"] .mega .label { margin-bottom: 16px; }
-[data-menu="groot"] .mega .mega__thumbs { gap: 2px; border-top: 0; }
+[data-menu="groot"] .mega .mega__thumbs { gap: 4px; border-top: 0; }
 [data-menu="groot"] .mega .mega__thumbs li { border-bottom: 0; }
 [data-menu="groot"] .mega__thumbs a, [data-menu="groot"] .mega .mega__thumbs a {
 	min-height: 0; padding: 4px 0; gap: 0;
-	font-size: clamp(24px, 2.1vw, 32px); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; text-transform: none;
+	font-size: clamp(18px, 1.45vw, 22px); font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; text-transform: none;
 }
 [data-menu="groot"] .mega .mega__thumbs a::after { display: none; }
 @media (hover: hover) { [data-menu="groot"] .mega .mega__thumbs a:hover { color: var(--muted); } }
@@ -893,7 +893,16 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 /* balk en mobiel menu: ook geen hoofdletters */
 [data-menu="groot"] .nav__menu a, [data-menu="groot"] .nav__trigger { font-size: 15px; letter-spacing: 0; text-transform: none; }
 [data-menu="groot"] .mnav__root a, [data-menu="groot"] .mnav__root button { text-transform: none; letter-spacing: -0.01em; }
-[data-menu="groot"] .mnav .mega__thumbs a { padding: 3px 0; font-size: 24px; }
+[data-menu="groot"] .mnav .mega__thumbs a { padding: 4px 0; font-size: 20px; }
+[data-menu="groot"] .mnav .mega__thumbs { gap: 2px; }
+/* smallere desktops: kaart minder hoog, kolommen dichter bij elkaar */
+@media (max-width: 1200px) {
+	[data-menu="groot"] .mega__inner { gap: 28px; padding-top: 32px; padding-bottom: 36px; }
+	[data-menu="groot"] .mega .mega-panel { min-height: 340px; }
+	[data-menu="groot"] .mega-panel__body { left: 20px; right: 20px; bottom: 20px; gap: 6px; }
+	[data-menu="groot"] .mega-panel__title { font-size: 21px; }
+	[data-menu="groot"] .mega-panel__text { font-size: 14px; }
+}
 
 /* ---------- 12d. Mobiel menu (doorklikpanelen) ---------- */
 .mnav {
