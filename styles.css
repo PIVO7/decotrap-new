@@ -1443,10 +1443,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 
 /* tegels komen gelaagd binnen wanneer de sectie in beeld schuift */
 
- 
- 
-}
-
 /* ---------- 28. Footer (compact): merk en acties boven, vier kolommen, juridisch onderaan ---------- */
 .sfoot { background: var(--footer); color: #FFFFFF; padding: clamp(56px, 6vw, 88px) var(--gutter) 28px; }
 .sfoot a { color: inherit; text-decoration: none; }
@@ -1579,8 +1575,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 
 .mpx-teaser__title { margin-top: 4px; font-size: clamp(26px, 2.8vw, 40px) !important; line-height: 1.1 !important; letter-spacing: -0.02em !important; max-width: 520px; }
 .mpx-teaser__text { max-width: 520px; font-size: 16px; line-height: 1.6; color: var(--text); }
-.mpx-teaser__facts { list-style: none; margin: 4px 0 8px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; }
-.mpx-teaser__facts li { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--ink); }
 
 .mpx-teaser__btn { gap: 10px; min-height: 0; padding: 13px 20px; border-radius: 3px; background: var(--ink); color: #FFFFFF; font-size: 15px; font-weight: 400; letter-spacing: 0; text-transform: none; text-decoration: none; }
 .mpx-teaser__btn .arrow { transition: transform 250ms var(--ease); }
@@ -1594,7 +1588,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 @media (max-width: 860px) {
 	.mpx-teaser__card { grid-template-columns: minmax(0, 1fr); }
 	.mpx-teaser__media { order: -1; min-height: 0; aspect-ratio: 16 / 10; }
-	.mpx-teaser__facts { flex-direction: column; gap: 8px; }
 }
 
 /* ---------- 33. Vangnet: de pagina scrollt nooit horizontaal (clip maakt geen scrollcontainer, sticky blijft werken) ---------- */
@@ -1671,9 +1664,6 @@ html[data-theme="huisstijl"] body { font-size: 16px; }
 .highlights li { gap: 8px; }
 .highlights .check { width: 16px; height: 16px; flex: none; color: var(--brand); }
 .mpx-teaser__label { padding: 0; background: none; color: var(--muted) !important; }
-.mpx-teaser__facts { gap: 8px; margin: 2px 0 8px; }
-.mpx-teaser__facts li { padding: 7px 14px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); font-size: 14px; }
-@media (max-width: 860px) { .mpx-teaser__facts { flex-direction: row; } }
 .usps2__head { display: block; }
 .usps2__title { text-align: center; }
 .mega-panel__eyebrow::before { display: none; }
@@ -1956,4 +1946,64 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	.later__fotos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
 	.later__fotos::-webkit-scrollbar { display: none; }
 	.later__fotos li { flex: none; width: 72vw; scroll-snap-align: start; }
+}
+
+/* ---------- 51. Gsm-afwerking productpagina: knoppen naast elkaar en even breed, voordelen in één kolom ---------- */
+@media (max-width: 640px) {
+	.hero--sub .hero__actions, .op__cta .hero__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%; }
+	.hero--sub .hero__actions .btn, .op__cta .hero__actions .btn { justify-content: center; min-height: 48px; padding-inline: 12px; white-space: nowrap; }
+	.hero--sub .hero__actions .hero__afspraak { align-self: stretch; }
+	.highlights { flex-direction: column; gap: 10px; padding-top: 18px; }
+}
+
+/* ---------- 52. Troeven op gsm: links uitgelijnd, icoon + titel op één rij, cijfers in twee gelijke vakjes, donker vlak binnen de marges ---------- */
+@media (max-width: 760px) {
+	.usps2 { padding-left: var(--gutter); padding-right: var(--gutter); }
+	.usps2__box { border-radius: var(--radius); padding: 28px 20px 24px; text-align: left; }
+	.usps2__head { align-items: flex-start; }
+	.usps2__title { text-align: left; font-size: 28px !important; }
+	.usps2__intro { margin-left: 0; font-size: 16px; }
+	.usps2__cols { margin-top: 28px; gap: 24px; }
+	.usps2__col { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 10px; padding: 0; }
+	.usps2__col + .usps2__col { margin-top: 0; padding-top: 24px; }
+	.usps2__col-icon { width: 24px; height: 24px; }
+	.usps2__col-title { margin-top: 0; font-size: 18px !important; text-align: left; }
+	.usps2__stats { grid-column: 1 / -1; margin-top: 14px; gap: 8px; }
+	.usps2__stats > div { padding: 14px; border-radius: var(--radius); background: rgb(255 255 255 / 0.06); }
+	.usps2__stats dd { align-items: flex-start; gap: 4px; margin-top: 4px; }
+	.usps2__stats strong { font-size: 20px; }
+	.usps2__stats span { font-size: 13px; line-height: 1.4; }
+	.usps2__link { margin-top: 24px; }
+}
+
+/* ---------- 53. Gsm: donkere secties schermbreed (inhoud op de paginamarge), pijltabs tegen de schermrand ---------- */
+@media (max-width: 760px) {
+	.usps2 { padding-left: 0; padding-right: 0; }
+	.usps2__box { border-radius: 0; padding: 32px var(--gutter) 28px; }
+	.slider__section { margin-inline: calc(-1 * var(--gutter)); border-radius: 0; --pad: var(--gutter); }
+}
+@media (max-width: 960px) {
+	.steps3__box { margin-inline: calc(-1 * var(--gutter)); border-radius: 0; padding: 24px var(--gutter); }
+	.steps3__list { margin-inline: calc(-1 * var(--gutter)); padding-inline: calc(var(--gutter) + 14px); scroll-padding-inline: calc(var(--gutter) + 14px); }
+	.steps3__arrows { margin-inline: calc(-1 * var(--gutter)); }
+}
+
+/* ---------- 54. Afsluitende CTA: label in huisstijlkleur; gsm links uitgelijnd op de paginamarge ---------- */
+.op__cta .op__cta-label { margin-bottom: -8px; color: var(--brand); }
+@media (max-width: 760px) {
+	.op__cta { padding: 36px var(--gutter) 32px; gap: 14px; }
+	.op__cta p:not(.label) { font-size: 16px; }
+	.op__cta .hero__actions { margin-top: 10px; }
+}
+
+/* ---------- 55. Teaser op gsm: compacter, knop over de volle breedte ---------- */
+@media (max-width: 640px) {
+	.mpx-teaser__body { padding: 24px 20px; gap: 12px; }
+	.mpx-teaser__btn { align-self: stretch; justify-content: center; min-height: 48px; margin-top: 4px; }
+}
+
+/* ---------- 56. Traptypes op gsm: pijltje loopt mee achter het laatste woord ---------- */
+@media (max-width: 640px) {
+	.types__link { display: inline; font-size: 14px; }
+	.types__link svg { display: inline-block; margin-left: 6px; vertical-align: -1px; }
 }
