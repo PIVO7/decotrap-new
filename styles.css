@@ -1410,9 +1410,8 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 
 /* ---------- 15. Enkel hero (enkel preview) ----------
    Alleen het eerste scherm: de rest van de pagina valt weg en er valt niets te scrollen. */
-[data-page="hero"], [data-page="hero"] body { height: 100%; overflow: hidden; }
 [data-page="hero"] body > main, [data-page="hero"] body > footer, [data-page="hero"] .mbar { display: none !important; }
-[data-page="hero"] .hero { height: 100vh; height: 100svh; }
+/* de hero vult precies één scherm; enkel als de inhoud niet past (bv. gsm liggend) kan je binnen de hero scrollen */
 
 /* ---------- 16. Gratis offerte zoals op decotrap.be (thema 'huisstijl') ----------
    Effen logogroen, witte tekst, klein en vet in hoofdletters, 3px hoeken; geen glas-, blur- of schaduweffect en geen pijltje. */
@@ -1450,7 +1449,7 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	[data-layout="split"] .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
 	[data-layout="split"] .nav { padding-block: 14px; }
 	[data-layout="split"] .hero__content { grid-column: 1; grid-row: 2; padding: 28px var(--gutter) 24px; }
-	[data-layout="split"] .hero > picture { grid-column: 1; grid-row: 3; }
+	[data-layout="split"] .hero > picture { grid-column: 1; grid-row: 3; min-height: 220px; } /* foto blijft zichtbaar, ook op lage schermen */
 }
 
 /* ---------- 18. Afspraak maken: outline-knop zoals decotrap.be (btn-outline-black) ----------
