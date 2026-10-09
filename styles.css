@@ -1949,8 +1949,6 @@ html, body { overflow-x: clip; }
 .parallax-slider__item-img { left: 0; width: 100%; }
 .parallax-slider__item-visual { will-change: auto; transform: none !important; }
 .slider-arrows--onder { margin-top: 24px; }
-/* voorbeeldpagina (voorbeeld-trappagina.html) */
-.voorbeeld__tekst { max-width: 720px; font-size: 17px; line-height: 1.65; color: var(--text); }
 /* voorbeeld van het herbruikbare blok op de multiplex-pagina, met titel erboven (enkel om te tonen) */
 .demo-blok { margin: 0 var(--gutter) clamp(64px, 7vw, 112px); padding-top: clamp(40px, 5vw, 64px); border-top: 2px dashed var(--line); }
 .demo-blok__head { max-width: 720px; margin-bottom: 20px; }
