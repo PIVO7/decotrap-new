@@ -1716,3 +1716,47 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.lb__col--center { gap: 1.25em; }
 }
 .lb-open .mbar { visibility: hidden; } /* knoppenbalk (gsm) niet door de lightbox heen laten schemeren */
+
+/* ---------- 26. Troeven als bento-raster: tegels van verschillende grootte, foto's en accenttegels (zelfde tokens) ---------- */
+.bento { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(220px, auto); gap: 12px; }
+.bento__tile { position: relative; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 28px; border-radius: var(--radius); background: var(--paper); color: var(--ink); isolation: isolate; }
+.bento__tile--groot { grid-column: span 2; grid-row: span 2; }
+.bento__tile--breed { grid-column: span 2; }
+.bento__body { display: flex; flex-direction: column; gap: 8px; max-width: 420px; }
+.bento__body .mark { width: 22px; height: 22px; margin-bottom: 6px; }
+.bento__tile h3 { font-size: 20px; line-height: 1.2; }
+.bento__tile p { font-size: 15px; line-height: 1.5; color: var(--text); }
+.bento__big { font-size: clamp(26px, 2.6vw, 38px) !important; line-height: 1.1 !important; }
+/* donker: de hoofdtroef */
+.bento__tile--donker { background: var(--deep); color: #FFFFFF; }
+.bento__tile--donker p { color: rgb(255 255 255 / 0.72); }
+/* logogroen accent */
+.bento__tile--groen { background: var(--brand); color: var(--ink); }
+.bento__tile--groen p { color: var(--ink); }
+.bento__tile--groen .mark { fill: var(--ink); }
+.bento__tile--groen .mark path { fill: var(--ink); }
+/* fototegels: foto over de hele tegel, tekst onderaan op een donkere laag */
+.bento__tile--foto { color: #FFFFFF; min-height: 260px; }
+.bento__tile--foto img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease); }
+.bento__tile--foto::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(var(--shade) / 0) 35%, rgb(var(--shade) / 0.78) 100%); }
+.bento__tile--foto p { color: rgb(255 255 255 / 0.85); }
+@media (hover: hover) { .bento__tile--foto:hover img { transform: scale(1.03); } }
+/* tegels komen gelaagd binnen wanneer de sectie in beeld schuift */
+.usps .bento__tile { opacity: 0; transform: translateY(16px); transition: opacity 600ms var(--ease), transform 700ms var(--ease); }
+.usps.is-in .bento__tile { opacity: 1; transform: none; }
+.usps.is-in .bento__tile:nth-child(2) { transition-delay: 60ms; } .usps.is-in .bento__tile:nth-child(3) { transition-delay: 120ms; }
+.usps.is-in .bento__tile:nth-child(4) { transition-delay: 180ms; } .usps.is-in .bento__tile:nth-child(5) { transition-delay: 240ms; }
+.usps.is-in .bento__tile:nth-child(6) { transition-delay: 300ms; } .usps.is-in .bento__tile:nth-child(7) { transition-delay: 360ms; }
+.usps.is-in .bento__tile:nth-child(8) { transition-delay: 420ms; }
+@media (prefers-reduced-motion: reduce) { .usps .bento__tile { opacity: 1; transform: none; transition: none; } }
+@media (max-width: 1100px) {
+	.bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(190px, auto); }
+	.bento__tile--groot { grid-column: span 2; grid-row: span 1; min-height: 340px; }
+}
+@media (max-width: 560px) {
+	.bento { gap: 8px; grid-auto-rows: minmax(170px, auto); }
+	.bento__tile { padding: 20px; }
+	.bento__tile h3 { font-size: 17px; }
+	.bento__tile p { font-size: 14px; }
+	.bento__tile--groot { min-height: 280px; }
+}
