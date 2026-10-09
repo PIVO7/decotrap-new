@@ -1957,3 +1957,18 @@ html, body { overflow-x: clip; }
 .demo-blok .mpx-teaser { padding: 0; }
 @media (max-width: 960px) { .demo-blok { padding-top: 40px; } }
 [data-theme="huisstijl"] .mpx-teaser__btn { font-weight: 400; font-size: 15px; letter-spacing: 0; text-transform: none; } /* zelfde gewicht als de andere knoppen */
+
+/* ---------- 34. Productpagina: herofoto in een kader (zelfde hoeken als de rest), niet tot tegen de rand ---------- */
+[data-layout="split"] .hero--sub > picture.hero__frame {
+	align-self: center; justify-self: end;
+	width: clamp(320px, 36vw, 540px); aspect-ratio: 4 / 5;
+	margin: clamp(32px, 4vw, 56px) var(--gutter) clamp(32px, 4vw, 56px) 0;
+	border-radius: var(--radius); overflow: hidden;
+}
+[data-layout="split"] .hero--sub > picture.hero__frame img { object-position: 50% 55%; }
+@media (max-width: 960px) {
+	[data-layout="split"] .hero--sub > picture.hero__frame {
+		justify-self: stretch; width: auto; aspect-ratio: 4 / 3;
+		margin: 0 var(--gutter) 28px;
+	}
+}
