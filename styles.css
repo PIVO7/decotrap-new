@@ -1782,3 +1782,42 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.parallax-slider__item-inner { width: 78vw; }
 	.slider-arrow { width: 44px; height: 44px; }
 }
+
+/* ---------- 28. Footer (compact): merk en acties boven, vier kolommen, juridisch onderaan ---------- */
+.sfoot { background: var(--footer); color: #FFFFFF; padding: clamp(56px, 6vw, 88px) var(--gutter) 28px; }
+.sfoot a { color: inherit; text-decoration: none; }
+.sfoot__top { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding-bottom: clamp(36px, 4vw, 56px); border-bottom: 1px solid rgb(255 255 255 / 0.12); }
+.sfoot__brand { display: flex; align-items: center; gap: 24px; max-width: 560px; }
+.sfoot__brand img { flex: none; width: 44px; height: auto; }
+.sfoot__brand p { font-size: 17px; line-height: 1.55; color: rgb(255 255 255 / 0.78); }
+.sfoot__cta { margin: 0; flex: none; }
+.sfoot__cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; padding: clamp(36px, 4vw, 56px) 0; }
+.sfoot__label { margin-bottom: 14px; font-size: 14px; font-weight: 400; color: rgb(255 255 255 / 0.55); }
+.sfoot__col p { font-size: 16px; line-height: 1.6; color: rgb(255 255 255 / 0.9); }
+.sfoot__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.sfoot__list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.sfoot__list a { font-size: 16px; }
+.sfoot__list span { font-size: 14px; color: rgb(255 255 255 / 0.55); }
+.sfoot__route { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; margin-top: 6px; font-size: 15px; border-bottom: 1px solid var(--brand); }
+.sfoot__route .arrow { width: 12px; height: 12px; }
+@media (hover: hover) {
+	.sfoot__list a:hover, .sfoot__legal a:hover, .sfoot__social a:hover, .sfoot__top-link:hover { color: var(--brand); }
+	.sfoot__route:hover { color: var(--brand); }
+}
+.sfoot a:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 2px; }
+.sfoot__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; padding-top: 24px; border-top: 1px solid rgb(255 255 255 / 0.12); font-size: 14px; color: rgb(255 255 255 / 0.6); }
+.sfoot__social { list-style: none; margin: 0; padding: 0; display: flex; gap: 24px; }
+.sfoot__top-link { display: inline-flex; align-items: center; gap: 8px; }
+@media (max-width: 960px) {
+	.sfoot__top { flex-direction: column; align-items: flex-start; }
+	.sfoot__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+	.sfoot { padding-bottom: calc(96px + env(safe-area-inset-bottom)); } /* ruimte voor de knoppenbalk op gsm */
+}
+@media (max-width: 560px) {
+	.sfoot__brand { flex-direction: column; align-items: flex-start; gap: 16px; }
+	.sfoot__cta { flex-direction: column; align-items: stretch; width: 100%; }
+	.sfoot__cta .btn { justify-content: center; }
+	.sfoot__cols { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+	.sfoot__bottom { flex-direction: column; align-items: flex-start; }
+}
+.op ~ .sfoot .sfoot__cta { display: none; } /* pagina met eigen afsluitende actie: de knoppen niet twee keer na elkaar */
