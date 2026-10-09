@@ -2022,3 +2022,14 @@ html[data-theme="huisstijl"] body { font-size: 16px; }
 	.usps2__title { font-size: clamp(26px, 7vw, 30px) !important; }
 	.faq__item summary { font-size: 16px; }
 }
+
+/* ---------- 38. Geen trapje-icoontjes meer: vinkjes in de hero, tags in het blok, labels zonder icoon ---------- */
+.highlights li { gap: 8px; }
+.highlights .check { width: 16px; height: 16px; flex: none; color: var(--brand); }
+.mpx-teaser__label { padding: 0; background: none; color: var(--muted) !important; }
+.mpx-teaser__facts { gap: 8px; margin: 2px 0 8px; }
+.mpx-teaser__facts li { padding: 7px 14px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); font-size: 14px; }
+@media (max-width: 860px) { .mpx-teaser__facts { flex-direction: row; } }
+.usps2__head { display: block; }
+.usps2__title { text-align: center; }
+.mega-panel__eyebrow::before { display: none; }
