@@ -31,31 +31,55 @@
 	var pills = Array.prototype.slice.call(root.querySelectorAll('.steps3__pill'));
 	var shots = Array.prototype.slice.call(root.querySelectorAll('.steps3__shot'));
 	var arrows = Array.prototype.slice.call(root.querySelectorAll('.steps3__arrow'));
+	var dots = Array.prototype.slice.call(root.querySelectorAll('.steps3__dots span'));
 	var index = 0;
+	var list = root.querySelector('.steps3__list');
+	var desktop = window.matchMedia('(min-width: 961px)');
+	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+	// de uitleg ligt meteen op zijn eindbreedte, zodat ze tijdens het openen niet herschikt
+	function setTextWidth() { root.style.setProperty('--tw', (Math.min(list.clientWidth, 460) - 54) + 'px'); }
+	setTextWidth();
+	window.addEventListener('resize', setTextWidth);
+	// zoals apple.com: eindmaat vooraf meten, dan enkel breedte en hoogte van het kader animeren
+	function morph(p, from) {
+		if (p._end) p.removeEventListener('transitionend', p._end);
+		p.style.transition = 'none'; p.style.width = ''; p.style.height = '';
+		var to = p.getBoundingClientRect();
+		p.style.width = from.width + 'px'; p.style.height = from.height + 'px';
+		void p.offsetWidth;
+		p.style.transition = '';
+		p.style.width = to.width + 'px'; p.style.height = to.height + 'px';
+		p._end = function (e) { if (e.target !== p || e.propertyName !== 'height') return; p.style.width = ''; p.style.height = ''; p.removeEventListener('transitionend', p._end); };
+		p.addEventListener('transitionend', p._end);
+	}
 	function show(i) {
 		var prev = index;
 		index = Math.max(0, Math.min(pills.length - 1, i));
-		// gsm: de nieuwe kaart schuift in vanuit de richting waarin je navigeert
-		if (index !== prev) {
-			var li = pills[index].parentNode;
-			li.classList.remove('is-in-fwd', 'is-in-back');
-			void li.offsetWidth;
-			li.classList.add(index > prev ? 'is-in-fwd' : 'is-in-back');
-		}
+		var animate = index !== prev && desktop.matches && !reduce.matches;
+		var from = animate ? pills.map(function (p) { return p.getBoundingClientRect(); }) : null;
 		pills.forEach(function (p, k) { var on = k === index; p.classList.toggle('is-active', on); p.setAttribute('aria-expanded', String(on)); });
+		if (animate) { morph(pills[prev], from[prev]); morph(pills[index], from[index]); }
 		shots.forEach(function (s, k) { s.classList.toggle('is-active', k === index); });
+		dots.forEach(function (d, k) { d.classList.toggle('is-active', k === index); });
 		arrows.forEach(function (a) { a.disabled = (a.dataset.dir === '-1' && index === 0) || (a.dataset.dir === '1' && index === pills.length - 1); });
 	}
-	pills.forEach(function (p, k) { p.addEventListener('click', function () { show(k); }); });
-	arrows.forEach(function (a) { a.addEventListener('click', function () { show(index + Number(a.dataset.dir)); }); });
-	// horizontaal swipen over foto en kaart
-	var box = root.querySelector('.steps3__box'), x0 = null, y0 = 0;
-	box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
-	box.addEventListener('touchend', function (e) {
-		if (x0 === null) return;
-		var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
-		x0 = null;
-		if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(index + (dx < 0 ? 1 : -1));
+	pills.forEach(function (p, k) { p.addEventListener('click', function () { if (desktop.matches) show(k); }); });
+	arrows.forEach(function (a) { a.addEventListener('click', function () {
+		var k = Math.max(0, Math.min(pills.length - 1, index + Number(a.dataset.dir)));
+		if (desktop.matches) show(k); else scrollToCard(k);
+	}); });
+	// gsm: de kaarten swipe je native (scroll-snap); de foto en de voortgang volgen de kaart die in beeld staat
+	function cardStep() { return pills[0].parentNode.offsetWidth + (parseFloat(getComputedStyle(list).columnGap) || 0); }
+	function scrollToCard(k) { list.scrollTo({ left: k * cardStep(), behavior: reduce.matches ? 'auto' : 'smooth' }); }
+	var ticking = false;
+	list.addEventListener('scroll', function () {
+		if (desktop.matches || ticking) return;
+		ticking = true;
+		requestAnimationFrame(function () {
+			ticking = false;
+			var k = Math.round(list.scrollLeft / cardStep());
+			if (k !== index) show(k);
+		});
 	}, { passive: true });
 	show(0);
 })();
