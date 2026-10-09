@@ -1860,3 +1860,31 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.usps2__col { padding: 0; }
 	.usps2__col + .usps2__col { border-left: 0; border-top: 1px solid rgb(255 255 255 / 0.2); margin-top: 44px; padding-top: 44px; }
 }
+
+/* ---------- 30. Troeven (Apple-stijl) verfijnd: minder vet, rustiger maten, meer lucht ---------- */
+.usps2__box { padding: clamp(64px, 7.5vw, 116px) clamp(24px, 6vw, 96px) clamp(56px, 6.5vw, 100px); }
+.usps2__head { gap: clamp(18px, 2.4vw, 32px); }
+.usps2__icon { width: clamp(44px, 4vw, 60px); height: clamp(44px, 4vw, 60px); }
+.usps2__icon circle { stroke-width: 2.2; }
+.usps2__title { font-size: clamp(34px, 4.6vw, 66px) !important; line-height: 1.02 !important; letter-spacing: -0.03em !important; }
+/* intro: rustig grijs, kernwoorden wit maar niet vet */
+.usps2__intro { max-width: 660px; margin-top: clamp(22px, 2.4vw, 32px); font-size: clamp(17px, 1.35vw, 19px); line-height: 1.65; color: rgb(255 255 255 / 0.58) !important; }
+.usps2__intro strong { font-weight: 400; color: #FFFFFF; }
+/* kolommen: meer afstand tot de intro, subtielere scheidingslijn */
+.usps2__cols { max-width: 880px; margin-top: clamp(56px, 7vw, 104px); }
+.usps2__col { padding: 0 clamp(20px, 4vw, 64px); }
+.usps2__col + .usps2__col { border-left-color: rgb(255 255 255 / 0.14); }
+.usps2__col-icon { width: 36px; height: 36px; }
+.usps2__col-icon * { stroke-width: 2.2; }
+/* kolomtitel halfvet in plaats van vet, zodat de titel bovenaan de baas blijft */
+.usps2__col-title { margin-top: 20px; font-size: clamp(22px, 2vw, 28px) !important; line-height: 1.2 !important; font-weight: 400 !important; letter-spacing: -0.01em !important; -webkit-text-stroke: 0.4px currentColor; }
+.usps2__stats { margin-top: clamp(36px, 4vw, 56px); gap: clamp(36px, 3.6vw, 52px); }
+.usps2__stats dt { font-size: 14px; letter-spacing: 0.01em; color: rgb(255 255 255 / 0.5); }
+.usps2__stats dd { margin-top: 10px; gap: 10px; }
+.usps2__stats strong { font-size: clamp(32px, 3.3vw, 48px); line-height: 1; letter-spacing: -0.03em; }
+.usps2__stats span { max-width: 240px; font-size: 15px; line-height: 1.45; color: rgb(255 255 255 / 0.55); }
+.usps2__link { margin-top: clamp(48px, 5.5vw, 76px); font-size: 17px; }
+@media (max-width: 640px) {
+	.usps2__col + .usps2__col { margin-top: 52px; padding-top: 52px; }
+	.usps2__intro { font-size: 17px; }
+}
