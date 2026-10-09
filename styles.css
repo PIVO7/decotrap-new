@@ -1557,11 +1557,7 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 
 /* realisaties: raster met twee grote foto's, klik om groot te bekijken */
 .gallery__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(160px, 15vw, 240px); grid-auto-flow: dense; gap: 12px; }
-.gallery__item a { display: block; height: 100%; overflow: hidden; border-radius: var(--radius); cursor: zoom-in; }
-.gallery__item picture, .gallery__item img { display: block; width: 100%; height: 100%; }
-.gallery__item img { object-fit: cover; transition: transform 500ms var(--ease); }
 .gallery__item--groot { grid-column: span 2; grid-row: span 2; }
-@media (hover: hover) { .gallery__item a:hover img { transform: scale(1.04); } }
 
 /* zo verloopt het */
 .flow__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: none; }
@@ -1587,18 +1583,9 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 .op__cta p { max-width: 560px; color: rgb(255 255 255 / 0.75); }
 .op__cta .hero__actions { justify-content: center; margin-top: 8px; }
 
-/* foto groot bekijken */
-.lightbox { width: auto; max-width: 94vw; max-height: 92svh; padding: 0; border: 0; background: transparent; overflow: visible; }
-.lightbox::backdrop { background: rgb(20 22 22 / 0.88); }
-.lightbox img { display: block; width: auto; max-width: 100%; height: auto; max-height: 86svh; border-radius: var(--radius); } /* nooit groter dan de foto zelf */
-.lightbox button { position: absolute; display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.92); color: var(--ink); cursor: pointer; }
-.lightbox__close { top: -60px; right: 0; }
-.lightbox__prev { left: -64px; top: 50%; transform: translateY(-50%); }
-.lightbox__next { right: -64px; top: 50%; transform: translateY(-50%); }
 
 @media (max-width: 1100px) {
 	.usps__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-	.lightbox__prev { left: 8px; } .lightbox__next { right: 8px; }
 }
 @media (max-width: 960px) {
 	.hero.hero--sub { min-height: 0; }
@@ -1695,3 +1682,37 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 }
 /* sub-navigatie op kleine laptops: zonder titel, zodat alle ankers en de knop passen */
 @media (min-width: 961px) and (max-width: 1280px) { .subnav__title { display: none; } }
+
+/* ---------- 25. Fotogalerij met lightbox (lightbox.js, naar 'Lightbox Setup' van Osmo Supply) ----------
+   Geen overflow: hidden op tegel of knop, anders loopt de Flip-animatie mank; de foto zelf snijdt bij met object-fit. */
+.gallery__btn { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; border-radius: var(--radius); cursor: zoom-in; }
+.gallery__btn img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); transition: opacity 300ms var(--ease); }
+@media (hover: hover) { .gallery__btn:hover img { opacity: 0.88; } }
+.gallery__btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+.lb { position: fixed; inset: 0; z-index: 70; display: none; justify-content: center; align-items: center; width: 100%; height: 100dvh; }
+.lb.is-active { display: flex; }
+.lb__stage { position: relative; display: flex; justify-content: center; align-items: center; width: 90vw; height: calc(100svh - 10em); }
+.lb__item { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; visibility: hidden; }
+.lb__item.is-active { visibility: visible; }
+/* open foto: in zijn eigen verhouding, zo groot als past (cover op die verhouding = geen bijsnijding, vloeiende overgang vanuit de tegel) */
+.lb__item img { display: block; width: auto !important; height: auto !important; max-width: 100%; max-height: 100%; object-fit: cover; border-radius: var(--radius); }
+.lb__nav { position: absolute; left: 2em; right: 2em; bottom: 2em; z-index: 2; display: flex; justify-content: space-between; align-items: center; color: #FFFFFF; }
+.lb__col { width: 33.333%; display: flex; align-items: center; }
+.lb__col--start { justify-content: flex-start; }
+.lb__col--center { justify-content: center; gap: 2em; }
+.lb__col--end { justify-content: flex-end; }
+.lb__text { margin: 0; font-size: 16px; color: inherit; }
+.lb__btn { display: flex; align-items: center; gap: 0.5em; margin: -1em; padding: 1em; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+.lb__btn:focus-visible { outline: 2px solid var(--brand); outline-offset: -6px; border-radius: var(--radius); }
+.lb__dot { width: 0.375em; height: 0.375em; margin-bottom: -0.1em; border-radius: 10em; background: var(--brand); transition: transform 0.45s cubic-bezier(0.625, 0.05, 0, 1); }
+@media (hover: hover) {
+	.lb__btn:hover .lb__dot { transform: scale(1.8); }
+	.lb__btn:hover .lb__text { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--brand); }
+}
+@media (max-width: 560px) {
+	.lb__stage { width: 94vw; height: calc(100svh - 8em); }
+	.lb__nav { left: 1.25em; right: 1.25em; bottom: 1.5em; }
+	.lb__col--center { gap: 1.25em; }
+}
+.lb-open .mbar { visibility: hidden; } /* knoppenbalk (gsm) niet door de lightbox heen laten schemeren */
