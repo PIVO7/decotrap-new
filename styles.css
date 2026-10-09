@@ -1495,3 +1495,14 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	[data-menu="groot"] .nav__menu a, [data-menu="groot"] .nav__trigger { font-size: 14.5px; }
 	.nav .nav__logo img { height: 48px; }
 }
+
+/* ---------- 21. Hero-titel groeit mee op grote schermen ----------
+   Tot 1440px blijft alles gelijk (max. 60px); daarboven groeit de titel rustig mee tot 84px (bij ±2400px).
+   De tekstkolom groeit mee, zodat de titel niet op meer regels breekt. */
+@media (min-width: 1441px) {
+	[data-theme="huisstijl"] .hero h1 { font-size: min(84px, calc(60px + (100vw - 1440px) * 0.025)); }
+	[data-theme="huisstijl"] .hero__content { max-width: calc(2 * var(--gutter) + 860px); } /* zijruimte links en rechts + vaste tekstbreedte */
+	[data-theme="huisstijl"][data-layout="split"] .hero__content { max-width: none; } /* split: de linkerkolom bepaalt de breedte */
+	[data-theme="huisstijl"][data-layout="split"] .hero h1 { font-size: min(74px, calc(60px + (100vw - 1440px) * 0.0125)); }
+	[data-theme="huisstijl"] .hero__sub { font-size: min(21px, calc(19px + (100vw - 1440px) * 0.002)); max-width: 600px; }
+}
