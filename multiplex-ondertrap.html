@@ -284,7 +284,7 @@
 			<li><a href="#troeven">Troeven</a></li>
 			<li><a href="#traptypes">Traptypes</a></li>
 			<li><a href="#realisaties">Realisaties</a></li>
-			<li><a href="#werkwijze-scroll">Werkwijze</a></li>
+			<li><a href="#werkwijze">Werkwijze</a></li>
 			<li><a href="#vragen">Vragen</a></li>
 		</ul>
 		<a class="btn hero__cta subnav__cta" href="https://www.decotrap.be/gratis-offerte/">Gratis offerte</a>
@@ -448,37 +448,28 @@
 		</div>
 	</section>
 
-	<div class="steps2-scroll" id="werkwijze-scroll">
-	<section class="op__section steps2" id="werkwijze" aria-labelledby="flow-titel">
-			<div class="steps2__text">
-				<p class="label">Zo verloopt het</p>
-				<h2 class="h2" id="flow-titel">In drie stappen naar je ondertrap</h2>
-				<p class="steps2__intro">Van je offerte tot een trap die je later laat bekleden. Scroll verder of kies een stap.</p>
-				<ol class="steps2__list">
-					<li class="steps2__item is-active">
-						<button class="steps2__btn" type="button" id="stap-1" aria-controls="stap-foto-1" aria-expanded="true"><span class="steps2__tag">Stap 1</span><span class="steps2__title">Gratis offerte</span></button>
-						<div class="steps2__desc"><p>Vraag online je offerte aan, of kom langs in een van onze toonzalen in Heusden-Zolder of Wetteren.</p></div>
-						<span class="steps2__bar" aria-hidden="true"></span>
-					</li>
-					<li class="steps2__item">
-						<button class="steps2__btn" type="button" id="stap-2" aria-controls="stap-foto-2" aria-expanded="false"><span class="steps2__tag">Stap 2</span><span class="steps2__title">Plaatsing in de ruwbouw</span></button>
-						<div class="steps2__desc"><p>Zodra de ruwbouw regendicht is, maken we de ondertrap ter plaatse op maat. Tijdens de werken heb je meteen een vaste werftrap.</p></div>
-						<span class="steps2__bar" aria-hidden="true"></span>
-					</li>
-					<li class="steps2__item">
-						<button class="steps2__btn" type="button" id="stap-3" aria-controls="stap-foto-3" aria-expanded="false"><span class="steps2__tag">Stap 3</span><span class="steps2__title">Later bekleden</span></button>
-						<div class="steps2__desc"><p>Bij de afwerking laat je de ondertrap bekleden in de houtsoort van je keuze. Of je laat hem zoals hij is, als keldertrap.</p></div>
-						<span class="steps2__bar" aria-hidden="true"></span>
-					</li>
-				</ol>
+	<section class="op__section steps3 reveal" id="werkwijze" aria-labelledby="flow-titel">
+		<div class="op__head">
+			<p class="label">Zo verloopt het</p>
+			<h2 class="h2" id="flow-titel">In drie stappen naar je ondertrap</h2>
+		</div>
+		<div class="steps3__box">
+			<div class="steps3__arrows">
+				<button class="steps3__arrow" type="button" data-dir="-1" aria-label="Vorige stap"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 10l4.5-4.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+				<button class="steps3__arrow" type="button" data-dir="1" aria-label="Volgende stap"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
 			</div>
-			<div class="steps2__media">
-				<div class="steps2__shot is-active" id="stap-foto-1" role="img" aria-labelledby="stap-1"><img src="img/menu/toonzaal.jpg" width="840" height="640" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"></div>
-				<div class="steps2__shot" id="stap-foto-2" role="img" aria-labelledby="stap-2"><img src="img/ondertrap/realisatie-02-640.jpg" srcset="img/ondertrap/realisatie-02-640.webp 480w, img/ondertrap/realisatie-02.webp 600w" sizes="(min-width: 961px) 50vw, 100vw" width="600" height="800" alt="Multiplex ondertrap in een ruwbouw, van bovenaf gezien" loading="lazy" decoding="async"></div>
-				<div class="steps2__shot" id="stap-foto-3" role="img" aria-labelledby="stap-3"><img src="img/ondertrap/type-klassieke-trap.jpg" width="720" height="520" alt="Afgewerkte houten trap met witte leuning" loading="lazy" decoding="async"></div>
+			<ul class="steps3__list">
+				<li><button class="steps3__pill is-active" type="button" aria-expanded="true" aria-controls="steps3-foto-1"><span class="steps3__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></span><span class="steps3__label">Gratis offerte</span><span class="steps3__text"><span><strong>Stap 1. Gratis offerte.</strong> Vraag online je offerte aan, of kom langs in een van onze toonzalen in Heusden-Zolder of Wetteren.</span></span></button></li>
+				<li><button class="steps3__pill" type="button" aria-expanded="false" aria-controls="steps3-foto-2"><span class="steps3__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></span><span class="steps3__label">Plaatsing in de ruwbouw</span><span class="steps3__text"><span><strong>Stap 2. Plaatsing in de ruwbouw.</strong> Zodra de ruwbouw regendicht is, maken we de ondertrap ter plaatse op maat. Tijdens de werken heb je meteen een vaste werftrap.</span></span></button></li>
+				<li><button class="steps3__pill" type="button" aria-expanded="false" aria-controls="steps3-foto-3"><span class="steps3__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></span><span class="steps3__label">Later bekleden</span><span class="steps3__text"><span><strong>Stap 3. Later bekleden.</strong> Bij de afwerking laat je de ondertrap bekleden in de houtsoort van je keuze. Of je laat hem zoals hij is, als keldertrap.</span></span></button></li>
+			</ul>
+			<div class="steps3__media">
+				<div class="steps3__shot is-active" id="steps3-foto-1"><img src="img/menu/toonzaal.jpg" width="840" height="640" alt="De Trap-o-theek, toonzaal van Decotrap" loading="lazy" decoding="async"></div>
+				<div class="steps3__shot" id="steps3-foto-2"><img src="img/ondertrap/realisatie-02-640.jpg" srcset="img/ondertrap/realisatie-02-640.webp 480w, img/ondertrap/realisatie-02.webp 600w" sizes="(min-width: 961px) 50vw, 100vw" width="600" height="800" alt="Multiplex ondertrap in een ruwbouw, van bovenaf gezien" loading="lazy" decoding="async"></div>
+				<div class="steps3__shot" id="steps3-foto-3"><img src="img/ondertrap/type-klassieke-trap.jpg" width="720" height="520" alt="Afgewerkte houten trap met witte leuning" loading="lazy" decoding="async"></div>
 			</div>
-		</section>
-	</div>
+		</div>
+	</section>
 
 	<section class="op__section faq reveal" id="vragen" aria-labelledby="faq-titel">
 		<div class="faq__aside">

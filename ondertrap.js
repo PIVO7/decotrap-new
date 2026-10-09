@@ -24,67 +24,21 @@
 	}, { threshold: 0 }).observe(hero);
 })();
 
-// Werkwijze in drie stappen: één vastgezet scherm; scrollen schuift door de stappen.
-// Vloeiend: de voortgang volgt de scrollpositie met zachte demping (per beeld), en een stap wisselt pas net voorbij het omslagpunt.
+// Werkwijze in drie stappen (naar 'van dichtbij' op apple.com): bubbels links, de gekozen bubbel klapt open met uitleg, foto rechts; pijltjes om te bladeren
 (function () {
-	var wrap = document.querySelector('.steps2-scroll');
-	var root = document.querySelector('.steps2');
-	if (!wrap || !root) return;
-	var items = Array.prototype.slice.call(root.querySelectorAll('.steps2__item'));
-	var shots = Array.prototype.slice.call(root.querySelectorAll('.steps2__shot'));
-	var bars = items.map(function (it) { return it.querySelector('.steps2__bar'); });
-	var n = items.length, index = -1, target = 0, current = 0, running = false, near = false;
-	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	var root = document.querySelector('.steps3');
+	if (!root) return;
+	var pills = Array.prototype.slice.call(root.querySelectorAll('.steps3__pill'));
+	var shots = Array.prototype.slice.call(root.querySelectorAll('.steps3__shot'));
+	var arrows = Array.prototype.slice.call(root.querySelectorAll('.steps3__arrow'));
+	var index = 0;
 	function show(i) {
-		if (i === index) return;
-		index = i;
-		items.forEach(function (it, k) {
-			var on = k === index;
-			it.classList.toggle('is-active', on);
-			it.classList.toggle('is-done', k < index);
-			it.querySelector('.steps2__btn').setAttribute('aria-expanded', String(on));
-		});
-		shots.forEach(function (sh, k) { sh.classList.toggle('is-active', k === index); });
+		index = Math.max(0, Math.min(pills.length - 1, i));
+		pills.forEach(function (p, k) { var on = k === index; p.classList.toggle('is-active', on); p.setAttribute('aria-expanded', String(on)); });
+		shots.forEach(function (s, k) { s.classList.toggle('is-active', k === index); });
+		arrows.forEach(function (a) { a.disabled = (a.dataset.dir === '-1' && index === 0) || (a.dataset.dir === '1' && index === pills.length - 1); });
 	}
-	function pinned() { return getComputedStyle(root).position === 'sticky'; }
-	function measure() {
-		var range = wrap.offsetHeight - root.offsetHeight;
-		target = Math.min(1, Math.max(0, -wrap.getBoundingClientRect().top / Math.max(range, 1))) * n;
-	}
-	function render() {
-		// stap kiezen met een kleine marge rond het omslagpunt (geen geflikker bij traag scrollen)
-		var i = index < 0 ? Math.min(n - 1, Math.floor(current)) : index;
-		if (current > i + 1 + 0.04 && i < n - 1) i = Math.min(n - 1, Math.floor(current - 0.04));
-		if (current < i - 0.04 && i > 0) i = Math.max(0, Math.floor(current + 0.04));
-		show(i);
-		bars.forEach(function (b, k) {
-			var v = k < index ? 1 : k > index ? 0 : Math.min(1, Math.max(0, current - k));
-			b.style.transform = 'scaleY(' + v.toFixed(4) + ')';
-		});
-	}
-	function tick() {
-		measure();
-		current += (target - current) * (reduce ? 1 : 0.14);   // demping: volgt de scroll zacht
-		if (Math.abs(target - current) < 0.0005) current = target;
-		render();
-		if (near) { requestAnimationFrame(tick); } else { running = false; } // loopt enkel zolang de sectie in de buurt is
-	}
-	function start() { if (!running && pinned()) { running = true; requestAnimationFrame(tick); } }
-	// enkel animeren als de sectie (bijna) in beeld is
-	if ('IntersectionObserver' in window) {
-		new IntersectionObserver(function (e) { near = e[0].isIntersecting; if (near) start(); }, { rootMargin: '200px 0px' }).observe(wrap);
-	}
-	window.addEventListener('scroll', start, { passive: true });
-	window.addEventListener('resize', start);
-	// niet vastgezet (laag scherm of minder beweging): gewone klikbare stappen
-	items.forEach(function (it, k) {
-		it.querySelector('.steps2__btn').addEventListener('click', function () {
-			if (!pinned()) { show(k); bars.forEach(function (b, j) { b.style.transform = 'scaleY(' + (j === k ? 1 : 0) + ')'; }); return; }
-			var range = wrap.offsetHeight - root.offsetHeight;
-			var y = wrap.getBoundingClientRect().top + window.scrollY + range * ((k + 0.2) / n);
-			window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
-		});
-	});
-	measure(); current = target; render();
-	if (!pinned()) { show(0); bars[0].style.transform = 'scaleY(1)'; }
+	pills.forEach(function (p, k) { p.addEventListener('click', function () { show(k); }); });
+	arrows.forEach(function (a) { a.addEventListener('click', function () { show(index + Number(a.dataset.dir)); }); });
+	show(0);
 })();

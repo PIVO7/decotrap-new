@@ -1748,43 +1748,13 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { min-height: 48px; padding-
 @media (prefers-reduced-motion: reduce) { .subnav__cta, .subnav.is-stuck .subnav__cta { transition: none; transform: none; } }
 
 /* ---------- 42. Werkwijze in drie stappen (naar het voorbeeld van Stage): stappen links op een lijn, foto rechts die meewisselt ---------- */
-.steps2 { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 6vw, 96px); align-items: center; }
-.steps2__intro { margin-top: 14px; max-width: 460px; font-size: 16px; line-height: 1.6; color: var(--text); }
-.steps2__list { list-style: none; margin: clamp(28px, 3.4vw, 44px) 0 0; padding: 0; border-left: 1px dashed var(--line); }
-.steps2__item { position: relative; padding: 16px 0 16px 28px; }
+
 /* groene lijn van de actieve stap; vult zich als voortgangsbalk terwijl de stappen vanzelf doorschuiven */
-.steps2__bar { position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: var(--brand); transform: scaleY(0); transform-origin: top; }
-.steps2__item.is-active .steps2__bar { transform: scaleY(1); }
-.steps2.is-playing .steps2__item.is-active .steps2__bar { animation: steps2-voortgang var(--steps2-duur, 6s) linear both; }
-@keyframes steps2-voortgang { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-.steps2__btn { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.steps2__btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 6px; border-radius: 2px; }
-.steps2__tag { display: none; padding: 4px 10px; border-radius: 999px; background: var(--brand); color: var(--ink); font-size: 13px; line-height: 1.3; }
-.steps2__item.is-active .steps2__tag { display: inline-block; }
-.steps2__title { font-size: 18px; line-height: 1.3; color: var(--muted); transition: color 250ms var(--ease); }
-.steps2__item.is-active .steps2__title { color: var(--ink); font-weight: 700; }
-@media (hover: hover) { .steps2__btn:hover .steps2__title { color: var(--ink); } }
+
+
 /* uitleg klapt open bij de actieve stap */
-.steps2__desc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 350ms var(--ease); }
-.steps2__desc > p { overflow: hidden; max-width: 420px; font-size: 15px; line-height: 1.6; color: var(--text); }
-.steps2__item.is-active .steps2__desc { grid-template-rows: 1fr; }
-.steps2__item.is-active .steps2__desc > p { padding-top: 8px; }
+
 /* foto rechts: kruisovergang */
-.steps2__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--paper); }
-.steps2__shot { position: absolute; inset: 0; opacity: 0; transform: scale(1.03); transition: opacity 500ms var(--ease), transform 900ms var(--ease); }
-.steps2__shot.is-active { opacity: 1; transform: none; }
-.steps2__shot img { width: 100%; height: 100%; object-fit: cover; }
-@media (prefers-reduced-motion: reduce) {
-	.steps2__shot, .steps2__desc, .steps2__title { transition: none; }
-	.steps2.is-playing .steps2__item.is-active .steps2__bar { animation: none; transform: scaleY(1); }
-}
-@media (max-width: 960px) {
-	.steps2 { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-	.steps2__media { order: 2; }
-	.steps2__text { order: 1; }
-	.steps2__list { margin-top: 24px; }
-}
-.steps2.is-paused .steps2__item.is-active .steps2__bar { animation-play-state: paused; }
 
 /* ---------- 43. Mobiel menu verfijnd (naar Open, Instacart en de mobiele menu's van Apple/Stripe) ----------
    Compacte bovenbalk, extra links op één rij, knoppen vast onderaan naast elkaar. */
@@ -1809,27 +1779,10 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 [data-theme="huisstijl"] .mega-panel__cta { font-weight: 400; } /* zelfde gewicht als de andere knoppen */
 
 /* ---------- 44. Werkwijze als vastgezet scherm: scrollen schuift door de drie stappen ---------- */
-.steps2-scroll { --subnav-h: 64px; height: calc((100svh - var(--subnav-h)) + 3 * 60svh); }
-.steps2-scroll > .steps2 { position: sticky; top: var(--subnav-h); min-height: calc(100svh - var(--subnav-h)); align-content: center; padding-top: clamp(32px, 5vh, 64px); padding-bottom: clamp(32px, 5vh, 64px); }
+
 /* groene lijn volgt de scrollvoortgang (--p van 0 tot 1); afgewerkte stappen blijven gevuld */
-.steps2-scroll .steps2__bar { transform: scaleY(var(--p, 0)); transition: transform 120ms linear; }
-.steps2-scroll .steps2__item.is-done .steps2__bar { transform: scaleY(1); }
-.steps2-scroll .steps2__item.is-done .steps2__title { color: var(--ink); }
-@media (max-width: 960px) {
-	.steps2-scroll { --subnav-h: 52px; height: calc((100svh - var(--subnav-h)) + 3 * 55svh); }
-	.steps2-scroll > .steps2 { gap: 16px; padding-top: 20px; padding-bottom: 20px; }
-	.steps2-scroll .steps2__media { order: 0; aspect-ratio: 16 / 10; }
-	.steps2-scroll .steps2__text { order: 1; }
-	.steps2-scroll .steps2__intro { display: none; }
-	.steps2-scroll .steps2__list { margin-top: 16px; }
-	.steps2-scroll .steps2__item { padding: 10px 0 10px 22px; }
-}
+
 /* lage schermen (bv. gsm liggend) of minder beweging: gewoon klikbare stappen, niet vastgezet */
-@media (max-height: 560px), (prefers-reduced-motion: reduce) {
-	.steps2-scroll { height: auto; }
-	.steps2-scroll > .steps2 { position: static; min-height: 0; }
-	.steps2-scroll .steps2__item.is-active .steps2__bar { transform: scaleY(1); }
-}
 
 /* ---------- 45. Gsm: klikvlakken van minstens 44px (footer, stappen, links) ---------- */
 @media (max-width: 960px) {
@@ -1839,31 +1792,67 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 	.sfoot__legal a, .sfoot__social a, .sfoot__top-link { display: inline-flex; align-items: center; min-height: 44px; }
 	.sfoot__social { gap: 20px; }
 	.sfoot__bottom { gap: 4px 24px; }
-	.steps2__btn { min-height: 44px; justify-content: center; }
+	
 	.usps2__link { min-height: 44px; }
 	.crumbs a { display: inline-flex; align-items: center; min-height: 44px; }
 	.crumbs { row-gap: 0; }
 }
 
 /* ---------- 46. Werkwijze: donkere achtergrond en zachtere overgangen ---------- */
-.steps2-scroll { background: var(--deep); color: #FFFFFF; }
-.steps2-scroll .label { color: rgb(255 255 255 / 0.6); }
-.steps2-scroll .h2 { color: #FFFFFF; }
-.steps2-scroll .steps2__intro { color: rgb(255 255 255 / 0.68); }
-.steps2-scroll .steps2__list { border-left-color: rgb(255 255 255 / 0.22); }
-.steps2-scroll .steps2__title { color: rgb(255 255 255 / 0.5); }
-.steps2-scroll .steps2__item.is-active .steps2__title, .steps2-scroll .steps2__item.is-done .steps2__title { color: #FFFFFF; }
-@media (hover: hover) { .steps2-scroll .steps2__btn:hover .steps2__title { color: #FFFFFF; } }
-.steps2-scroll .steps2__desc > p { color: rgb(255 255 255 / 0.72); }
-.steps2-scroll .steps2__media { background: rgb(255 255 255 / 0.06); }
+
 /* lijn wordt per beeld door het script gezet: geen eigen vertraging */
-.steps2-scroll .steps2__bar { transition: none; }
+
 /* zachtere wissel van uitleg en foto */
-.steps2-scroll .steps2__desc { transition: grid-template-rows 520ms cubic-bezier(0.22, 1, 0.36, 1); }
-.steps2-scroll .steps2__desc > p { transition: opacity 420ms var(--ease) 80ms; opacity: 0; }
-.steps2-scroll .steps2__item.is-active .steps2__desc > p { opacity: 1; }
-.steps2-scroll .steps2__shot { transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 1200ms cubic-bezier(0.22, 1, 0.36, 1); transform: scale(1.04); }
-.steps2-scroll .steps2__shot.is-active { transform: none; }
-.steps2-scroll .steps2__tag { animation: steps2-tag 360ms var(--ease); }
-@keyframes steps2-tag { from { opacity: 0; transform: translateY(4px); } }
-@media (prefers-reduced-motion: reduce) { .steps2-scroll .steps2__desc, .steps2-scroll .steps2__desc > p, .steps2-scroll .steps2__shot, .steps2-scroll .steps2__tag { transition: none; animation: none; } }
+
+
+
+/* ---------- 47. Werkwijze (naar 'van dichtbij' op apple.com): donker vlak binnen de zijmarges, bubbels links, foto rechts ---------- */
+.steps3__box {
+	display: grid; grid-template-columns: auto minmax(0, 5fr) minmax(0, 6fr); align-items: center; gap: clamp(20px, 3vw, 48px);
+	padding: clamp(32px, 4.5vw, 72px); border-radius: var(--radius); background: var(--deep); color: #FFFFFF;
+}
+/* pijltjes helemaal links */
+.steps3__arrows { display: flex; flex-direction: column; gap: 12px; }
+.steps3__arrow { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.1); color: #FFFFFF; cursor: pointer; transition: background-color 200ms var(--ease), opacity 200ms var(--ease); }
+.steps3__arrow svg { width: 16px; height: 16px; }
+.steps3__arrow:disabled { opacity: 0.35; cursor: default; }
+@media (hover: hover) { .steps3__arrow:not(:disabled):hover { background: rgb(255 255 255 / 0.2); } }
+.steps3__arrow:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+/* bubbels */
+.steps3__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.steps3__list li { width: 100%; }
+.steps3__pill {
+	interpolate-size: allow-keywords;
+	display: flex; align-items: center; gap: 12px; width: fit-content; max-width: 100%;
+	padding: 14px 24px 14px 16px; border: 0; border-radius: 28px; background: rgb(255 255 255 / 0.1); color: #FFFFFF;
+	font: inherit; font-size: 17px; text-align: left; cursor: pointer;
+	transition: width 450ms cubic-bezier(0.22, 1, 0.36, 1), padding 450ms cubic-bezier(0.22, 1, 0.36, 1), background-color 250ms var(--ease);
+}
+@media (hover: hover) { .steps3__pill:not(.is-active):hover { background: rgb(255 255 255 / 0.18); } }
+.steps3__pill:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+.steps3__icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border: 1.5px solid currentColor; border-radius: 999px; }
+.steps3__icon svg { width: 14px; height: 14px; }
+.steps3__label { font-weight: 700; white-space: nowrap; }
+/* uitleg: verborgen tot de bubbel open is */
+.steps3__text { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 450ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms var(--ease); }
+.steps3__text > span { overflow: hidden; font-size: 16px; line-height: 1.55; color: rgb(255 255 255 / 0.78); }
+.steps3__text strong { color: #FFFFFF; font-weight: 700; }
+/* open bubbel: groter, uitleg in plaats van titel */
+.steps3__pill.is-active { width: 100%; max-width: 460px; padding: 24px 28px; background: rgb(255 255 255 / 0.14); cursor: default; }
+.steps3__pill.is-active .steps3__icon, .steps3__pill.is-active .steps3__label { display: none; }
+.steps3__pill.is-active .steps3__text { grid-template-rows: 1fr; opacity: 1; }
+/* foto rechts */
+.steps3__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: rgb(255 255 255 / 0.06); }
+.steps3__shot { position: absolute; inset: 0; opacity: 0; transform: scale(1.03); transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), transform 1000ms cubic-bezier(0.22, 1, 0.36, 1); }
+.steps3__shot.is-active { opacity: 1; transform: none; }
+.steps3__shot img { width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) { .steps3__pill, .steps3__text, .steps3__shot { transition: none; } }
+@media (max-width: 960px) {
+	.steps3__box { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 20px; }
+	.steps3__arrows { display: none; }
+	.steps3__media { order: -1; aspect-ratio: 16 / 10; }
+	.steps3__list { gap: 8px; }
+	.steps3__pill { font-size: 16px; padding: 12px 20px 12px 12px; }
+	.steps3__pill.is-active { max-width: none; padding: 18px 20px; }
+	.steps3__text > span { font-size: 15px; }
+}
