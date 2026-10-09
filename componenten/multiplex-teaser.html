@@ -1,17 +1,22 @@
 <!-- Herbruikbaar blok: vermelding van de multiplex ondertrap met link naar de pagina.
-     Zet dit net boven de footer (of tussen twee secties) op bv. Z-trap, klassieke trap, trap met rechte treden, betontrap bekleden.
-     Stijl: sectie 32 in styles.css (.mpx-teaser). Vereist het trapje- en pijl-symbool (#trapje, #pijl) uit de svg-sprite bovenaan de pagina. -->
+     Zet dit net boven de footer op andere pagina's, bv. Z-trap, klassieke trap, trap met rechte treden, betontrap bekleden.
+     Stijl: sectie 32 in styles.css (.mpx-teaser). Vereist het trapje-symbool (#trapje) en pijl-symbool (#pijl) uit de svg-sprite bovenaan de pagina.
+     Voorbeeld in context: voorbeeld-trappagina.html -->
 <aside class="mpx-teaser" aria-labelledby="mpx-teaser-titel">
-	<a class="mpx-teaser__card" href="multiplex-ondertrap.html">
-		<span class="mpx-teaser__media">
-			<img src="img/ondertrap/realisatie-01-640.jpg" srcset="img/ondertrap/realisatie-01-640.webp 480w, img/ondertrap/realisatie-01.webp 600w" sizes="(min-width: 961px) 34vw, 100vw" alt="Multiplex ondertrap met kwartdraai in een ruwbouw" width="600" height="800" loading="lazy" decoding="async">
-		</span>
-		<span class="mpx-teaser__body">
-			<span class="mpx-teaser__label"><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Slim beginnen aan je trap</span>
-			<span class="mpx-teaser__title" id="mpx-teaser-titel">Bouw je nog? Start met een multiplex ondertrap</span>
-			<span class="mpx-teaser__text">Goedkoper dan een betontrap en al te plaatsen in de ruwbouwfase. Tijdens de werken heb je meteen een werftrap, en later laat je hem bekleden in de houtsoort van je keuze.</span>
-			<span class="mpx-teaser__chips"><span>Goedkoper dan beton</span><span>Watervast</span><span>Ter plaatse gemaakt</span></span>
-			<span class="mpx-teaser__cta">Ontdek de multiplex ondertrap <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></span>
-		</span>
-	</a>
+	<div class="mpx-teaser__card">
+		<div class="mpx-teaser__body">
+			<p class="mpx-teaser__label"><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Tip voor wie bouwt</p>
+			<h2 class="mpx-teaser__title" id="mpx-teaser-titel">Start met een multiplex ondertrap</h2>
+			<p class="mpx-teaser__text">Een stevige basis in watervaste multiplex, ter plaatse gemaakt zodra de ruwbouw regendicht is. Tijdens de werken heb je meteen een werftrap, en later laat je hem bekleden.</p>
+			<ul class="mpx-teaser__facts">
+				<li><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Goedkoper dan een betontrap</li>
+				<li><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Al in de ruwbouwfase</li>
+				<li><svg class="mark" aria-hidden="true"><use href="#trapje"></use></svg>Later te bekleden</li>
+			</ul>
+			<a class="btn mpx-teaser__btn" href="multiplex-ondertrap.html">Ontdek de multiplex ondertrap <svg class="arrow" aria-hidden="true"><use href="#pijl"></use></svg></a>
+		</div>
+		<div class="mpx-teaser__media">
+			<img src="img/ondertrap/realisatie-01-640.jpg" srcset="img/ondertrap/realisatie-01-640.webp 480w, img/ondertrap/realisatie-01.webp 600w" sizes="(min-width: 961px) 40vw, 100vw" alt="Multiplex ondertrap met kwartdraai in een ruwbouw" width="600" height="800" loading="lazy" decoding="async">
+		</div>
+	</div>
 </aside>

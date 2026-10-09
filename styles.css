@@ -1907,30 +1907,31 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	.usps2__col + .usps2__col { margin-top: 36px; padding-top: 36px; }
 }
 
-/* ---------- 32. Herbruikbaar blok: vermelding multiplex ondertrap (componenten/multiplex-teaser.html) ---------- */
-.mpx-teaser { padding: 0 var(--gutter) clamp(64px, 7vw, 112px); }
-.mpx-teaser__card { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); overflow: hidden; border-radius: var(--radius); background: var(--paper); color: var(--ink); text-decoration: none; border: 1px solid var(--line); transition: border-color 250ms var(--ease), box-shadow 250ms var(--ease); }
-.mpx-teaser__media { position: relative; display: block; min-height: 300px; overflow: hidden; }
-.mpx-teaser__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease); }
-.mpx-teaser__body { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: clamp(28px, 4vw, 56px); }
-.mpx-teaser__label { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+/* ---------- 32. Herbruikbaar blok: vermelding multiplex ondertrap (componenten/multiplex-teaser.html) ----------
+   Liggende kaart: tekst links, foto rechts. Bedoeld net boven de footer op andere pagina's. */
+.mpx-teaser { padding: clamp(56px, 7vw, 112px) var(--gutter); }
+.mpx-teaser__card { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); overflow: hidden; border-radius: var(--radius); background: var(--paper); border: 1px solid var(--line); }
+.mpx-teaser__body { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: clamp(32px, 4.5vw, 64px); }
+.mpx-teaser__label { display: inline-flex; align-items: center; gap: 10px; padding: 6px 12px 6px 10px; border-radius: 999px; background: var(--bg); font-size: 14px; color: var(--ink) !important; }
 .mpx-teaser__label .mark { width: 14px; height: 14px; }
-.mpx-teaser__title { font-size: clamp(24px, 2.4vw, 34px); line-height: 1.15; font-weight: 700; letter-spacing: -0.015em; max-width: 560px; }
-.mpx-teaser__text { max-width: 560px; font-size: 16px; line-height: 1.6; color: var(--text); }
-.mpx-teaser__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
-.mpx-teaser__chips span { padding: 6px 12px; border-radius: 999px; background: var(--bg); font-size: 14px; color: var(--ink); }
-.mpx-teaser__cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; min-height: 44px; font-weight: 700; border-bottom: 2px solid var(--brand); }
-.mpx-teaser__cta .arrow { transition: transform 250ms var(--ease); }
+.mpx-teaser__title { margin-top: 4px; font-size: clamp(26px, 2.8vw, 40px) !important; line-height: 1.1 !important; letter-spacing: -0.02em !important; max-width: 520px; }
+.mpx-teaser__text { max-width: 520px; font-size: 16px; line-height: 1.6; color: var(--text); }
+.mpx-teaser__facts { list-style: none; margin: 4px 0 8px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; }
+.mpx-teaser__facts li { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--ink); }
+.mpx-teaser__facts .mark { width: 13px; height: 13px; }
+.mpx-teaser__btn { gap: 10px; min-height: 0; padding: 13px 20px; border-radius: 3px; background: var(--ink); color: #FFFFFF; font-size: 15px; font-weight: 400; letter-spacing: 0; text-transform: none; text-decoration: none; }
+.mpx-teaser__btn .arrow { transition: transform 250ms var(--ease); }
 @media (hover: hover) {
-	.mpx-teaser__card:hover { border-color: var(--ink); box-shadow: 0 18px 40px -24px rgb(var(--shade) / 0.45); }
-	.mpx-teaser__card:hover .mpx-teaser__media img { transform: scale(1.04); }
-	.mpx-teaser__card:hover .mpx-teaser__cta .arrow { transform: translate(2px, -2px); }
+	.mpx-teaser__btn:hover { background: var(--brand); color: var(--ink); }
+	.mpx-teaser__btn:hover .arrow { transform: translate(2px, -2px); }
 }
-.mpx-teaser__card:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
-@media (max-width: 960px) {
-	.mpx-teaser { padding-top: clamp(48px, 8vw, 72px); }
+.mpx-teaser__btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+.mpx-teaser__media { position: relative; min-height: 320px; }
+.mpx-teaser__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 860px) {
 	.mpx-teaser__card { grid-template-columns: minmax(0, 1fr); }
-	.mpx-teaser__media { min-height: 0; aspect-ratio: 16 / 10; }
+	.mpx-teaser__media { order: -1; min-height: 0; aspect-ratio: 16 / 10; }
+	.mpx-teaser__facts { flex-direction: column; gap: 8px; }
 }
 
 /* ---------- 33. Vangnet: de pagina scrollt nooit horizontaal (clip maakt geen scrollcontainer, sticky blijft werken) ---------- */
@@ -1948,3 +1949,13 @@ html, body { overflow-x: clip; }
 .parallax-slider__item-img { left: 0; width: 100%; }
 .parallax-slider__item-visual { will-change: auto; transform: none !important; }
 .slider-arrows--onder { margin-top: 24px; }
+/* voorbeeldpagina (voorbeeld-trappagina.html) */
+.voorbeeld__tekst { max-width: 720px; font-size: 17px; line-height: 1.65; color: var(--text); }
+/* voorbeeld van het herbruikbare blok op de multiplex-pagina, met titel erboven (enkel om te tonen) */
+.demo-blok { margin: 0 var(--gutter) clamp(64px, 7vw, 112px); padding-top: clamp(40px, 5vw, 64px); border-top: 2px dashed var(--line); }
+.demo-blok__head { max-width: 720px; margin-bottom: 20px; }
+.demo-blok__label { font-size: 15px; font-weight: 700; color: var(--ink); }
+.demo-blok__text { margin-top: 4px; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.demo-blok .mpx-teaser { padding: 0; }
+@media (max-width: 960px) { .demo-blok { padding-top: 40px; } }
+[data-theme="huisstijl"] .mpx-teaser__btn { font-weight: 400; font-size: 15px; letter-spacing: 0; text-transform: none; } /* zelfde gewicht als de andere knoppen */
