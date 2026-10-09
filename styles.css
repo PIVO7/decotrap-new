@@ -1800,3 +1800,26 @@ html[data-theme="huisstijl"] .mnav .mnav__ctas .btn { justify-content: center; p
 .mnav [data-view="root"] > .mnav__ctas { margin-bottom: 0; }
 .mnav [data-view="root"] > .mnav__meta { padding-top: 20px; }
 [data-theme="huisstijl"] .mega-panel__cta { font-weight: 400; } /* zelfde gewicht als de andere knoppen */
+
+/* ---------- 44. Werkwijze als vastgezet scherm: scrollen schuift door de drie stappen ---------- */
+.steps2-scroll { --subnav-h: 64px; height: calc((100svh - var(--subnav-h)) + 3 * 60svh); }
+.steps2-scroll > .steps2 { position: sticky; top: var(--subnav-h); min-height: calc(100svh - var(--subnav-h)); align-content: center; padding-top: clamp(32px, 5vh, 64px); padding-bottom: clamp(32px, 5vh, 64px); }
+/* groene lijn volgt de scrollvoortgang (--p van 0 tot 1); afgewerkte stappen blijven gevuld */
+.steps2-scroll .steps2__bar { transform: scaleY(var(--p, 0)); transition: transform 120ms linear; }
+.steps2-scroll .steps2__item.is-done .steps2__bar { transform: scaleY(1); }
+.steps2-scroll .steps2__item.is-done .steps2__title { color: var(--ink); }
+@media (max-width: 960px) {
+	.steps2-scroll { --subnav-h: 52px; height: calc((100svh - var(--subnav-h)) + 3 * 55svh); }
+	.steps2-scroll > .steps2 { gap: 16px; padding-top: 20px; padding-bottom: 20px; }
+	.steps2-scroll .steps2__media { order: 0; aspect-ratio: 16 / 10; }
+	.steps2-scroll .steps2__text { order: 1; }
+	.steps2-scroll .steps2__intro { display: none; }
+	.steps2-scroll .steps2__list { margin-top: 16px; }
+	.steps2-scroll .steps2__item { padding: 10px 0 10px 22px; }
+}
+/* lage schermen (bv. gsm liggend) of minder beweging: gewoon klikbare stappen, niet vastgezet */
+@media (max-height: 560px), (prefers-reduced-motion: reduce) {
+	.steps2-scroll { height: auto; }
+	.steps2-scroll > .steps2 { position: static; min-height: 0; }
+	.steps2-scroll .steps2__item.is-active .steps2__bar { transform: scaleY(1); }
+}

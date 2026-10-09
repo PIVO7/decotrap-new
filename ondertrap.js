@@ -24,44 +24,48 @@
 	}, { threshold: 0 }).observe(hero);
 })();
 
-// Werkwijze in drie stappen: klik op een stap, of laat ze vanzelf doorschuiven zolang de sectie in beeld is
+// Werkwijze in drie stappen: één vastgezet scherm; scrollen schuift door naar de volgende stap, de groene lijn volgt de voortgang
 (function () {
+	var wrap = document.querySelector('.steps2-scroll');
 	var root = document.querySelector('.steps2');
-	if (!root) return;
+	if (!wrap || !root) return;
 	var items = Array.prototype.slice.call(root.querySelectorAll('.steps2__item'));
 	var shots = Array.prototype.slice.call(root.querySelectorAll('.steps2__shot'));
-	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	var index = 0, inView = false, paused = false;
+	var n = items.length, index = -1, raf = 0;
 	function show(i) {
-		index = (i + items.length) % items.length;
+		if (i === index) return;
+		index = i;
 		items.forEach(function (it, k) {
 			var on = k === index;
 			it.classList.toggle('is-active', on);
+			it.classList.toggle('is-done', k < index);
 			it.querySelector('.steps2__btn').setAttribute('aria-expanded', String(on));
 		});
 		shots.forEach(function (sh, k) { sh.classList.toggle('is-active', k === index); });
 	}
-	function syncPlay() {
-		root.classList.toggle('is-playing', !reduce && inView);
-		root.classList.toggle('is-paused', paused); // hover of focus: balk pauzeert, begint niet opnieuw
+	function pinned() { return getComputedStyle(root).position === 'sticky'; }
+	function update() {
+		raf = 0;
+		if (!pinned()) { items.forEach(function (it) { it.style.removeProperty('--p'); }); if (index < 0) show(0); return; }
+		var top = wrap.getBoundingClientRect().top;
+		var range = wrap.offsetHeight - root.offsetHeight;          // hoeveel er te scrollen valt terwijl het scherm vaststaat
+		var p = Math.min(1, Math.max(0, -top / Math.max(range, 1))); // 0 → 1 over de hele sectie
+		var pos = p * n;
+		var i = Math.min(n - 1, Math.floor(pos));
+		show(i);
+		items.forEach(function (it, k) { it.style.setProperty('--p', k < i ? 1 : k > i ? 0 : Math.min(1, pos - i)); });
 	}
-	// voortgangsbalk vol = volgende stap
+	function onScroll() { if (!raf) raf = requestAnimationFrame(update); }
+	window.addEventListener('scroll', onScroll, { passive: true });
+	window.addEventListener('resize', onScroll);
+	// klik op een stap: naar het scrollpunt van die stap
 	items.forEach(function (it, k) {
-		it.querySelector('.steps2__bar').addEventListener('animationend', function () {
-			if (root.classList.contains('is-playing') && !paused && k === index) show(index + 1);
-		});
 		it.querySelector('.steps2__btn').addEventListener('click', function () {
-			show(k);
-			// balk opnieuw laten starten
-			root.classList.remove('is-playing'); void root.offsetWidth; syncPlay();
+			if (!pinned()) { show(k); return; }
+			var range = wrap.offsetHeight - root.offsetHeight;
+			var y = wrap.getBoundingClientRect().top + window.scrollY + range * ((k + 0.15) / n);
+			window.scrollTo({ top: y, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 		});
 	});
-	root.addEventListener('mouseenter', function () { paused = true; syncPlay(); });
-	root.addEventListener('mouseleave', function () { paused = false; syncPlay(); });
-	root.addEventListener('focusin', function () { paused = true; syncPlay(); });
-	root.addEventListener('focusout', function (e) { if (!root.contains(e.relatedTarget)) { paused = false; syncPlay(); } });
-	if ('IntersectionObserver' in window) {
-		new IntersectionObserver(function (entries) { inView = entries[0].isIntersecting; syncPlay(); }, { threshold: 0.4 }).observe(root);
-	}
-	show(0);
+	update();
 })();
