@@ -1452,3 +1452,19 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 	[data-layout="split"] .hero__content { grid-column: 1; grid-row: 2; padding: 28px var(--gutter) 24px; }
 	[data-layout="split"] .hero > picture { grid-column: 1; grid-row: 3; }
 }
+
+/* ---------- 18. Afspraak maken: outline-knop zoals decotrap.be (btn-outline-black) ----------
+   Rand en tekst in de tekstkleur van de hero: wit op de foto, donker naast de foto (split). */
+.hero__afspraak, [data-theme="huisstijl"] .hero__afspraak {
+	min-height: 0; padding: 12px 20px; gap: 0;
+	background: transparent; color: inherit; border: 1px solid currentColor; border-radius: 3px;
+	font-size: 13.5px; font-weight: 400; line-height: 1.4; letter-spacing: 1px; text-transform: uppercase;
+}
+@media (hover: hover) {
+	.hero__afspraak:hover { background: #FFFFFF; color: var(--ink); border-color: #FFFFFF; }
+	[data-layout="split"] .hero__afspraak:hover { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
+}
+@media (max-width: 960px) { .hero__actions .hero__afspraak { align-self: flex-start; } }
+
+/* ---------- 19. Navigatie: menu links, vlak naast het logo; knoppen blijven rechts ---------- */
+.nav__menu { margin-left: clamp(16px, 3vw, 48px); margin-right: auto; }
