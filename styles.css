@@ -76,7 +76,7 @@
 	--font: 'Geist', system-ui, sans-serif;
 	--mono: 'Geist Mono', ui-monospace, monospace;
 	--serif: 'Instrument Serif', Georgia, serif;
-	--gutter: max(clamp(20px, 4.5vw, 64px), calc((100vw - 1600px) / 2));
+	--gutter: max(clamp(20px, 4.5vw, 64px), calc((100vw - 1360px) / 2)); /* inhoud max. 1360px breed */
 	--radius: 4px;
 	--ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -875,8 +875,6 @@ h2.label { margin: 0; font-weight: 400; line-height: inherit; }
 /* ---------- 12c-ter. Megamenu 'groot' (enkel preview) ----------
    Huidig design en animatie, maar enkel tekst: producten groot, de rest klein (naar het menu van Apple). Geen lijnen, geen hoofdletters. */
 [data-menu="groot"] .mega__thumbs img { display: none; }
-/* navigatie (en de hero eronder, zodat logo en titel blijven uitlijnen) smaller op grote schermen: max. 1360px breed */
-[data-menu="groot"] .hero { --gutter: max(clamp(20px, 4.5vw, 64px), calc((100vw - 1360px) / 2)); }
 [data-menu="groot"] .mega .label, [data-menu="groot"] .mnav .label, [data-menu="groot"] .mnav__back { font-family: var(--font); font-size: 13px; letter-spacing: 0; text-transform: none; }
 [data-menu="groot"] .mega .label { margin-bottom: 16px; }
 [data-menu="groot"] .mega .mega__thumbs { gap: 4px; border-top: 0; }
